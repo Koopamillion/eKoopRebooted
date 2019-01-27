@@ -1,5 +1,13 @@
 {
-  "variants" : {
-    "normal" : {"model" : "mymod:charger"}
+  "forge_marker": 1,
+  "defaults":
+  {
+    "model": "mymod:charger",
+    "uvlock": false
+  },
+  "variants":
+  {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

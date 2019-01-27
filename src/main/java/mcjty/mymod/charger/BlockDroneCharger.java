@@ -3,26 +3,30 @@ package mcjty.mymod.charger;
 import mcjty.mymod.MyMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
+
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateBase;
-import net.minecraft.block.state.BlockStateContainer;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
+
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
+
 public class BlockDroneCharger extends Block {
+
+    public static final AxisAlignedBB CHARGER_AABB = new AxisAlignedBB(0.125D,0,0.125D,0.875D,0.75D,0.875D);
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
@@ -57,6 +61,18 @@ public class BlockDroneCharger extends Block {
     @Override
     public boolean isOpaqueCube(IBlockState blockState) {
         return false;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return CHARGER_AABB;
+
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return CHARGER_AABB;
     }
 
     @Override
