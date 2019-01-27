@@ -50,26 +50,53 @@ public class GuiFurnace extends GuiContainer {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         if (furnace.getClientProgress() != 0.000000000000000f){
-            if (furnace.getTime() >= 0.15f){
-                float percentage = furnace.getClientProgress() / furnace.getTime();
+            if (furnace.getGuiTime() >= 0.15f){
+                float percentage = furnace.getClientProgress() / furnace.getGuiTime();
                 drawString(mc.fontRenderer, "Time remaining: " + Math.round(percentage * 100) + "%", guiLeft + 10, guiTop + 50, 0xffffff);
             }else{
                 randomPicker(255);
-                drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
-
+                drawString(mc.fontRenderer, "M", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "  a", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "    x", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "       S", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "         p", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "           e", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "             e", guiLeft + 10, guiTop + 50, rgb);
+                randomPicker(255);
+                drawString(mc.fontRenderer, "               d", guiLeft + 10, guiTop + 50, rgb);
             }
 
            // System.out.println(furnace.getProgressRemaining());
 
-        }else if (furnace.getTime() >=0.15f){
+        }else if (furnace.getGuiTime() >=0.15f){
             drawString(mc.fontRenderer, "Time remaining:", guiLeft + 10, guiTop + 50, 0xffffff);
 
         }else{
             randomPicker(255);
-            drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
+            drawString(mc.fontRenderer, "M", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "  a", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "    x", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "       S", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "         p", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "           e", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "             e", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "               d", guiLeft + 10, guiTop + 50, rgb);
         }
 
-        System.out.println(furnace.getTime());
+        System.out.println(furnace.getGuiTime());
     }
 
     @Override

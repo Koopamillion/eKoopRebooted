@@ -30,7 +30,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     private  final float furnaceSmeltTimeMin = 5;
     public float time = furnaceSmeltTimeMax;
 
-    public static float guiTime = 100;
+    public  float guiTime = 100;
     private float progressRemaining = 0;
     private float scale = 0;
     private float increaseWithoutCompound = 0.0005f;
@@ -46,7 +46,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-
+            guiTime = time;
             if (progressRemaining > 0) {
 
                 progressRemaining --;
@@ -144,7 +144,19 @@ public class TileFurnace extends TileEntity implements ITickable {
     }
 
     public float getTime(){
+        return time;
+    }
+
+    //seperate gui time var for gui only
+
+    public float getGuiTime(){
         return guiTime;
+    }
+
+
+
+    public void setGuiTime(float guiTime){
+        this.guiTime = guiTime;
     }
 
     public float getClientProgress() {

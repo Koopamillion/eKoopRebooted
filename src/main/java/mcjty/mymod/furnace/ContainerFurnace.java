@@ -15,6 +15,7 @@ public class ContainerFurnace extends Container {
     private TileFurnace te;
 
     private static final int PROGRESS_ID = 0;
+    private static final int TIME_ID = 1;
 
     public ContainerFurnace(IInventory playerInventory, TileFurnace te) {
         this.te = te;
@@ -100,15 +101,35 @@ public class ContainerFurnace extends Container {
         if (te.getProgressRemaining() != te.getClientProgress()){
             te.setClientProgress(te.getProgressRemaining());
         }
+        //makes sure gui time is always the same as time
+        if (te.getTime() != te.getGuiTime()){
+            te.setGuiTime(te.getTime());
+        }
+
+        //sends vars to a packet
+
         for (IContainerListener listener: listeners){
             listener.sendWindowProperty(this, PROGRESS_ID, Math.round(te.getProgressRemaining()));
+            listener.sendWindowProperty(this, TIME_ID, Math.round(te.getTime()));
         }
     }
+
+
+    /**
+     * Sends two ints to the client-side Container. Used for furnace burning time, smelting progress, brewing progress,
+     * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
+     * value. Both are truncated to shorts in non-local SMP.
+     */
 
     @Override
     public void updateProgressBar(int id, int data) {
         if(id == PROGRESS_ID){
             te.setClientProgress(data);
+
         }
+        if(id == TIME_ID){
+            te.setGuiTime(data);
+        }
+
     }
 }
