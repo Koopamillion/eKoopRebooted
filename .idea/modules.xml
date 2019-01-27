@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyMod.iml" filepath="$PROJECT_DIR$/MyMod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.iml" filepath="$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.api.iml" filepath="$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mcjty.mymod.MyMod.test.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+{
+  "minecraft:recipes/combat/arrow": {
+    "criteria": {
+      "has_feather": "2019-01-26 21:52:44 +0000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2019-01-26 21:52:21 +0000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest": "2019-01-26 21:51:37 +0000",
+      "beaches": "2019-01-26 21:52:24 +0000"
+    },
+    "done": false
+  }
+}

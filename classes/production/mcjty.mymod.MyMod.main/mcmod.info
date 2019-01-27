@@ -1,0 +1,15 @@
+[
+{
+  "modid": "mymod",
+  "name": "eKoop Rebooted",
+  "description": "eKoop is back!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Koopamillion"],
+  "credits": "eKoop",
+  "logoFile": "",
+  "screenshots": []
+}
+]

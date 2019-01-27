@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "mymod:furnace"
+  },
+  "pattern": [
+    " c ",
+    "cFc",
+    " c "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  }
+}
