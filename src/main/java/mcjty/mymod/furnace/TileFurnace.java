@@ -46,7 +46,9 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
+
             if (progressRemaining > 0) {
+
                 progressRemaining --;
                 //if the algorithm wont be below 0.1 then set the time to the algorithm
                 if  (furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale) > 0.1){
@@ -61,10 +63,13 @@ public class TileFurnace extends TileEntity implements ITickable {
                 // System.out.println(time);
                 //if there is no ticks left to remove, GO AND SMELT
                 if (progressRemaining <= 0) {
+
                     attemptSmelt();
                 }
+
                 markDirty();
             } else {
+
                 //no ticks left? must have started, GO AND START THE SMELTING PROCESS LOL
                 startSmelt();
 

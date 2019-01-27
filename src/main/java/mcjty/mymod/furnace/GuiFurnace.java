@@ -33,6 +33,7 @@ public class GuiFurnace extends GuiContainer {
 
 
 
+
     public GuiFurnace(TileFurnace tileEntity, ContainerFurnace container) {
         super(container);
 
@@ -44,6 +45,7 @@ public class GuiFurnace extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
@@ -59,28 +61,14 @@ public class GuiFurnace extends GuiContainer {
 
            // System.out.println(furnace.getProgressRemaining());
 
+        }else if (furnace.getTime() >=0.15f){
+            drawString(mc.fontRenderer, "Time remaining:", guiLeft + 10, guiTop + 50, 0xffffff);
+
         }else{
             randomPicker(255);
-            drawString(mc.fontRenderer, "T", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, " i", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "  m", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "   e", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "     ", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "      r", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "       e", guiLeft + 10, guiTop + 50, rgb);
-            randomPicker(255);
-            drawString(mc.fontRenderer, "        m", guiLeft + 10, guiTop + 50, rgb);
-
-
+            drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
         }
-           // randomPicker(255);
-            // drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
+
         System.out.println(furnace.getTime());
     }
 
