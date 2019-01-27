@@ -1,5 +1,6 @@
 package mcjty.mymod.furnace;
 
+import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -8,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
@@ -20,8 +22,10 @@ public class TileFurnace extends TileEntity implements ITickable {
     public static final int INPUT_SLOTS = 3;
     public static final int OUTPUT_SLOTS = 3;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
-
-
+    public static final int MAX_POWER = 100000;
+    public static final int RF_PER_TICK = 20;
+    public static final int RF_PER_TICK_INPUT = 100;
+    //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 
 
     //start time
@@ -46,8 +50,18 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
+            if (energyStorage.getEnergyStored() < RF_PER_TICK){
+                return;
+            }
+
+
+
+
             guiTime = time;
             if (progressRemaining > 0) {
+                energyStorage.consumePower(RF_PER_TICK);
+
+
 
                 progressRemaining --;
                 //if the algorithm wont be below 0.1 then set the time to the algorithm
@@ -167,6 +181,8 @@ public class TileFurnace extends TileEntity implements ITickable {
         this.clientProgress = clientProgress;
     }
 
+    //-------------------------------------------------------------------------------------------------------------
+
 
     // This item handler will hold our three input slots
     private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {
@@ -199,6 +215,8 @@ public class TileFurnace extends TileEntity implements ITickable {
 
     private CombinedInvWrapper combinedHandler = new CombinedInvWrapper(inputHandler, outputHandler);
 
+    //-------------------------------------------------------------------------------------------------------------
+
     //reads that saved stuff
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -210,6 +228,7 @@ public class TileFurnace extends TileEntity implements ITickable {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
         progressRemaining = compound.getFloat("progressRemaining");
+        energyStorage.setEnergy(compound.getInteger("energy"));
         time = compound.getFloat("time");
         scale = compound.getFloat("scale");
     }
@@ -222,8 +241,15 @@ public class TileFurnace extends TileEntity implements ITickable {
         compound.setFloat("progressRemaining", progressRemaining);
         compound.setFloat("scale", scale);
         compound.setFloat("time", time);
+        compound.setInteger("energy", energyStorage.getEnergyStored());
         return compound;
     }
+
+    //-------------------------------------------------------------------------------------------------------------
+
+    private MyEnergyStorage energyStorage = new MyEnergyStorage(MAX_POWER, RF_PER_TICK_INPUT);
+
+    //-------------------------------------------------------------------------------------------------------------
 
     public boolean canInteractWith(EntityPlayer playerIn) {
         // If we are too far away from this tile entity you cannot use it
@@ -233,6 +259,9 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return true;
+        }
+        if (capability == CapabilityEnergy.ENERGY){
             return true;
         }
         return super.hasCapability(capability, facing);
@@ -248,7 +277,9 @@ public class TileFurnace extends TileEntity implements ITickable {
             } else {
                 return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(outputHandler);
             }
-
+        }
+        if (capability == CapabilityEnergy.ENERGY){
+            return  CapabilityEnergy.ENERGY.cast(energyStorage);
         }
         return super.getCapability(capability, facing);
     }

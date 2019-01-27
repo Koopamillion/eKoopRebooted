@@ -96,7 +96,7 @@ public class GuiFurnace extends GuiContainer {
             drawString(mc.fontRenderer, "               d", guiLeft + 10, guiTop + 50, rgb);
         }
 
-        System.out.println(furnace.getGuiTime());
+        //System.out.println(furnace.getGuiTime());
     }
 
     @Override
