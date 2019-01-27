@@ -23,8 +23,8 @@ public class TileFurnace extends TileEntity implements ITickable {
     public static final int OUTPUT_SLOTS = 3;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
     public static final int MAX_POWER = 100000;
-    public static final int RF_PER_TICK = 20;
-    public static final int RF_PER_TICK_INPUT = 100;
+    public float RF_PER_TICK = 9;
+    public static final int RF_PER_TICK_INPUT = 250;
     //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 
 
@@ -50,16 +50,12 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            if (energyStorage.getEnergyStored() < RF_PER_TICK){
+            if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
                 return;
             }
 
-
-
-
-            guiTime = time;
             if (progressRemaining > 0) {
-                energyStorage.consumePower(RF_PER_TICK);
+                energyStorage.consumePower(Math.round(RF_PER_TICK));
 
 
 
@@ -115,9 +111,11 @@ public class TileFurnace extends TileEntity implements ITickable {
                     if (changeScale == true){
                         if(compound == false){
                             scale = scale + (increaseWithoutCompound * time);
-
+                            RF_PER_TICK = RF_PER_TICK + 0.5f;
+                            System.out.println(RF_PER_TICK);
                         }else{
                             scale = scale + increaseWithCompound;
+                            RF_PER_TICK = RF_PER_TICK + 0.5f;
                         }
 
 
