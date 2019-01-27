@@ -2,6 +2,7 @@ package mcjty.mymod.furnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,8 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerFurnace extends Container {
 
     private TileFurnace te;
+
+    private static final int PROGRESS_ID = 0;
 
     public ContainerFurnace(IInventory playerInventory, TileFurnace te) {
         this.te = te;
@@ -89,5 +92,23 @@ public class ContainerFurnace extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return te.canInteractWith(playerIn);
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        if (te.getProgressRemaining() != te.getClientProgress()){
+            te.setClientProgress(te.getProgressRemaining());
+        }
+        for (IContainerListener listener: listeners){
+            listener.sendWindowProperty(this, PROGRESS_ID, Math.round(te.getProgressRemaining()));
+        }
+    }
+
+    @Override
+    public void updateProgressBar(int id, int data) {
+        if(id == PROGRESS_ID){
+            te.setClientProgress(data);
+        }
     }
 }

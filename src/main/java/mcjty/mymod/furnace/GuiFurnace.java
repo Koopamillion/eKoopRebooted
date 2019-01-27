@@ -1,26 +1,87 @@
 package mcjty.mymod.furnace;
 
+
 import mcjty.mymod.MyMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
+
+
+
+import java.util.Random;
+
 
 public class GuiFurnace extends GuiContainer {
     public static final int WIDTH = 180;
     public static final int HEIGHT = 152;
 
     private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/furnace.png");
+    private TileFurnace furnace;
+    Random rand = new Random();
+    private int rgb = 0;
+
+
+    public void randomPicker (int bound){
+
+        int r = rand.nextInt(bound);
+
+        int g = rand.nextInt(bound);
+
+        int b = rand.nextInt(bound);
+
+        rgb = (r << 16)|(g << 8)|(b);
+    }
+
+
 
     public GuiFurnace(TileFurnace tileEntity, ContainerFurnace container) {
         super(container);
 
         xSize = WIDTH;
         ySize = HEIGHT;
+
+        furnace = tileEntity;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+        if (furnace.getClientProgress() != 0.000000000000000f){
+            if (furnace.getTime() >= 0.15f){
+                float percentage = furnace.getClientProgress() / furnace.getTime();
+                drawString(mc.fontRenderer, "Time remaining: " + Math.round(percentage * 100) + "%", guiLeft + 10, guiTop + 50, 0xffffff);
+            }else{
+                randomPicker(255);
+                drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
+
+            }
+
+           // System.out.println(furnace.getProgressRemaining());
+
+        }else{
+            randomPicker(255);
+            drawString(mc.fontRenderer, "T", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, " i", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "  m", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "   e", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "     ", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "      r", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "       e", guiLeft + 10, guiTop + 50, rgb);
+            randomPicker(255);
+            drawString(mc.fontRenderer, "        m", guiLeft + 10, guiTop + 50, rgb);
+
+
+        }
+           // randomPicker(255);
+            // drawString(mc.fontRenderer, "Max Speed", guiLeft + 10, guiTop + 50, rgb);
+        System.out.println(furnace.getTime());
     }
 
     @Override

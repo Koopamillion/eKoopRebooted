@@ -25,13 +25,22 @@ public class TileFurnace extends TileEntity implements ITickable {
 
 
     //start time
-    private float furnaceSmeltTimeMax = 100;
+    private  final float furnaceSmeltTimeMax = 100;
     //max end time actually idk anymore
-    private float furnaceSmeltTimeMin = 5;
-    private float time = furnaceSmeltTimeMax;
+    private  final float furnaceSmeltTimeMin = 5;
+    public float time = furnaceSmeltTimeMax;
+
+    public static float guiTime = 100;
     private float progressRemaining = 0;
     private float scale = 0;
+    private float increaseWithoutCompound = 0.0005f;
+    private float increaseWithCompound = 0.025f;
+    private float clientProgress = -1;
+    //public int progressInt = 0;
+
     private boolean changeScale = true;
+    //should it accelerate faster and faster? Basically if this is false, its more balanced
+    private boolean compound = false;
 
 
     @Override
@@ -42,13 +51,14 @@ public class TileFurnace extends TileEntity implements ITickable {
                 //if the algorithm wont be below 0.1 then set the time to the algorithm
                 if  (furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale) > 0.1){
                     time = furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale);
+
                 }else{
                     //if it is below 0.1 then set it to 0.1f
                     time = 0.1f;
                     //and change the boolean so the scale dosent keep increasing and the function dosent need to be called multiple times
                     changeScale = false;
                 }
-                 System.out.println(time);
+                // System.out.println(time);
                 //if there is no ticks left to remove, GO AND SMELT
                 if (progressRemaining <= 0) {
                     attemptSmelt();
@@ -61,6 +71,7 @@ public class TileFurnace extends TileEntity implements ITickable {
             }
 
         }
+
 
     }
 
@@ -82,16 +93,24 @@ public class TileFurnace extends TileEntity implements ITickable {
             if (!result.isEmpty()) {
                 if (insertOutput(result.copy(), true)) {
                     //if changescale is enable then increase scale
+                    if (changeScale == true){
+                        if(compound == false){
+                            scale = scale + (increaseWithoutCompound * time);
 
-                    if (changeScale = true){
-                        scale = scale + 0.025f;
+                        }else{
+                            scale = scale + increaseWithCompound;
+                        }
+
+
                     }
                     //set progressremaining to time
                     progressRemaining = time;
+                    guiTime = time;
                     markDirty();
                     }
-                }
                 break;
+                }
+
             }
         }
 
@@ -113,6 +132,22 @@ public class TileFurnace extends TileEntity implements ITickable {
 
     public float getProgressRemaining() {
         return progressRemaining;
+    }
+
+    public void setProgressRemaining(float progressRemaining){
+        this.progressRemaining = progressRemaining;
+    }
+
+    public float getTime(){
+        return guiTime;
+    }
+
+    public float getClientProgress() {
+        return clientProgress;
+    }
+
+    public void setClientProgress(float clientProgress) {
+        this.clientProgress = clientProgress;
     }
 
 
@@ -157,7 +192,9 @@ public class TileFurnace extends TileEntity implements ITickable {
         if (compound.hasKey("itemsOut")) {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
-        progressRemaining = compound.getInteger("progressRemaining");
+        progressRemaining = compound.getFloat("progressRemaining");
+        time = compound.getFloat("time");
+        scale = compound.getFloat("scale");
     }
     //saves stuff in a file so it can be recalled upon boot up
     @Override
@@ -166,6 +203,8 @@ public class TileFurnace extends TileEntity implements ITickable {
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
         compound.setFloat("progressRemaining", progressRemaining);
+        compound.setFloat("scale", scale);
+        compound.setFloat("time", time);
         return compound;
     }
 
