@@ -1,10 +1,10 @@
 {
   "result": {
-    "item": "mymod:furnace"
+    "item": "mymod:charger"
   },
   "pattern": [
-    "vcv",
-    "cFc",
+    " v ",
+    " F ",
     "vcv"
   ],
   "type": "forge:ore_shaped",
@@ -13,10 +13,10 @@
       "type": "forge:ore_dict", "ore": "blockIron"
     },
     "F": {
-      "item": "minecraft:furnace"
+      "item": "forge:ore_dict", "ore": "blockRedstone"
     },
     "v": {
-      "type": "forge:ore_dict", "ore": "dustRedstone"
+      "type": "forge:ore_dict", "ore": "ingotIron"
     }
   }
 }

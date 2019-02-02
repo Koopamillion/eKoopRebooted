@@ -3,17 +3,20 @@
     "item": "mymod:furnace"
   },
   "pattern": [
-    " c ",
+    "vcv",
     "cFc",
-    " c "
+    "vcv"
   ],
   "type": "forge:ore_shaped",
   "key": {
     "c": {
-      "type": "forge:ore_dict", "ore": "ingotIron"
+      "type": "forge:ore_dict", "ore": "blockIron"
     },
     "F": {
       "item": "minecraft:furnace"
+    },
+    "v": {
+      "type": "forge:ore_dict", "ore": "dustRedstone"
     }
   }
 }

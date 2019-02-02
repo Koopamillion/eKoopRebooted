@@ -3,6 +3,9 @@ package mcjty.mymod.proxy;
 import mcjty.mymod.furnace.ContainerFurnace;
 import mcjty.mymod.furnace.GuiFurnace;
 import mcjty.mymod.furnace.TileFurnace;
+import mcjty.mymod.plushy.ContainerChickenPlushy;
+import mcjty.mymod.plushy.GuiChickenPlushy;
+import mcjty.mymod.plushy.TileChickenPlushy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +24,9 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileFurnace) {
             return new ContainerFurnace(player.inventory, (TileFurnace) te);
         }
+        if (te instanceof TileChickenPlushy) {
+            return new ContainerChickenPlushy(player.inventory, (TileChickenPlushy) te);
+        }
         return null;
     }
 
@@ -32,6 +38,10 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileFurnace) {
             TileFurnace containerTileEntity = (TileFurnace) te;
             return new GuiFurnace(containerTileEntity, new ContainerFurnace(player.inventory, containerTileEntity));
+        }
+        if (te instanceof TileChickenPlushy) {
+            TileChickenPlushy containerTileEntity = (TileChickenPlushy) te;
+            return new GuiChickenPlushy(containerTileEntity, new ContainerChickenPlushy(player.inventory, containerTileEntity));
         }
         return null;
     }

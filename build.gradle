@@ -39,7 +39,7 @@ repositories {
 }
 
 version = "0.0.1"
-group= "mcjty.mymod"
+group= "com.mcjty.mymod"
 archivesBaseName = "mymod"
 
 sourceCompatibility = 1.8

@@ -1,0 +1,190 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "particle": "mymod:blocks/chickenfeathers",
+        "chickenfeathers": "mymod:blocks/chickenfeathers",
+        "chickeneyes": "mymod:blocks/chickeneyes",
+        "chickeneyebrow": "mymod:blocks/chickeneyebrow",
+        "chicken nostrils": "mymod:blocks/chicken nostrils",
+        "chickenmouth": "mymod:blocks/chickenmouth",
+        "chickenred": "mymod:blocks/chickenred"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 27, 215, 0 ],
+            "translation": [ 0, 2, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 104, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.4, 0.4, 0.4 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 32, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 5, 0, 5 ], 
+            "to": [ 11, 6, 13 ], 
+            "faces": {
+                "north": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 6 ] },
+                "east": { "texture": "#chickenfeathers", "uv": [ 0, 0, 8, 6 ] },
+                "south": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 6 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 0, 0, 8, 6 ] },
+                "up": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 8 ] },
+                "down": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 8 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 4, 2, 6 ], 
+            "to": [ 5, 6, 12 ], 
+            "faces": {
+                "north": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 4 ] },
+                "south": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 4 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 4 ] },
+                "up": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 6 ] },
+                "down": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 6 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 4, 4 ], 
+            "to": [ 10, 10, 6 ], 
+            "faces": {
+                "east": { "texture": "#chickenfeathers", "uv": [ 0, 0, 2, 6 ] },
+                "south": { "texture": "#chickenfeathers", "uv": [ 0, 0, 4, 6 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 0, 0, 2, 6 ] },
+                "up": { "texture": "#chickenfeathers", "uv": [ 0, 2, 4, 4 ] },
+                "down": { "texture": "#chickenfeathers", "uv": [ 0, 0, 4, 2 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 6, 1 ], 
+            "to": [ 10, 7, 3 ], 
+            "faces": {
+                "north": { "texture": "#chickenmouth", "uv": [ 12, 1, 16, 2 ] },
+                "east": { "texture": "#chickenmouth", "uv": [ 12, 1, 14, 2 ] },
+                "west": { "texture": "#chickenmouth", "uv": [ 12, 1, 14, 2 ] },
+                "up": { "texture": "#chickenmouth", "uv": [ 0, 1, 4, 3 ] },
+                "down": { "texture": "#chickenmouth", "uv": [ 0, 1, 4, 3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7, 4, 2 ], 
+            "to": [ 9, 6, 3 ], 
+            "faces": {
+                "north": { "texture": "#chickenred", "uv": [ 0, 0, 2, 2 ] },
+                "east": { "texture": "#chickenred", "uv": [ 0, 0, 1, 2 ] },
+                "west": { "texture": "#chickenred", "uv": [ 0, 0, 1, 2 ] },
+                "down": { "texture": "#chickenred", "uv": [ 0, 0, 2, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 11, 2, 6 ], 
+            "to": [ 12, 6, 12 ], 
+            "faces": {
+                "north": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 4 ] },
+                "east": { "texture": "#chickenfeathers", "uv": [ 0, 0, 6, 4 ] },
+                "south": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 4 ] },
+                "up": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 6 ] },
+                "down": { "texture": "#chickenfeathers", "uv": [ 0, 0, 1, 6 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 9, 7, 1 ], 
+            "to": [ 10, 8, 2 ], 
+            "faces": {
+                "north": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "east": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#chicken nostrils", "uv": [ 0, 0, 1, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 7, 2 ], 
+            "to": [ 10, 8, 3 ], 
+            "faces": {
+                "north": { "texture": "#chickenmouth", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#chickenmouth", "uv": [ 0, 0, 4, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7, 7, 1 ], 
+            "to": [ 9, 8, 2 ], 
+            "faces": {
+                "north": { "texture": "#chickenmouth", "uv": [ 0, 0, 2, 1 ] },
+                "up": { "texture": "#chickenmouth", "uv": [ 0, 0, 2, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 9, 3 ], 
+            "to": [ 10, 10, 4 ], 
+            "faces": {
+                "north": { "texture": "#chickeneyebrow", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#chickenfeathers", "uv": [ 2, 0, 3, 1 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 15, 0, 16, 1 ] },
+                "up": { "texture": "#chickenfeathers", "uv": [ 0, 0, 4, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 8, 3 ], 
+            "to": [ 10, 9, 4 ], 
+            "faces": {
+                "north": { "texture": "#chickeneyes", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#chickenfeathers", "uv": [ 2, 1, 3, 2 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 15, 1, 16, 2 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 4, 3 ], 
+            "to": [ 10, 8, 4 ], 
+            "faces": {
+                "north": { "texture": "#chickenfeathers", "uv": [ 1, 2, 5, 6 ] },
+                "east": { "texture": "#chickenfeathers", "uv": [ 2, 2, 3, 6 ] },
+                "west": { "texture": "#chickenfeathers", "uv": [ 15, 2, 16, 6 ] },
+                "down": { "texture": "#chickenfeathers", "uv": [ 0, 0, 4, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 7, 1 ], 
+            "to": [ 7, 8, 2 ], 
+            "faces": {
+                "north": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#chickenmouth", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#chicken nostrils", "uv": [ 0, 0, 1, 1 ] }
+            }
+        }
+    ]
+}

@@ -1,13 +1,9 @@
-package mcjty.mymod.furnace;
+package mcjty.mymod.plushy;
 
-
-import mcjty.mymod.network.Messages;
-import mcjty.mymod.network.PacketSyncPower;
-import mcjty.mymod.tools.IEnergyContainer;
+import mcjty.mymod.furnace.TileFurnace;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -15,14 +11,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerFurnace extends Container implements IEnergyContainer {
+public class ContainerChickenPlushy extends Container {
 
-    private TileFurnace te;
+    private TileChickenPlushy te;
 
-    private static final int PROGRESS_ID = 0;
-    private static final int TIME_ID = 1;
-
-    public ContainerFurnace(IInventory playerInventory, TileFurnace te) {
+    public ContainerChickenPlushy(IInventory playerInventory, TileChickenPlushy te) {
         this.te = te;
 
         // This container references items out of our own inventory (the 9 slots we hold ourselves)
@@ -30,6 +23,11 @@ public class ContainerFurnace extends Container implements IEnergyContainer {
         // both inventories. The two calls below make sure that slots are defined for both inventories.
         addOwnSlots();
         addPlayerSlots(playerInventory);
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return te.canInteractWith(playerIn);
     }
 
     private void addPlayerSlots(IInventory playerInventory) {
@@ -77,11 +75,11 @@ public class ContainerFurnace extends Container implements IEnergyContainer {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < TileFurnace.SIZE) {
-                if (!this.mergeItemStack(itemstack1, TileFurnace.SIZE, this.inventorySlots.size(), true)) {
+            if (index < TileChickenPlushy.SIZE) {
+                if (!this.mergeItemStack(itemstack1, TileChickenPlushy.SIZE, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, TileFurnace.SIZE, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, TileChickenPlushy.SIZE, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -93,61 +91,5 @@ public class ContainerFurnace extends Container implements IEnergyContainer {
         }
 
         return itemstack;
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return te.canInteractWith(playerIn);
-    }
-
-    //send stuff to the server
-
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-        if (te.getProgressRemaining() != te.getClientProgress()){
-            te.setClientProgress(te.getProgressRemaining());
-        }
-        //makes sure gui time is always the same as time
-        if (te.getTime() != te.getGuiTime()){
-            te.setGuiTime(te.getTime());
-        }
-        //sends vars to a packet
-        for (IContainerListener listener: listeners){
-            listener.sendWindowProperty(this, PROGRESS_ID, Math.round(te.getProgressRemaining()));
-            listener.sendWindowProperty(this, TIME_ID, Math.round(te.getTime()));
-        }
-        if (te.getEnergy()!= te.getClientEnergy()){
-            te.setClientEnergy(te.getEnergy());
-            for (IContainerListener listener: listeners){
-                if (listener instanceof EntityPlayerMP){
-                    EntityPlayerMP player = (EntityPlayerMP) listener;
-                    Messages.INSTANCE.sendTo(new PacketSyncPower(te.getEnergy()), player);
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Sends two ints to the client-side Container. Used for furnace burning time, smelting progress, brewing progress,
-     * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
-     * value. Both are truncated to shorts in non-local SMP.
-     */
-
-    @Override
-    public void updateProgressBar(int id, int data) {
-        if(id == PROGRESS_ID){
-            te.setClientProgress(data);
-        }
-        if(id == TIME_ID){
-            te.setGuiTime(data);
-        }
-
-    }
-
-    @Override
-    public void syncPower(int energy) {
-        te.setClientEnergy(energy);
     }
 }

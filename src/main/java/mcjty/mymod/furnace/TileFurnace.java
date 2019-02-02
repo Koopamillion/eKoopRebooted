@@ -1,10 +1,13 @@
 package mcjty.mymod.furnace;
 
 import mcjty.mymod.tools.MyEnergyStorage;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -13,8 +16,10 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileFurnace extends TileEntity implements ITickable {
 
@@ -23,7 +28,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     public static final int OUTPUT_SLOTS = 3;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
     public static final int MAX_POWER = 100000;
-    public float RF_PER_TICK = 9;
+    public float RF_PER_TICK = 20;
     public static final int RF_PER_TICK_INPUT = 250;
     //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 
@@ -40,6 +45,8 @@ public class TileFurnace extends TileEntity implements ITickable {
     private float increaseWithoutCompound = 0.0005f;
     private float increaseWithCompound = 0.025f;
     private float clientProgress = -1;
+    private FurnaceState state = FurnaceState.OFF;
+    private int clientEnergy = -1;
     //public int progressInt = 0;
 
     private boolean changeScale = true;
@@ -50,45 +57,73 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
-                return;
-            }
 
-            if (progressRemaining > 0) {
-                energyStorage.consumePower(Math.round(RF_PER_TICK));
+                if (shouldRun() == true){
+                if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
 
-
-
-                progressRemaining --;
-                //if the algorithm wont be below 0.1 then set the time to the algorithm
-                if  (furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale) > 0.1){
-                    time = furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale);
-
-                }else{
-                    //if it is below 0.1 then set it to 0.1f
-                    time = 0.1f;
-                    //and change the boolean so the scale dosent keep increasing and the function dosent need to be called multiple times
-                    changeScale = false;
-                }
-                // System.out.println(time);
-                //if there is no ticks left to remove, GO AND SMELT
-                if (progressRemaining <= 0) {
-
-                    attemptSmelt();
+                    return;
                 }
 
-                markDirty();
-            } else {
+                if (progressRemaining > 0) {
+                    setState(FurnaceState.WORKING);
+                    energyStorage.consumePower(Math.round(RF_PER_TICK));
 
-                //no ticks left? must have started, GO AND START THE SMELTING PROCESS LOL
-                startSmelt();
+
+
+                    progressRemaining --;
+                    //if the algorithm wont be below 0.1 then set the time to the algorithm
+                    if  (furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale) > 0.1){
+                        time = furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale);
+
+                    }else{
+                        //if it is below 0.1 then set it to 0.1f
+                        time = 0.1f;
+                        //and change the boolean so the scale dosent keep increasing and the function dosent need to be called multiple times
+                        changeScale = false;
+                    }
+                    // System.out.println(time);
+                    //if there is no ticks left to remove, GO AND SMELT
+                    if (progressRemaining <= 0) {
+
+                        attemptSmelt();
+                    }
+
+                    markDirty();
+                } else {
+
+                    //no ticks left? must have started, GO AND START THE SMELTING PROCESS LOL
+                    startSmelt();
+
+                }
+            }else{
+                    if(changeScale==false){
+                        changeScale=true;
+                        scale = scale - 0.001f;
+                    }else if (scale > 0){
+                        scale = scale - 0.001f;
+                        if  (furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale) <= 100){
+                            time = furnaceSmeltTimeMax - ((furnaceSmeltTimeMax - furnaceSmeltTimeMin)* scale);
+
+                        }else{
+
+                            time = 100f;
+
+
+                        }
+                    }else{
+                        scale = 0;
+                    }
+
+                    setState(FurnaceState.OFF);
+                }
 
             }
+
 
         }
 
 
-    }
+
 
 
 
@@ -102,6 +137,27 @@ public class TileFurnace extends TileEntity implements ITickable {
         return false;
     }
 
+    public boolean shouldRun(){
+        for (int i = 0; i < INPUT_SLOTS; i++){
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputHandler.getStackInSlot(i));
+            if(!result.isEmpty()){  //does input slot got something in?
+                if (insertOutput(result.copy(), true)) { //is there a free output slot
+                    if(!(energyStorage.getEnergyStored() < Math.round(RF_PER_TICK))){   //is there enough energy
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+        }
+
+
+        return false;
+
+        }
+
     private void startSmelt() {
         for (int i = 0; i < INPUT_SLOTS; i++) {
             ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputHandler.getStackInSlot(i));
@@ -111,11 +167,10 @@ public class TileFurnace extends TileEntity implements ITickable {
                     if (changeScale == true){
                         if(compound == false){
                             scale = scale + (increaseWithoutCompound * time);
-                            RF_PER_TICK = RF_PER_TICK + 0.5f;
-                            System.out.println(RF_PER_TICK);
+
                         }else{
                             scale = scale + increaseWithCompound;
-                            RF_PER_TICK = RF_PER_TICK + 0.5f;
+
                         }
 
 
@@ -125,8 +180,10 @@ public class TileFurnace extends TileEntity implements ITickable {
                     guiTime = time;
                     markDirty();
                     }
+
                 break;
                 }
+
 
             }
         }
@@ -177,6 +234,56 @@ public class TileFurnace extends TileEntity implements ITickable {
 
     public void setClientProgress(float clientProgress) {
         this.clientProgress = clientProgress;
+    }
+
+    public int getClientEnergy() {
+        return clientEnergy;
+    }
+
+    public void setClientEnergy(int clientEnergy) {
+        this.clientEnergy = clientEnergy;
+    }
+
+    public int getEnergy(){
+        return energyStorage.getEnergyStored();
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound nbtTag = super.getUpdateTag();
+        nbtTag.setInteger("state", state.ordinal());
+        return nbtTag;
+    }
+
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+    }
+
+
+    //client
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        int stateIndex = packet.getNbtCompound().getInteger("state");
+
+        if (world.isRemote && stateIndex != state.ordinal()) {
+            state = FurnaceState.VALUES[stateIndex];
+            world.markBlockRangeForRenderUpdate(pos, pos);
+        }
+    }
+
+    public void setState(FurnaceState state) {
+        if (this.state != state) {
+            this.state = state;
+            markDirty();
+            IBlockState blockState = world.getBlockState(pos);
+            getWorld().notifyBlockUpdate(pos, blockState, blockState, 3);
+        }
+    }
+
+    public FurnaceState getState() {
+        return state;
     }
 
     //-------------------------------------------------------------------------------------------------------------
