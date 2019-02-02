@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "mymod:circuit"
+  },
+  "pattern": [
+    "xzx",
+    "zzz",
+    "sss"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "x": {
+      "type": "forge:ore_dict", "ore": "dustRedstone"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    }
+  }
+}

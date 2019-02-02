@@ -5,18 +5,24 @@
   "pattern": [
     "vcv",
     "cFc",
-    "vcv"
+    "vsv"
   ],
   "type": "forge:ore_shaped",
   "key": {
     "c": {
-      "type": "forge:ore_dict", "ore": "blockIron"
+      "type": "forge:ore_dict", "ore": "ingotIron"
     },
     "F": {
-      "item": "minecraft:furnace"
+      "item": "minecraft:furnace",
+      "data": 0
+
     },
     "v": {
       "type": "forge:ore_dict", "ore": "dustRedstone"
+    },
+    "s": {
+      "item": "mymod:machineframe",
+      "data": 0
     }
   }
 }
