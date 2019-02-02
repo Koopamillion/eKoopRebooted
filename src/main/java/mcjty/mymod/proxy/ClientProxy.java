@@ -2,6 +2,7 @@ package mcjty.mymod.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import mcjty.mymod.ModBlocks;
+import mcjty.mymod.ModItems;
 import mcjty.mymod.MyMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +27,7 @@ public class ClientProxy extends CommonProxy {
     public static void registerModels(ModelRegistryEvent event) {
 
         ModBlocks.initModels();
+        ModItems.initModels();
     }
 
 

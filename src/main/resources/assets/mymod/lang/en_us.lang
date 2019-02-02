@@ -1,3 +1,5 @@
 tile.mymod.furnace.name=Accelerating Furnace
 tile.mymod.chicken.name=Chicken Plushy
-itemGroup.mymod.tabEKoop=eKoop
+tile.mymod.machineframe.name=Basic Machine Frame
+item.mymod.circuit.name=Basic Circuit
+itemGroup.mymod.tabEKoop.name=eKoop

@@ -2,12 +2,15 @@ package mcjty.mymod.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import mcjty.mymod.ModBlocks;
+import mcjty.mymod.ModItems;
 import mcjty.mymod.MyMod;
 import mcjty.mymod.furnace.BlockFurnace;
 import mcjty.mymod.furnace.TileFurnace;
+import mcjty.mymod.machineitems.ItemCircuit;
 import mcjty.mymod.network.Messages;
 import mcjty.mymod.plushy.BlockChickenPlushy;
 import mcjty.mymod.plushy.TileChickenPlushy;
+import mcjty.mymod.simpleblocks.BlockMachineFrame;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -42,6 +45,7 @@ public class CommonProxy {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new BlockFurnace());
         event.getRegistry().register(new BlockChickenPlushy());
+        event.getRegistry().register(new BlockMachineFrame());
         GameRegistry.registerTileEntity(TileFurnace.class, MyMod.MODID + "_furnace");
         GameRegistry.registerTileEntity(TileChickenPlushy.class, MyMod.MODID + "_chicken");
     }
@@ -49,8 +53,9 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock (ModBlocks.blockFurnace).setRegistryName(BlockFurnace.afurnace));
-
+        event.getRegistry().register(new ItemCircuit());
         event.getRegistry().register(new ItemBlock (ModBlocks.blockChicken).setRegistryName(BlockChickenPlushy.chicken));
+        event.getRegistry().register(new ItemBlock (ModBlocks.blockMachineFrame).setRegistryName(BlockMachineFrame.machineframe));
     }
 
 
