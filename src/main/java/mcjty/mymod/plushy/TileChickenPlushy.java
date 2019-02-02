@@ -6,6 +6,7 @@ import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -14,11 +15,14 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
@@ -27,7 +31,7 @@ import javax.annotation.Nullable;
 
 public class TileChickenPlushy extends TileEntity implements ITickable {
     public static final int INPUT_SLOTS = 3;
-    public static final int OUTPUT_SLOTS = 3;
+    public static final int OUTPUT_SLOTS = 9;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
     public static final int MAX_POWER = 100000;
     public float RF_PER_TICK = 20;
@@ -54,8 +58,8 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            System.out.println(count);
-            if(count < 80){
+
+            if(count < 4800){
                 count++;
 
             }else{
@@ -76,13 +80,25 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
         }
     }
 
+
     public void run(ItemStack itemstack, Item item) {
-        for(int i = 0; i < 3; ++i) {
-            if((outputHandler.getStackInSlot(i).getCount() >= item.getItemStackLimit(itemstack))&& outputHandler.getStackInSlot(i).getItem() == item)
-                continue;
-            outputHandler.insertItem(i, itemstack.copy(), false);
-            break;
+
+        //    if((ItemHandlerHelper.canItemStacksStack(outputHandler.getStackInSlot(i), itemstack)))
+
+        //    System.out.println("hi");
+            ItemHandlerHelper.insertItemStacked(this.outputHandler, itemstack, false);
+
+
+    }
+
+    private boolean insertOutput(ItemStack output, boolean simulate) {
+        for (int i = 0; i < OUTPUT_SLOTS; i++) {
+            ItemStack remaining = outputHandler.insertItem(i, output, simulate);
+            if (remaining.isEmpty()) {
+                return true;
+            }
         }
+        return false;
     }
 
         @Override
@@ -100,7 +116,7 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
 
 
         // This item handler will hold our three input slots
-        private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {
+        private ItemStackHandler inputHandler = new ItemStackHandler(0) {
 
             @Override
             protected void onContentsChanged(int slot) {

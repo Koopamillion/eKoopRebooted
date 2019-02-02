@@ -14,7 +14,7 @@ public class GuiChickenPlushy extends GuiContainer {
 
     public static final int WIDTH = 180;
     public static final int HEIGHT = 152;
-    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/furnace.png");
+    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/chicken.png");
     private TileChickenPlushy chicken;
 
 
@@ -32,6 +32,7 @@ public class GuiChickenPlushy extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override

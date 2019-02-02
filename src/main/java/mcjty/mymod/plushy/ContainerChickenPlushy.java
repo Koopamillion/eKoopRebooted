@@ -50,17 +50,23 @@ public class ContainerChickenPlushy extends Container {
 
     private void addOwnSlots() {
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        int x = 10;
-        int y = 25;
+        int y = 5;
 
 
         int slotIndex = 0;
+
+        // Add our own slots
+        int x = 64;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
-
-        // Add our own slots
-        x = 118;
+        y += 18;
+        x = 64;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        y += 18;
+        x = 64;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));

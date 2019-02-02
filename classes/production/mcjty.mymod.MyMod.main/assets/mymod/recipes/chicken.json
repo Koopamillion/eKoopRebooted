@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "mymod:chicken"
+  },
+  "pattern": [
+    "xyx",
+    "yzy",
+    "xyx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "minecraft:egg"
+    },
+    "y": {
+      "item": "minecraft:feather"
+    },
+    "z": {
+      "item": "minecraft:chicken"
+    }
+  }
+}

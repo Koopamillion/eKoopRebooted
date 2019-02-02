@@ -48,7 +48,7 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
         // mymod:charger
         setRegistryName(chicken);
         setUnlocalizedName(MyMod.MODID + ".chicken");
-        setHarvestLevel("pickaxe", 1);
+        setHarvestLevel("pickaxe", 0);
         setCreativeTab(MyMod.tabEKoop);
         setHardness(1);
 
