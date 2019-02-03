@@ -70,7 +70,7 @@ public class ContainerSolderTable extends Container {
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
         y = 18+5;
-        x = 64+120;
+        x = 64+80;
 
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
     }

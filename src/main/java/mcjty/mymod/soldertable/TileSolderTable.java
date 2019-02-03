@@ -7,10 +7,12 @@ import mcjty.mymod.plushy.TileChickenPlushy;
 import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -104,6 +106,7 @@ public class TileSolderTable extends TileEntity implements ITickable {
             ItemStack result = getResult(inputHandler.getStackInSlot(i));
             if (!result.isEmpty()) {
                 if (insertOutput(result.copy(), true)) {
+                    progressRemaining = 40;
                     markDirty();
                 }
 
@@ -121,7 +124,11 @@ public class TileSolderTable extends TileEntity implements ITickable {
             if (!result.isEmpty()) {
                 // This copy is very important!(
                 if (insertOutput(result.copy(), false)) {
-                    inputHandler.extractItem(i, 1, false);
+                    for(int l = 0; l < 9; l++){
+                        inputHandler.extractItem(l, 1, false);
+                    }
+
+
                     break;
 
                 }
@@ -131,10 +138,14 @@ public class TileSolderTable extends TileEntity implements ITickable {
 
 
 
-    private ItemStack getResult(ItemStack stackInSlot){
-        SolderRecipe recipe = SolderManager.getRecipe(stackInSlot, stackInSlot, stackInSlot, stackInSlot, stackInSlot);
+    private ItemStack getResult(ItemStack stack ){
+        SolderRecipe recipe = SolderManager.getRecipe(inputHandler.getStackInSlot(0), inputHandler.getStackInSlot(1), inputHandler.getStackInSlot(2), inputHandler.getStackInSlot(3), inputHandler.getStackInSlot(4), inputHandler.getStackInSlot(5), inputHandler.getStackInSlot(6), inputHandler.getStackInSlot(7), inputHandler.getStackInSlot(8));
      //   if(Fluid == Enough){return recipe.getOutput();}
-        return  recipe.getOutput();
+        if (recipe!= null){
+            return  recipe.getOutput();
+
+        }
+        return ItemStack.EMPTY;
     }
 
 
@@ -183,11 +194,11 @@ public class TileSolderTable extends TileEntity implements ITickable {
     // This item handler will hold our three input slots
     private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {
 
-        @Override
+   /*     @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            ItemStack result = getResult(stack);
+            ItemStack result = getResult(inputHandler.getStackInSlot(slot));
             return !result.isEmpty();
-        }
+        }*/
 
         @Override
         protected void onContentsChanged(int slot) {
