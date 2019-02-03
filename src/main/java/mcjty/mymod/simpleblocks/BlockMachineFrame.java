@@ -23,6 +23,7 @@ public class BlockMachineFrame extends Block {
         setHarvestLevel("pickaxe", 1);
         setCreativeTab(MyMod.tabEKoop);
         setHardness(1);
+        setLightLevel(5);
     }
 
     @SideOnly(Side.CLIENT)

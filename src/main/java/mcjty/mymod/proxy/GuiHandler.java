@@ -6,6 +6,9 @@ import mcjty.mymod.furnace.TileFurnace;
 import mcjty.mymod.plushy.ContainerChickenPlushy;
 import mcjty.mymod.plushy.GuiChickenPlushy;
 import mcjty.mymod.plushy.TileChickenPlushy;
+import mcjty.mymod.soldertable.ContainerSolderTable;
+import mcjty.mymod.soldertable.GuiSolderTable;
+import mcjty.mymod.soldertable.TileSolderTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +30,9 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileChickenPlushy) {
             return new ContainerChickenPlushy(player.inventory, (TileChickenPlushy) te);
         }
+        if (te instanceof TileSolderTable) {
+            return new ContainerSolderTable(player.inventory, (TileSolderTable) te);
+        }
         return null;
     }
 
@@ -42,6 +48,10 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileChickenPlushy) {
             TileChickenPlushy containerTileEntity = (TileChickenPlushy) te;
             return new GuiChickenPlushy(containerTileEntity, new ContainerChickenPlushy(player.inventory, containerTileEntity));
+        }
+        if (te instanceof TileSolderTable) {
+            TileSolderTable containerTileEntity = (TileSolderTable) te;
+            return new GuiSolderTable(containerTileEntity, new ContainerSolderTable(player.inventory, containerTileEntity));
         }
         return null;
     }

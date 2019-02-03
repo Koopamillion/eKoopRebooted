@@ -3,6 +3,7 @@ package mcjty.mymod;
 import mcjty.mymod.furnace.BlockFurnace;
 import mcjty.mymod.plushy.BlockChickenPlushy;
 import mcjty.mymod.simpleblocks.BlockMachineFrame;
+import mcjty.mymod.soldertable.BlockSolderTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -11,6 +12,9 @@ public class ModBlocks {
 
     @GameRegistry.ObjectHolder("mymod:furnace")
     public static BlockFurnace blockFurnace;
+
+    @GameRegistry.ObjectHolder("mymod:solder")
+    public static BlockSolderTable blockSolder;
 
 
    @GameRegistry.ObjectHolder("mymod:chicken")
@@ -25,7 +29,7 @@ public class ModBlocks {
         blockFurnace.initModel();
         blockChicken.initModel();
         blockMachineFrame.initModel();
-
+        blockSolder.initModel();
 
     }
 

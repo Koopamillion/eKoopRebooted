@@ -1,5 +1,6 @@
 package mcjty.mymod.furnace;
 
+import mcjty.mymod.sound.SoundFurnace;
 import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,9 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -20,6 +24,9 @@ import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import static mcjty.mymod.furnace.FurnaceState.OFF;
+import static mcjty.mymod.furnace.FurnaceState.WORKING;
 
 public class TileFurnace extends TileEntity implements ITickable {
 
@@ -42,12 +49,13 @@ public class TileFurnace extends TileEntity implements ITickable {
     public  float guiTime = 100;
     private float progressRemaining = 0;
     private float scale = 0;
+
+    private int soundCounter = 0;
     private float increaseWithoutCompound = 0.0005f;
     private float increaseWithCompound = 0.025f;
     private float clientProgress = -1;
     private FurnaceState state = FurnaceState.OFF;
     private int clientEnergy = -1;
-    //public int progressInt = 0;
 
     private boolean changeScale = true;
     //should it accelerate faster and faster? Basically if this is false, its more balanced
@@ -57,7 +65,6 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-
                 if (shouldRun() == true){
                 if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
 
@@ -117,6 +124,19 @@ public class TileFurnace extends TileEntity implements ITickable {
                     setState(FurnaceState.OFF);
                 }
 
+                if(getState()==WORKING && soundCounter == 0){
+
+                    soundCounter = 34;
+                    BlockPos pos = getPos();
+                    World worldIn = getWorld();
+
+                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 2.0f, 1.0F);
+                //    worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                }
+                if(soundCounter > 0){
+                    soundCounter--;
+                }
+
             }
 
 
@@ -129,6 +149,7 @@ public class TileFurnace extends TileEntity implements ITickable {
 
     private boolean insertOutput(ItemStack output, boolean simulate) {
         for (int i = 0; i < OUTPUT_SLOTS; i++) {
+
             ItemStack remaining = outputHandler.insertItem(i, output, simulate);
             if (remaining.isEmpty()) {
                 return true;

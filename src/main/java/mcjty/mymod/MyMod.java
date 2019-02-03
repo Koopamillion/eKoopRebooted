@@ -2,6 +2,7 @@ package mcjty.mymod;
 
 
 import mcjty.mymod.proxy.CommonProxy;
+import mcjty.mymod.sound.SoundFurnace;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -39,6 +40,7 @@ public class MyMod {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+        SoundFurnace.preInit();
     }
 
     @Mod.EventHandler

@@ -2,10 +2,13 @@ package mcjty.mymod.plushy;
 
 import mcjty.mymod.furnace.FurnaceState;
 import mcjty.mymod.furnace.TileFurnace;
+import mcjty.mymod.sound.SoundFurnace;
 import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +21,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -28,56 +34,78 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Random;
+
+import static mcjty.mymod.furnace.FurnaceState.WORKING;
 
 public class TileChickenPlushy extends TileEntity implements ITickable {
     public static final int INPUT_SLOTS = 3;
     public static final int OUTPUT_SLOTS = 9;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
-    public static final int MAX_POWER = 100000;
-    public float RF_PER_TICK = 20;
-    public static final int RF_PER_TICK_INPUT = 250;
-    //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
+    private int randInt = 0;
+    Random rand = new Random();
+    private int tier1chance = 4;
+    private int soundCounter = rand.nextInt(2400);
+    private int tier2chance = 2;
+
+    private int tier3chance = 1;
 
 
-    //start time
-    private final float furnaceSmeltTimeMax = 100;
-    //max end time actually idk anymore
-    private final float furnaceSmeltTimeMin = 5;
-    private int count = 0;
-    private int bigcount = 0;
-    private int biggestcount = 0;
 
-    private int clientEnergy = -1;
-    //public int progressInt = 0;
-
-    private boolean changeScale = true;
-    //should it accelerate faster and faster? Basically if this is false, its more balanced
-    private boolean compound = false;
 
 
     @Override
     public void update() {
         if (!world.isRemote) {
+            randInt = rand.nextInt(19200);
 
-            if(count < 4800){
-                count++;
+            for(int i = 0; i < tier1chance; i++){
+                if(randInt == i){
+                    BlockPos pos = getPos();
+                    World worldIn = getWorld();
+                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 1.0f, 1.0F);
+                    run(new ItemStack(Items.EGG, 1, 0), Items.EGG);
+                    break;
+                }
+            }
+            for(int i = (tier1chance+1); i < (tier2chance+tier1chance+1); i++){
+                if(randInt == i){
+                    BlockPos pos = getPos();
+                    World worldIn = getWorld();
+                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 1.0f, 1.0F);
+                    run(new ItemStack(Items.FEATHER, 1, 0), Items.EGG);
+                    break;
+                }
+            }
+            for(int i = (tier2chance+tier1chance+2); i < (tier3chance+tier1chance+tier2chance+2); i++){
+                if(randInt == i){
+                    BlockPos pos = getPos();
+                    World worldIn = getWorld();
+                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 1.0f, 1.0F);
+                    run(new ItemStack(Items.CHICKEN, 1, 0), Items.EGG);
+                    break;
+                }
+            }
+            if(soundCounter == 0){
 
-            }else{
-                bigcount ++;
-                count = 0;
-                run(new ItemStack(Items.EGG, 1, 0), Items.EGG);
+                soundCounter = rand.nextInt(2400);
+                BlockPos pos = getPos();
+                World worldIn = getWorld();
+
+                worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_AMBIENT, SoundCategory.BLOCKS, 0.7f, 1.0F);
+                //    worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
-            if(bigcount >= 2){
-                bigcount = 0;
-                biggestcount ++;
-                run(new ItemStack(Items.FEATHER, 1, 0), Items.FEATHER);
-            }
-            if(biggestcount >= 2){
-                biggestcount = 0;
-                run(new ItemStack(Items.CHICKEN, 1, 0), Items.CHICKEN);
+            if(soundCounter > 0){
+                soundCounter--;
             }
 
         }
+
+
+
+
+
+
     }
 
 
@@ -147,9 +175,7 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
             if (compound.hasKey("itemsOut")) {
                 outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
             }
-            count = compound.getInteger("count");
-            bigcount = compound.getInteger("bigcount");
-            biggestcount = compound.getInteger("biggestcount");
+
 
         }
         //saves stuff in a file so it can be recalled upon boot up
@@ -158,9 +184,7 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
             super.writeToNBT(compound);
             compound.setTag("itemsIn", inputHandler.serializeNBT());
             compound.setTag("itemsOut", outputHandler.serializeNBT());
-            compound.setInteger("count", count);
-            compound.setInteger("bigcount", bigcount);
-            compound.setInteger("biggestcount", biggestcount);
+
             return compound;
         }
 

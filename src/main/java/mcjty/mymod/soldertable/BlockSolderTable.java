@@ -1,15 +1,14 @@
-package mcjty.mymod.plushy;
+package mcjty.mymod.soldertable;
 
 import mcjty.mymod.MyMod;
-import mcjty.mymod.furnace.BlockFurnace;
-import mcjty.mymod.furnace.TileFurnace;
-import mcjty.mymod.sound.SoundFurnace;
-import net.minecraft.block.*;
+import mcjty.mymod.plushy.TileChickenPlushy;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -18,18 +17,15 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ChunkCache;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,28 +34,22 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-import java.util.Random;
-
-import static mcjty.mymod.furnace.BlockFurnace.STATE;
-
-
-public class BlockChickenPlushy extends Block implements ITileEntityProvider {
-//(0.250D,0,0.1875D,0.3125D,0.625D,0.0625D);
-    public static final AxisAlignedBB CHICKEN_AABB= new AxisAlignedBB(0.9375D,0,0.9375D,0.0625D,0.625D,0.0625D);
+public class BlockSolderTable extends Block implements ITileEntityProvider {
+ //   public static final AxisAlignedBB CHICKEN_AABB= new AxisAlignedBB(0.9375D,0,0.9375D,0.0625D,0.625D,0.0625D);
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public static final ResourceLocation chicken = new ResourceLocation(MyMod.MODID, "chicken");
+    public static final ResourceLocation solder = new ResourceLocation(MyMod.MODID, "solder");
 
 
 
 
-    public BlockChickenPlushy() {
+    public BlockSolderTable() {
         super(Material.CLOTH); //super fetches the material.Iron from the block class (vanilla)
         // mymod:charger
-        setRegistryName(chicken);
-        setUnlocalizedName(MyMod.MODID + ".chicken");
-        setHarvestLevel("pickaxe", 0);
+        setRegistryName(solder);
+        setUnlocalizedName(MyMod.MODID + ".solder");
+        setHarvestLevel("axe", 1);
         setCreativeTab(MyMod.tabEKoop);
         setHardness(1);
 
@@ -72,20 +62,17 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-
-
-
-        return new TileChickenPlushy();
+        return new TileSolderTable();
     }
 
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        world.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_HURT, SoundCategory.BLOCKS, 0.7f, 1.0f,false);
+    //    world.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_HURT, SoundCategory.BLOCKS, 0.7f, 1.0f,false);
         // Only execute on the server
         if (world.isRemote) {
             return true;
         }
         TileEntity te = world.getTileEntity(pos);
-        if (!(te instanceof TileChickenPlushy)) {
+        if (!(te instanceof TileSolderTable)) {
             return false;
         }
         player.openGui(MyMod.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
@@ -108,30 +95,12 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
         return false;
     }
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return CHICKEN_AABB;
 
-    }
-
-
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return CHICKEN_AABB;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_AMBIENT, SoundCategory.BLOCKS, 0.7f, 1.0f,false);
-    }
 
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-       // return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
-
 
 
     @Override
@@ -156,33 +125,24 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
         return state.getValue(FACING).getHorizontalIndex();
     }
 
-    @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_DEATH, SoundCategory.BLOCKS, 1.0f, 1.0f,false);
-    }
-
-    @Override
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_DEATH, SoundCategory.BLOCKS, 1.0f, 1.0f,false);
-    }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
         TileEntity te = worldIn.getTileEntity(pos);
         IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        if(te instanceof TileChickenPlushy){
-        for(int slot=0; slot <9;){
-            ItemStack stack = itemHandler.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
-                worldIn.spawnEntity(item);
-                if(worldIn.spawnEntity(item) == true)
-                    stack.setCount(0);
+        if(te instanceof TileSolderTable){
+            for(int slot=0; slot <9;){
+                ItemStack stack = itemHandler.getStackInSlot(slot);
+                if (!stack.isEmpty()) {
+                    EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+                    worldIn.spawnEntity(item);
+                    if(worldIn.spawnEntity(item) == true)
+                        stack.setCount(0);
+                }
+                slot++;
+            }
+            super.breakBlock(worldIn, pos, state);
         }
-            slot++;
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
     }
 }
