@@ -196,6 +196,7 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     }
 
 
+
     public float getProgressRemaining() {
         return progressRemaining;
     }
@@ -236,7 +237,10 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     public int getFluidAmount(){
         return tank.getFluidAmount();
     }
+    public FluidTank getTank(){
+        return tank;
 
+    }
 
     public int getEnergy(){
         return energyStorage.getEnergyStored();
@@ -273,13 +277,23 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     };
 
 
+
     // This item handler will hold our three output slots
     private ItemStackHandler outputHandler = new ItemStackHandler(OUTPUT_SLOTS) {
+
+        @Override
+        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+            return false;
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
             TileSolderTable.this.markDirty();
         }
     };
+
+
+
 
     private CombinedInvWrapper combinedHandler = new CombinedInvWrapper(inputHandler, outputHandler);
 
@@ -321,6 +335,9 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         tank.writeToNBT(tankNBT);
         compound.setTag("tank", tankNBT);
     }
+
+
+
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         tank.readFromNBT(packet.getNbtCompound().getCompoundTag("tank"));
@@ -368,5 +385,6 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         }
         return super.getCapability(capability, facing);
     }
+
 
 }

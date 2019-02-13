@@ -337,6 +337,10 @@ public class TileFurnace extends TileEntity implements ITickable {
             // that the chest contents is persisted
             TileFurnace.this.markDirty();
         }
+        @Override
+        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+            return false;
+        }
     };
 
     private CombinedInvWrapper combinedHandler = new CombinedInvWrapper(inputHandler, outputHandler);

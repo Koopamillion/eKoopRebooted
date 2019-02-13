@@ -145,7 +145,10 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
 
         // This item handler will hold our three input slots
         private ItemStackHandler inputHandler = new ItemStackHandler(0) {
-
+            @Override
+            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+                return false;
+            }
             @Override
             protected void onContentsChanged(int slot) {
                 TileChickenPlushy.this.markDirty();
@@ -158,6 +161,10 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
             @Override
             protected void onContentsChanged(int slot) {
                 TileChickenPlushy.this.markDirty();
+            }
+            @Override
+            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+                return false;
             }
         };
 

@@ -2,12 +2,10 @@ package mcjty.mymod.soldertable;
 
 import mcjty.mymod.ModBlocks;
 import mcjty.mymod.MyMod;
+import mcjty.mymod.furnace.TileFurnace;
 import mcjty.mymod.plushy.TileChickenPlushy;
 import mcjty.mymod.tools.MultiBlockTools;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -20,14 +18,13 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
@@ -37,6 +34,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -115,6 +113,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileSolderTable.class, new SolderTESR());
 
     }
 
@@ -206,14 +205,18 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
     }
 */
 
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-
         TileEntity te = worldIn.getTileEntity(pos);
-        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if(te instanceof TileSolderTable){
-            for(int slot=0; slot <11;){
+            for(int slot=0; slot < itemHandler.getSlots(); slot++){
                 ItemStack stack = itemHandler.getStackInSlot(slot);
                 if (!stack.isEmpty()) {
                     EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
@@ -221,7 +224,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
                     if(worldIn.spawnEntity(item) == true)
                         stack.setCount(0);
                 }
-                slot++;
+
             }
             super.breakBlock(worldIn, pos, state);
         }
