@@ -133,6 +133,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
     }
 
 
+
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
@@ -205,10 +206,16 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
     }
 */
 
-    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+
+/*    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
-    }
+
+    }*/
 
 
     @Override

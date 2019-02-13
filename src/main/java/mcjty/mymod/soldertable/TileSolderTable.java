@@ -12,6 +12,7 @@ import mcjty.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -69,7 +70,7 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     private FluidStack clientFluid = tank.getFluid();
     private int clientFluidAmount = tank.getFluidAmount();
     private float clientProgress = -1;
-    private FurnaceState state = FurnaceState.OFF;
+
     private int clientEnergy = -1;
 
 
@@ -77,6 +78,7 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     @Override
     public void update() {
         if (!world.isRemote) {
+
             if (progressRemaining > 0) {
 
                 progressRemaining--;
@@ -102,6 +104,17 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
         return oldState.getBlock() != newSate.getBlock();
     }*/
+
+
+
+
+    public EnumFacing getFacing(){
+        return this.facing;
+    }
+
+    public IBlockState getBlockState(){
+        return world.getBlockState(pos);
+    }
 
     private boolean insertOutput(ItemStack output, boolean simulate) {
         for (int i = 0; i < OUTPUT_SLOTS; i++) {
@@ -272,6 +285,8 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
 
         @Override
         protected void onContentsChanged(int slot) {
+            IBlockState state = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, state, state, 3);
             TileSolderTable.this.markDirty();
         }
     };

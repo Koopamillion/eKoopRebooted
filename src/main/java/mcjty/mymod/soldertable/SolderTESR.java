@@ -1,5 +1,6 @@
 package mcjty.mymod.soldertable;
 
+import mcjty.mymod.solder.BlockSolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,6 +17,8 @@ import org.lwjgl.opengl.GL11;
 
 public class SolderTESR extends TileEntitySpecialRenderer<TileSolderTable> {
     public static final float TANK_THICKNESS = 0.05f;
+    public static final float randomscale = 0.25f;
+    private BlockSolder block;
 
     public SolderTESR(){}
 
@@ -66,7 +70,7 @@ public class SolderTESR extends TileEntitySpecialRenderer<TileSolderTable> {
             float u2 = sprite.getMaxU();
             float v2 = sprite.getMaxV();
 
-            // Top
+        /*    // Top
             renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
             renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, 1-TANK_THICKNESS).tex(u1, v2).color(255, 255, 255, 128).endVertex();
             renderer.pos(1-TANK_THICKNESS, scale + TANK_THICKNESS, 1-TANK_THICKNESS).tex(u2, v2).color(255, 255, 255, 128).endVertex();
@@ -98,7 +102,40 @@ public class SolderTESR extends TileEntitySpecialRenderer<TileSolderTable> {
             renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS).tex(u1, v2).color(255, 255, 255, 128).endVertex();
             renderer.pos(TANK_THICKNESS, TANK_THICKNESS, 1-TANK_THICKNESS).tex(u2, v2).color(255, 255, 255, 128).endVertex();
             renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, 1-TANK_THICKNESS).tex(u2, v1).color(255, 255, 255, 128).endVertex();
+*/
+            // Top
+            if(tank.getBlockState().getValue().getHorizontalIndex() == EnumFacing.NORTH.getHorizontalIndex()){}
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u2, v1).color(255, 255, 255, 128).endVertex();
 
+            // Bottom
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS).tex(u2, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+
+            // Sides
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v1).color(255, 255, 255, 128).endVertex();
+
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u2, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, TANK_THICKNESS, TANK_THICKNESS).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS+randomscale, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS).tex(u1, v1).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS).tex(u1, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v2).color(255, 255, 255, 128).endVertex();
+            renderer.pos(TANK_THICKNESS, scale + TANK_THICKNESS, TANK_THICKNESS+randomscale).tex(u2, v1).color(255, 255, 255, 128).endVertex();
             tessellator.draw();
 
             net.minecraft.client.renderer.RenderHelper.enableStandardItemLighting();
