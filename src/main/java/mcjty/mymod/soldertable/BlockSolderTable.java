@@ -65,7 +65,6 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
 
-
     }
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -208,7 +207,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
 
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.CUTOUT;
     }
 
 /*    @SideOnly(Side.CLIENT)

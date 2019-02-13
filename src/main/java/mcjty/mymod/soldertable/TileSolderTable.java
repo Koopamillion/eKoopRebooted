@@ -108,12 +108,16 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
 
 
 
+
+
     public EnumFacing getFacing(){
         return this.facing;
     }
 
+
     public IBlockState getBlockState(){
         return world.getBlockState(pos);
+
     }
 
     private boolean insertOutput(ItemStack output, boolean simulate) {
