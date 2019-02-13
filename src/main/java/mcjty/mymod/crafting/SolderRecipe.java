@@ -1,6 +1,7 @@
 package mcjty.mymod.crafting;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class SolderRecipe {
 
@@ -13,9 +14,10 @@ public class SolderRecipe {
     private final ItemStack input7;
     private final ItemStack input8;
     private final ItemStack input9;
+    private final FluidStack input10;
     private final ItemStack output;
 
-    public SolderRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack inputboard, ItemStack input6, ItemStack input7, ItemStack input8, ItemStack input9, ItemStack output) {
+    public SolderRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack inputboard, ItemStack input6, ItemStack input7, ItemStack input8, ItemStack input9, ItemStack output, FluidStack input10) {
         this.input1 = input1;
         this.input2 = input2;
         this.input3 = input3;
@@ -26,6 +28,7 @@ public class SolderRecipe {
         this.input9 = input9;
         this.inputboard = inputboard;
         this.output = output;
+        this.input10 = input10;
     }
 
     public ItemStack getInput1() {
@@ -58,4 +61,6 @@ public class SolderRecipe {
     public ItemStack getOutput() {
         return output;
     }
+    public FluidStack getInput10(){return input10;}
+    public int getInput10Amount(){return input10.copy().amount;}
 }

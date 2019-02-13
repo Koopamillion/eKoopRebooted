@@ -1,11 +1,18 @@
 package mcjty.mymod.soldertable;
 
+import mcjty.mymod.ModBlocks;
+import mcjty.mymod.ModLiquids;
 import mcjty.mymod.crafting.SolderManager;
 import mcjty.mymod.crafting.SolderRecipe;
 import mcjty.mymod.furnace.FurnaceState;
+import mcjty.mymod.furnace.TileFurnace;
 import mcjty.mymod.plushy.TileChickenPlushy;
+import mcjty.mymod.tools.IRestorableTileEntity;
 import mcjty.mymod.tools.MyEnergyStorage;
+import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,39 +23,56 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileSolderTable extends TileEntity implements ITickable {
+public class TileSolderTable extends TileEntity implements ITickable, IRestorableTileEntity {
 
-    public static final int INPUT_SLOTS = 9;
+    public static final int INPUT_SLOTS = 10;
     public static final int OUTPUT_SLOTS = 1;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
     public static final int MAX_POWER = 100000;
     public float RF_PER_TICK = 20;
     public static final int RF_PER_TICK_INPUT = 250;
+
     //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 
-    private float progressRemaining = 40;
+    private float progressRemaining = 0;
 
     private int soundCounter = 0;
 
+    EnumFacing facing = EnumFacing.NORTH;
+
+    private FluidTank tank = new FluidTank(4000);
+
+    private FluidStack clientFluid = tank.getFluid();
+    private int clientFluidAmount = tank.getFluidAmount();
     private float clientProgress = -1;
     private FurnaceState state = FurnaceState.OFF;
     private int clientEnergy = -1;
+
+
 
     @Override
     public void update() {
@@ -63,12 +87,21 @@ public class TileSolderTable extends TileEntity implements ITickable {
             } else {
                 startSmelt();
             }
+            fluidMake();
+            int tanker = tank.getFluidAmount();
+
+           // System.out.println(tanker);
+
+
         }
 
 
     }
 
-
+/*    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
+    }*/
 
     private boolean insertOutput(ItemStack output, boolean simulate) {
         for (int i = 0; i < OUTPUT_SLOTS; i++) {
@@ -126,8 +159,9 @@ public class TileSolderTable extends TileEntity implements ITickable {
                 if (insertOutput(result.copy(), false)) {
                     for(int l = 0; l < 9; l++){
                         inputHandler.extractItem(l, 1, false);
-                    }
 
+                    }
+                    tank.drain(1000, true);
 
                     break;
 
@@ -135,13 +169,26 @@ public class TileSolderTable extends TileEntity implements ITickable {
             }
         }
     }
+    private void fluidMake(){
+        ItemStack stack = inputHandler.getStackInSlot(9);
+        if(stack.getItem() == Items.IRON_INGOT && tank.getFluidAmount() < tank.getCapacity()){
+
+            IFluidHandler handler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+            for(int i = 0; i < 100; i++){
+                handler.fill(new FluidStack(ModLiquids.solderfluid, 1),true);
+            }
+            inputHandler.extractItem(9, 1, false);
+
+
+        }
+    }
 
 
 
     private ItemStack getResult(ItemStack stack ){
-        SolderRecipe recipe = SolderManager.getRecipe(inputHandler.getStackInSlot(0), inputHandler.getStackInSlot(1), inputHandler.getStackInSlot(2), inputHandler.getStackInSlot(3), inputHandler.getStackInSlot(4), inputHandler.getStackInSlot(5), inputHandler.getStackInSlot(6), inputHandler.getStackInSlot(7), inputHandler.getStackInSlot(8));
+        SolderRecipe recipe = SolderManager.getRecipe(inputHandler.getStackInSlot(0), inputHandler.getStackInSlot(1), inputHandler.getStackInSlot(2), inputHandler.getStackInSlot(3), inputHandler.getStackInSlot(4), inputHandler.getStackInSlot(5), inputHandler.getStackInSlot(6), inputHandler.getStackInSlot(7), inputHandler.getStackInSlot(8), tank.getFluid());
      //   if(Fluid == Enough){return recipe.getOutput();}
-        if (recipe!= null){
+        if (recipe!= null&&tank.getFluidAmount() >= recipe.getInput10Amount()){
             return  recipe.getOutput();
 
         }
@@ -168,10 +215,28 @@ public class TileSolderTable extends TileEntity implements ITickable {
     public int getClientEnergy() {
         return clientEnergy;
     }
+    public int getCapacity(){
+        return tank.getCapacity();
 
-    public void setClientEnergy(int clientEnergy) {
+    }    public void setClientEnergy(int clientEnergy) {
         this.clientEnergy = clientEnergy;
     }
+    public void setClientFluid(FluidStack clientFluid) {
+        this.clientFluid = clientFluid;
+    }
+    public FluidStack getClientFluid() {
+       return tank.getFluid();
+    }
+    public void setClientFluidAmount(int clientFluidAmount) {
+        this.clientFluidAmount = clientFluidAmount;
+    }
+    public int getClientFluidAmount(){
+        return clientFluidAmount;
+    }
+    public int getFluidAmount(){
+        return tank.getFluidAmount();
+    }
+
 
     public int getEnergy(){
         return energyStorage.getEnergyStored();
@@ -180,6 +245,9 @@ public class TileSolderTable extends TileEntity implements ITickable {
     @Override
     public NBTTagCompound getUpdateTag () {
         NBTTagCompound nbtTag = super.getUpdateTag();
+        NBTTagCompound tankNBT = new NBTTagCompound();
+        tank.writeToNBT(tankNBT);
+        nbtTag.setTag("tank", tankNBT);
         return nbtTag;
     }
 
@@ -191,14 +259,12 @@ public class TileSolderTable extends TileEntity implements ITickable {
 
 
 
+    private CapabilityFluidHandler fluidHandler = new CapabilityFluidHandler();
+
     // This item handler will hold our three input slots
     private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {
 
-   /*     @Override
-        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            ItemStack result = getResult(inputHandler.getStackInSlot(slot));
-            return !result.isEmpty();
-        }*/
+
 
         @Override
         protected void onContentsChanged(int slot) {
@@ -229,6 +295,7 @@ public class TileSolderTable extends TileEntity implements ITickable {
         if (compound.hasKey("itemsOut")) {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
+        readRestorableFromNBT(compound);
 
 
     }
@@ -239,7 +306,24 @@ public class TileSolderTable extends TileEntity implements ITickable {
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
 
+        writeRestorableToNBT(compound);
         return compound;
+    }
+
+    @Override
+    public void readRestorableFromNBT(NBTTagCompound compound) {
+        tank.readFromNBT(compound.getCompoundTag("tank"));
+    }
+
+    @Override
+    public void writeRestorableToNBT(NBTTagCompound compound) {
+        NBTTagCompound tankNBT = new NBTTagCompound();
+        tank.writeToNBT(tankNBT);
+        compound.setTag("tank", tankNBT);
+    }
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        tank.readFromNBT(packet.getNbtCompound().getCompoundTag("tank"));
     }
 
     //-------------------------------------------------------------------------------------------------------------
@@ -255,8 +339,15 @@ public class TileSolderTable extends TileEntity implements ITickable {
 
     @Override
     public boolean hasCapability (Capability< ? > capability, EnumFacing facing){
+        IBlockState state = world.getBlockState(pos);
+        /*if(state.getBlock() != ModBlocks.blockSolder || state.getValue(BlockSolderTable.FORMED) == SolderPartIndex.UNFORMED){
+            return false;
+        }*/
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
+        }
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
+            return  true;
         }
         return super.hasCapability(capability, facing);
     }
@@ -271,6 +362,9 @@ public class TileSolderTable extends TileEntity implements ITickable {
             } else {
                 return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(outputHandler);
             }
+        }
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
+            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
         }
         return super.getCapability(capability, facing);
     }

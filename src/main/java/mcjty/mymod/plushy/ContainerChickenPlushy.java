@@ -50,7 +50,7 @@ public class ContainerChickenPlushy extends Container {
 
     private void addOwnSlots() {
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        int y = 5;
+        int y = 8;
 
 
         int slotIndex = 0;

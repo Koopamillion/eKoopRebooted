@@ -1,11 +1,16 @@
 package mcjty.mymod.soldertable;
 
 
+import mcjty.mymod.network.Messages;
+import mcjty.mymod.network.PacketSyncPower;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -13,6 +18,8 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerSolderTable extends Container {
 
     private TileSolderTable te;
+    private static final int PROGRESS_ID= 0;
+    private static final int FLUID_ID = 1;
 
     public ContainerSolderTable(IInventory playerInventory, TileSolderTable te) {
         this.te = te;
@@ -49,7 +56,7 @@ public class ContainerSolderTable extends Container {
 
     private void addOwnSlots() {
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        int y = 5;
+        int y = 8;
 
 
         int slotIndex = 0;
@@ -69,10 +76,11 @@ public class ContainerSolderTable extends Container {
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
-        y = 18+5;
-        x = 64+80;
+        y = 18+8;
 
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 64-27, y));
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 64+81, y));
     }
 
     @Override
@@ -101,5 +109,40 @@ public class ContainerSolderTable extends Container {
 
         return itemstack;
     }
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        if (te.getFluidAmount() != te.getClientFluidAmount()){
+            te.setClientFluidAmount(te.getFluidAmount());
+        }
+        if (te.getProgressRemaining() != te.getClientProgress()){
+            te.setClientProgress(te.getProgressRemaining());
+        }
+        //makes sure gui time is always the same as time
+
+        //sends vars to a packet
+        for (IContainerListener listener: listeners){
+            listener.sendWindowProperty(this, FLUID_ID, te.getFluidAmount());
+            listener.sendWindowProperty(this, PROGRESS_ID, Math.round(te.getProgressRemaining()));
+
+        }
+
+    }
+    @Override
+    public void updateProgressBar(int id, int data) {
+        if(id == PROGRESS_ID){
+            te.setClientProgress(data);
+        }
+        if(id == FLUID_ID){
+            te.setClientFluidAmount(data);
+        }
+    }
+    /*public void updateFluidBar(FluidStack fluid, int id){
+        if(id == FLUID_ID){
+            te.setClientFluid(fluid);
+
+        }
+    }*/
+
 
 }

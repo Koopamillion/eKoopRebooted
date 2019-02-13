@@ -1,11 +1,11 @@
 {
   "result": {
-    "item": "mymod:circuit"
+    "item": "mymod:solder"
   },
   "pattern": [
+    "xxx",
     "xzx",
-    "zzz",
-    "sss"
+    "xsx"
   ],
   "type": "forge:ore_shaped",
   "key": {
@@ -14,10 +14,10 @@
       "data": 0
     },
     "x": {
-      "type": "forge:ore_dict", "ore": "dustRedstone"
+      "type": "forge:ore_dict", "ore": "ingotIron"
     },
     "z": {
-      "type": "forge:ore_dict", "ore": "ingotIron"
+      "type": "forge:ore_dict", "ore": "blockRedstone"
     }
   }
 }

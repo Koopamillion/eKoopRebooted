@@ -4,10 +4,7 @@ import javafx.geometry.HorizontalDirection;
 import mcjty.mymod.MyMod;
 import mcjty.mymod.plushy.TileChickenPlushy;
 import mcjty.mymod.sound.SoundFurnace;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.BlockJukebox;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -49,6 +46,7 @@ public class BlockFurnace extends Block implements ITileEntityProvider {
     public static final PropertyEnum<FurnaceState> STATE = PropertyEnum.<FurnaceState>create("state", FurnaceState.class);
     private static boolean keepInventory;
     public static final ResourceLocation afurnace = new ResourceLocation(MyMod.MODID, "furnace");
+
  /*   ResourceLocation location = new ResourceLocation("mymod", "furnaceActive");
     SoundEvent event = new SoundEvent(location);*/
     private TileFurnace te;

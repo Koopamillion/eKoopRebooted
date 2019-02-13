@@ -5,6 +5,7 @@ import mcjty.mymod.proxy.CommonProxy;
 import mcjty.mymod.sound.SoundFurnace;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -30,6 +31,10 @@ public class MyMod {
             return new ItemStack(ModBlocks.blockFurnace);
         }
     };
+
+    public MyMod(){
+        FluidRegistry.enableUniversalBucket();
+    }
 
     @Mod.Instance
     public static MyMod instance;

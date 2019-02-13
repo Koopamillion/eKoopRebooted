@@ -1,5 +1,8 @@
 tile.mymod.furnace.name=Accelerating Furnace
 tile.mymod.chicken.name=Chicken Plushy
 tile.mymod.machineframe.name=Basic Machine Frame
+tile.mymod.solderfluid.name=Molten Solder
 item.mymod.circuit.name=Basic Circuit
+item.mymod.solder_bucket=Molten Solder Bucket
+fluid.solderfluid.name=Molten Solder
 itemGroup.mymod.tabEKoop.name=eKoop

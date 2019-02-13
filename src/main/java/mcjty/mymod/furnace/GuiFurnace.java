@@ -127,7 +127,7 @@ public class GuiFurnace extends GuiContainer {
         renderHoveredToolTip(mouseX, mouseY);
 
 
-        if (mouseX > guiLeft + 10 && mouseX < guiLeft + 112 && mouseY > guiTop + 5 && mouseY < guiTop + 15) {
+        if (mouseX > guiLeft + 9 && mouseX < guiLeft + 109 && mouseY > guiTop + 4 && mouseY < guiTop + 19) {
             drawHoveringText(Collections.singletonList("Energy: " + furnace.getClientEnergy()), mouseX, mouseY, fontRenderer);
         }
     }
