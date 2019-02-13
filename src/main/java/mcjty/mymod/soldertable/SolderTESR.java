@@ -47,8 +47,8 @@ public class SolderTESR extends TileEntitySpecialRenderer<TileSolderTable> {
             return;
         }
 
-        float scale = (1.0f - TANK_THICKNESS/2 - TANK_THICKNESS) * fluid.amount / (tank.getTank()
-        .getCapacity());
+        float scale = (1.0f - TANK_THICKNESS/2 - TANK_THICKNESS) * fluid.amount / (tank.getTank().getCapacity());
+       // float scale = (1.0f - TANK_THICKNESS/2 - TANK_THICKNESS) * 2000 / 4000));
 
         if (scale > 0.0f) {
             Tessellator tessellator = Tessellator.getInstance();
