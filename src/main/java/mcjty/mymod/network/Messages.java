@@ -26,6 +26,7 @@ public class Messages {
         // Client side
         //makes a message using packetsync power
         INSTANCE.registerMessage(PacketSyncPower.Handler.class, PacketSyncPower.class, nextID(), Side.CLIENT);
+        INSTANCE.registerMessage(PacketSyncHeat.Handler.class, PacketSyncHeat.class, nextID(), Side.CLIENT);
 
 
     }

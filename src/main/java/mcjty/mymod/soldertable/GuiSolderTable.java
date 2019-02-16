@@ -9,6 +9,8 @@ import mcjty.mymod.plushy.ContainerChickenPlushy;
 import mcjty.mymod.plushy.TileChickenPlushy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -30,8 +32,15 @@ import java.util.Collections;
 public class GuiSolderTable extends GuiContainer {
 
     public static final int WIDTH = 180;
-    public static final int HEIGHT = 152;
+    public static final int HEIGHT = 169;
+    private static final int increase = 17;
+   // public int
 
+
+    private static final ResourceLocation FurnaceTextures = new ResourceLocation(MyMod.MODID,"textures/gui/furnacepoweredbar.png");
+    private static final ResourceLocation FurnaceDead = new ResourceLocation(MyMod.MODID,"textures/gui/furnacedeadpowerbar.png");
+    private static final ResourceLocation HeatBar = new ResourceLocation(MyMod.MODID,"textures/gui/heatbar.png");
+    private static final ResourceLocation GlassHeatBar = new ResourceLocation(MyMod.MODID,"textures/gui/glassheatbar.png");
     private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/solder.png");
     private static final ResourceLocation fluidgauge = new ResourceLocation(MyMod.MODID, "textures/gui/fluidgauge.png");
     private static final ResourceLocation solderprogressbar = new ResourceLocation(MyMod.MODID, "textures/gui/solderprogressbar.png");
@@ -56,6 +65,8 @@ public class GuiSolderTable extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
 
+
+
         int fluid = solder.getClientFluidAmount();
         int capacity3 = solder.getCapacity();
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
@@ -64,13 +75,18 @@ public class GuiSolderTable extends GuiContainer {
 
         mc.getTextureManager().bindTexture(solderprogressbar);
         if(solder.getClientProgress() == 0) {
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26, 0, 0, 0, 16, 15, 16);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26 + increase, 0, 0, 0, 16, 15, 16);
         }else{
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26, 0, 0, 15 - l, 16, 15, 16);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26 + increase, 0, 0, 15 - l, 16, 15, 16);
         }
         drawFluidBar(fluid, capacity3);
         mc.getTextureManager().bindTexture(fluidgauge);
-        Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 11,0,0,16,45, 16, 45);
+        Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 11 + increase,0,0,16,45, 16, 45);
+
+        int energy = solder.getClientEnergy();
+        int heat = solder.getClientheat();
+        drawEnergyBar(energy);
+        drawHeatBar(heat);
 
      //   drawString(mc.fontRenderer, "Fluid: " + fluid, guiLeft + 10, guiTop + 50, 0xffffff);
     }
@@ -90,12 +106,18 @@ public class GuiSolderTable extends GuiContainer {
         drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         renderHoveredToolTip(mouseX, mouseY);
-        if (mouseX > guiLeft + 9 && mouseX < guiLeft + 26 && mouseY > guiTop + 10 && mouseY < guiTop + 56) {
+        if (mouseX > guiLeft + 9 && mouseX < guiLeft + 26 && mouseY > guiTop + 10 + increase && mouseY < guiTop + 56 + increase) {
             if(solder.getClientFluidAmount() == 0){
                 drawHoveringText(Collections.singletonList("0 mb of Solder"), mouseX, mouseY, fontRenderer);
 
             }else{
                 drawHoveringText(Collections.singletonList(solder.getClientFluidAmount() + "mb of Solder"), mouseX, mouseY, fontRenderer);}
+        }
+        if (mouseX > guiLeft + 9 && mouseX < guiLeft + 109 && mouseY > guiTop + 4 && mouseY < guiTop + 19) {
+            drawHoveringText(Collections.singletonList("Energy: " + solder.getClientEnergy()), mouseX, mouseY, fontRenderer);
+        }
+        if (mouseX > guiLeft + 113 && mouseX < guiLeft + 116+55 && mouseY > guiTop + 4 && mouseY < guiTop + 11) {
+            drawHoveringText(Collections.singletonList("Heat: " + solder.getClientheat() / 200 + "°C"), mouseX, mouseY, fontRenderer);
         }
 
     }
@@ -113,15 +135,26 @@ public class GuiSolderTable extends GuiContainer {
         float minV = sprite.getInterpolatedV(0);
         float maxU = sprite.getInterpolatedU(16);
         float maxV = sprite.getInterpolatedV(16);
-     //   int filled = Math.min((Math.round((level * height)*(int) (capacity / 1000))), height);
-        int filled = Math.min((int)(level * height), height); //added code
-        filled = filled / 6; //added code
 
-        for (int i = 0; i < filled / 16; i++) {
-            drawFluidQuad(guiLeft + 10, (guiTop + 20) + (i * 16) + (36 - (filled)) , 16, 16, minU, minV, maxU, maxV);
+
+     //   int filled = Math.min((Math.round((level * height)*(int) (capacity / 1000))), height);
+        int filled = Math.min((int)(level * 45 ), 45 );//added code, 46 is the max possible pixels
+      //  filled = filled / 6; //added code
+     //   System.out.println(height);
+
+        //int y = this.ySize + (height - filled) + 2;
+
+       /* for (int i = 0; i < filled / 16; i++) {
+            drawFluidQuad(guiLeft + 10, (guiTop + 20 + increase) + (i * 16) + (36 - (filled)) , 16, 16, minU, minV, maxU, maxV);
         }
         if (filled % 16 != 0) {
-            drawFluidQuad(guiLeft + 10, (guiTop + 20) + (36 - (filled % 16)), 16, filled % 16, minU, minV, maxU, sprite.getInterpolatedV(filled % 16));
+            drawFluidQuad(guiLeft + 10, (guiTop + 20 + increase) + (36 - (filled % 16)), 16, filled % 16, minU, minV, maxU, sprite.getInterpolatedV(filled % 16));
+        }*/
+        for (int i = 0; i < filled / 16; i++) {
+            drawFluidQuad(guiLeft + 10, (guiTop + 20 + increase) + (i * 16) + (36 - (filled)) , 16, 16, minU, minV, maxU, maxV);
+        }
+        if (filled % 16 != 0) {
+            drawFluidQuad(guiLeft + 10, (guiTop + 20 + increase) + (36 - (filled % 16)), 16, filled % 16, minU, minV, maxU, sprite.getInterpolatedV(filled % 16));
         }
     }
 
@@ -138,6 +171,29 @@ public class GuiSolderTable extends GuiContainer {
         //top left
         buffer.pos((double)x, (double)y, (double)this.zLevel).tex(minU, minV).endVertex();
         tessellator.draw();
+    }
+    private void drawEnergyBar(int energy) {
+        this.mc.getTextureManager().bindTexture(FurnaceDead);
+        Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 5,0,0,99,14,100f,14f);
+        int percentage = energy * 100 / TileSolderTable.MAX_POWER;
+        for (int i = 0 ; i < percentage ; i++) {
+            this.mc.getTextureManager().bindTexture(FurnaceTextures);
+            GlStateManager.color(1,1,1,1);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 5,0,0,i,14,100f,14f);
+        }
+    }
+    private void drawHeatBar(int heat) {
+      //  int percentage = heat * 100 / TileSolderTable.MAX_HEAT;
+        double pxperc = 0.00057 * heat;
+        if(pxperc >= 1){
+        for (int i = 0 ; i < Math.floor(pxperc) ; i++) {
+            this.mc.getTextureManager().bindTexture(HeatBar);
+            GlStateManager.color(1,1,1,1);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 114,guiTop + 5,0,0,i,6,56f,6f);
+        }
+        }
+        this.mc.getTextureManager().bindTexture(GlassHeatBar);
+        Gui.drawModalRectWithCustomSizedTexture(guiLeft + 114,guiTop + 5,0,0,56,6,56f,6f);
     }
 
 }

@@ -1,6 +1,7 @@
 package mcjty.mymod.soldertable;
 
 import mcjty.mymod.ModBlocks;
+import mcjty.mymod.ModItems;
 import mcjty.mymod.ModLiquids;
 import mcjty.mymod.crafting.SolderManager;
 import mcjty.mymod.crafting.SolderRecipe;
@@ -35,6 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -53,12 +55,17 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     public static final int INPUT_SLOTS = 10;
     public static final int OUTPUT_SLOTS = 1;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
-    public static final int MAX_POWER = 100000;
-    public float RF_PER_TICK = 20;
+    public static final int MAX_POWER = 10000;
+    public int RF_PER_TICK = 2;
+    private int amountsmooth = 0;
     public static final int RF_PER_TICK_INPUT = 250;
 
     //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 
+
+
+    private int heat = 0;
+    public static final int MAX_HEAT = 100000;
     private float progressRemaining = 0;
 
     private int soundCounter = 0;
@@ -71,6 +78,7 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     private int clientFluidAmount = tank.getFluidAmount();
     private float clientProgress = -1;
 
+    private int clientheat = -1;
     private int clientEnergy = -1;
 
 
@@ -78,10 +86,17 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     @Override
     public void update() {
         if (!world.isRemote) {
+            controlHeat();
+       //     System.out.println(heat);
+            if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
+
+                return;
+            }
 
             if (progressRemaining > 0) {
 
                 progressRemaining--;
+                energyStorage.consumePower(RF_PER_TICK);
                 if (progressRemaining <= 0) {
                     attemptSmelt();
                 }
@@ -167,6 +182,25 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         }
     }
 
+    private void controlHeat(){
+        if(heat < 0){
+            heat = 0;
+        }
+        if(heat > MAX_HEAT){
+            heat = MAX_HEAT;
+        }
+        if(energyStorage.getEnergyStored() >= this.RF_PER_TICK){
+            if(heat < MAX_HEAT){
+                energyStorage.consumePower(RF_PER_TICK);
+                heat = heat + 10;
+            }else if(heat >= MAX_HEAT){
+                energyStorage.consumePower(RF_PER_TICK / 2);
+            }
+
+        }else if(heat > 0){
+            heat = (heat - 1);
+        }
+    }
 
     private void attemptSmelt() {
         for (int i = 0; i < INPUT_SLOTS; i++) {
@@ -188,15 +222,15 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     }
     private void fluidMake(){
         ItemStack stack = inputHandler.getStackInSlot(9);
-        if(stack.getItem() == Items.IRON_INGOT && tank.getFluidAmount() < tank.getCapacity()){
-
-            IFluidHandler handler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
-            for(int i = 0; i < 100; i++){
-                handler.fill(new FluidStack(ModLiquids.solderfluid, 1),true);
-            }
+        if(stack.getItem() == ModItems.itemSolder && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= ModItems.itemSolder.getMeltingPoint() * 200){
+            amountsmooth = 20;
             inputHandler.extractItem(9, 1, false);
-
-
+        }
+        IFluidHandler handler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+        if(amountsmooth > 0 && this.getEnergy() >= 5){
+            handler.fill(new FluidStack(ModLiquids.solderfluid, 5),true);
+            amountsmooth --;
+            this.energyStorage.consumePower(5);
         }
     }
 
@@ -254,6 +288,14 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     public int getFluidAmount(){
         return tank.getFluidAmount();
     }
+    public int getHeat(){return heat;}
+    public void setHeat(int heat){this.heat = heat;}
+    public int getClientheat(){return clientheat;}
+    public void setClientheat(int clientheat){this.clientheat = clientheat;}
+
+    public int getTestInt(){return 342;}
+
+
     public FluidTank getTank(){
         return tank;
 
@@ -263,12 +305,17 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         return energyStorage.getEnergyStored();
     }
 
+
+
     @Override
     public NBTTagCompound getUpdateTag () {
         NBTTagCompound nbtTag = super.getUpdateTag();
         NBTTagCompound tankNBT = new NBTTagCompound();
         tank.writeToNBT(tankNBT);
         nbtTag.setTag("tank", tankNBT);
+        nbtTag.setInteger("heat", heat);
+        nbtTag.setInteger("energy", energyStorage.getEnergyStored());
+
         return nbtTag;
     }
 
@@ -328,6 +375,8 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         if (compound.hasKey("itemsOut")) {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
+        energyStorage.setEnergy(compound.getInteger("energy"));
+        heat = compound.getInteger("heat");
         readRestorableFromNBT(compound);
 
 
@@ -338,7 +387,8 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         super.writeToNBT(compound);
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
-
+        compound.setInteger("energy", energyStorage.getEnergyStored());
+        compound.setInteger("heat", heat);
         writeRestorableToNBT(compound);
         return compound;
     }
@@ -360,6 +410,10 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         tank.readFromNBT(packet.getNbtCompound().getCompoundTag("tank"));
+        clientheat = packet.getNbtCompound().getInteger("heat");
+        clientEnergy = packet.getNbtCompound().getInteger("energy");
+        energyStorage.setEnergy(packet.getNbtCompound().getInteger("energy"));
+        heat = packet.getNbtCompound().getInteger("heat");
     }
 
     //-------------------------------------------------------------------------------------------------------------
@@ -385,6 +439,9 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
             return  true;
         }
+        if (capability == CapabilityEnergy.ENERGY){
+            return true;
+        }
         return super.hasCapability(capability, facing);
     }
 
@@ -401,6 +458,9 @@ public class TileSolderTable extends TileEntity implements ITickable, IRestorabl
         }
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
+        }
+        if (capability == CapabilityEnergy.ENERGY){
+            return  CapabilityEnergy.ENERGY.cast(energyStorage);
         }
         return super.getCapability(capability, facing);
     }

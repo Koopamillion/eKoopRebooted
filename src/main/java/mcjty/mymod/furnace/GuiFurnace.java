@@ -139,19 +139,9 @@ public class GuiFurnace extends GuiContainer {
         Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 5,0,0,99,14,100f,14f);
         int percentage = energy * 100 / TileFurnace.MAX_POWER;
         for (int i = 0 ; i < percentage ; i++) {
-
-         //   TextureAtlasSprite sprite = this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.FLOWING_LAVA.getDefaultState());
             this.mc.getTextureManager().bindTexture(FurnaceTextures);
-
-         //   Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             GlStateManager.color(1,1,1,1);
             Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 5,0,0,i,14,100f,14f);
-         //   this.drawTexturedModalRect(guiLeft + 10,guiTop + 3,sprite,i,14);
-
-
-//code greyed out is for fluid in guid
-
-
         }
     }
 

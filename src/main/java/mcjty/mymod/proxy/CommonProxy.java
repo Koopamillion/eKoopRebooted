@@ -8,6 +8,7 @@ import mcjty.mymod.MyMod;
 import mcjty.mymod.furnace.BlockFurnace;
 import mcjty.mymod.furnace.TileFurnace;
 import mcjty.mymod.machineitems.ItemCircuit;
+import mcjty.mymod.machineitems.ItemSolderIngot;
 import mcjty.mymod.network.Messages;
 import mcjty.mymod.plushy.BlockChickenPlushy;
 import mcjty.mymod.plushy.TileChickenPlushy;
@@ -70,6 +71,7 @@ public class CommonProxy {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock (ModBlocks.blockFurnace).setRegistryName(BlockFurnace.afurnace));
         event.getRegistry().register(new ItemCircuit());
+        event.getRegistry().register(new ItemSolderIngot());
         event.getRegistry().register(new ItemBlock (ModBlocks.blockSolder).setRegistryName(BlockSolderTable.solder));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockChicken).setRegistryName(BlockChickenPlushy.chicken));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockMachineFrame).setRegistryName(BlockMachineFrame.machineframe));

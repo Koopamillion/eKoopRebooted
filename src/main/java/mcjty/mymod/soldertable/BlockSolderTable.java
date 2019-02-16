@@ -49,6 +49,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
 
     public static final ResourceLocation solder = new ResourceLocation(MyMod.MODID, "solder");
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final int testid = 342;
 
    // public static final PropertyEnum<SolderPartIndex> FORMED = PropertyEnum.<SolderPartIndex>create("formed", SolderPartIndex.class);
 
@@ -71,6 +72,8 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
         // return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
+
+
 
     @Nullable
     @Override
@@ -215,6 +218,8 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
         return BlockRenderLayer.CUTOUT;
 
     }*/
+
+
 
 
     @Override
