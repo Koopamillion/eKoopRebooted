@@ -1,0 +1,11 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "mymod:salt"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ]
+}

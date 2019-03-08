@@ -1,0 +1,7 @@
+{
+  "furnaceActive": {
+    "category": "block",
+    "subtitle": "mymod.subtitle.furnaceactive",
+    "sounds": [ "mymod:furnaceactive" ]
+  }
+}

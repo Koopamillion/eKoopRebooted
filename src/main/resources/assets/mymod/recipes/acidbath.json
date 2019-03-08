@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "mymod:acidbath"
+  },
+  "pattern": [
+    "x x",
+    "xzx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "ingotGold"
+    },
+    "z": {
+      "item": "minecraft:cauldron",
+      "data": 0
+    }
+  }
+}

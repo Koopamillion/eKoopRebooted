@@ -1,0 +1,192 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+"ambientocclusion": false,
+    "textures": {
+        "particle": "mymod:blocks/metalblock",
+        "gold_block": "mymod:blocks/gold_block",
+        "metalblock": "mymod:blocks/metalblock"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.4, 0.4, 0.4 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Element",
+            "from": [ 0, 3, 0 ], 
+            "to": [ 2, 16, 16 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 14, 0, 16, 13 ], "cullface": "north" },
+                "east": { "texture": "#gold_block", "uv": [ 0, 0, 16, 13 ] },
+                "south": { "texture": "#metalblock", "uv": [ 0, 0, 2, 13 ], "cullface": "south" },
+                "west": { "texture": "#metalblock", "uv": [ 0, 0, 16, 13 ], "cullface": "west" },
+                "up": { "texture": "#metalblock", "uv": [ 0, 0, 2, 16 ], "cullface": "up" },
+                "down": { "texture": "#metalblock", "uv": [ 0, 0, 2, 16 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 2, 3, 2 ], 
+            "to": [ 14, 4, 14 ], 
+            "faces": {
+                "up": { "texture": "#gold_block", "uv": [ 2, 2, 14, 14 ], "cullface": "up" },
+                "down": { "texture": "#metalblock", "uv": [ 2, 2, 14, 14 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 2, 3, 14 ], 
+            "to": [ 14, 16, 16 ], 
+            "faces": {
+                "north": { "texture": "#gold_block", "uv": [ 2, 0, 14, 13 ] },
+                "south": { "texture": "#metalblock", "uv": [ 2, 0, 14, 13 ], "cullface": "south" },
+                "up": { "texture": "#metalblock", "uv": [ 2, 14, 14, 16 ], "cullface": "up" },
+                "down": { "texture": "#metalblock", "uv": [ 2, 0, 14, 2 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 0, 0, 0 ], 
+            "to": [ 4, 3, 2 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 12, 13, 16, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 13, 13, 15, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 0, 13, 4, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 0, 13, 2, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 0, 14, 4, 16 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 0, 0, 2 ], 
+            "to": [ 2, 3, 4 ], 
+            "faces": {
+                "east": { "texture": "#metalblock", "uv": [ 11, 13, 13, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 1, 13, 3, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 2, 13, 4, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 0, 12, 2, 14 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 12, 0, 0 ], 
+            "to": [ 16, 3, 2 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 0, 13, 4, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 14, 13, 16, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 7, 13, 11, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 5, 13, 7, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 12, 14, 16, 16 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 14, 0, 2 ], 
+            "to": [ 16, 3, 4 ], 
+            "faces": {
+                "east": { "texture": "#metalblock", "uv": [ 12, 13, 14, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 10, 13, 12, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 10, 13, 12, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 14, 12, 16, 14 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 0, 0, 14 ], 
+            "to": [ 4, 3, 16 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 6, 13, 10, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 4, 13, 6, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 0, 13, 4, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 14, 13, 16, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 0, 0, 4, 2 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 0, 0, 12 ], 
+            "to": [ 2, 3, 14 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 10, 13, 12, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 8, 13, 10, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 12, 13, 14, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 0, 2, 2, 4 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 12, 0, 14 ], 
+            "to": [ 16, 3, 16 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 0, 13, 4, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 0, 13, 2, 16 ] },
+                "south": { "texture": "#metalblock", "uv": [ 12, 13, 16, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 13, 13, 15, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 12, 0, 16, 2 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 14, 0, 12 ], 
+            "to": [ 16, 3, 14 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 1, 13, 3, 16 ] },
+                "east": { "texture": "#metalblock", "uv": [ 2, 13, 4, 16 ] },
+                "west": { "texture": "#metalblock", "uv": [ 1, 13, 3, 16 ] },
+                "down": { "texture": "#metalblock", "uv": [ 14, 2, 16, 4 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 2, 3, 0 ], 
+            "to": [ 14, 16, 2 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 2, 0, 14, 13 ] },
+                "south": { "texture": "#gold_block", "uv": [ 2, 0, 14, 13 ], "cullface": "south" },
+                "up": { "texture": "#metalblock", "uv": [ 2, 0, 14, 2 ], "cullface": "up" },
+                "down": { "texture": "#metalblock", "uv": [ 2, 14, 14, 16 ] }
+            }
+        },
+        {
+            "name": "Element",
+            "from": [ 14, 3, 0 ], 
+            "to": [ 16, 16, 16 ], 
+            "faces": {
+                "north": { "texture": "#metalblock", "uv": [ 0, 0, 2, 13 ], "cullface": "north" },
+                "east": { "texture": "#metalblock", "uv": [ 0, 0, 16, 13 ] },
+                "south": { "texture": "#metalblock", "uv": [ 14, 0, 16, 13 ], "cullface": "south" },
+                "west": { "texture": "#gold_block", "uv": [ 0, 0, 16, 13 ], "cullface": "west" },
+                "up": { "texture": "#metalblock", "uv": [ 14, 0, 16, 16 ], "cullface": "up" },
+                "down": { "texture": "#metalblock", "uv": [ 14, 0, 16, 16 ] }
+            }
+        }
+    ]
+}

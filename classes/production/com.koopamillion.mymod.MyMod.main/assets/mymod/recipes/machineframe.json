@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "mymod:machineframe"
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xsx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "mymod:circuit"
+    },
+    "x": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "blockRedstone"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "mymod:solder"
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xsx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "x": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "blockRedstone"
+    }
+  }
+}

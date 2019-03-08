@@ -1,7 +1,6 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "particle": "mymod:blocks/particles",
         "machineframerotate": "mymod:blocks/machineframerotate",
         "redstone_block3": "mymod:blocks/redstone_block3",
         "machineframeframe": "mymod:blocks/machineframeframe"
@@ -204,7 +203,7 @@
             "faces": {
                 "south": { "texture": "#machineframeframe", "uv": [ 0, 0, 4, 4 ] },
                 "west": { "texture": "#machineframeframe", "uv": [ 12, 0, 16, 4 ] },
-                "up": { "texture": "#machineframeframe", "uv": [ 12, 0, 16, 4 ], "rotation": 90 }
+                "up": { "texture": "#machineframeframe", "uv": [ 12, 12, 16, 16 ], "rotation": 90 }
             }
         },
         {
