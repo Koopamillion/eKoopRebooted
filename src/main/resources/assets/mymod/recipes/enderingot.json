@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "mymod:enderingot"
+  },
+  "ingredients": [
+    {
+      "item": "mymod:solderingot"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
+
+  ]
+}

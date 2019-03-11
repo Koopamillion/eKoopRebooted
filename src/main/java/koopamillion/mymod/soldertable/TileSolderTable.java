@@ -214,11 +214,11 @@ private Fluid fluidtype = null;
             inputHandler.extractItem(9, 1, false);
               }
 
-      /*      if (stack.getItem() == ModItems.salt && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= 50 * 200 && tank.getFluid().getFluid() == ModLiquids.hcl) {
+            if (stack.getItem() == ModItems.enderingot && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= 250 * 200 && tank.getFluid().getFluid() == ModLiquids.enderfluid) {
                 amountsmooth = 20;
-                fluidtype = ModLiquids.hcl;
+                fluidtype = ModLiquids.enderfluid;
                 inputHandler.extractItem(9, 1, false);
-            }*/
+            }
         }else {
             if(stack.getItem() == ModItems.itemSolder && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= ModItems.itemSolder.getMeltingPoint() * 200  ){
                 amountsmooth = 20;
@@ -226,11 +226,11 @@ private Fluid fluidtype = null;
                 inputHandler.extractItem(9, 1, false);
             }
 
-        /*    if (stack.getItem() == ModItems.salt && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= 50 * 200 ) {
+            if (stack.getItem() == ModItems.enderingot && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= 250 * 200 ) {
                 amountsmooth = 20;
-                fluidtype = ModLiquids.hcl;
+                fluidtype = ModLiquids.enderfluid;
                 inputHandler.extractItem(9, 1, false);
-            }*/
+            }
         }
 
         IFluidHandler handler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);

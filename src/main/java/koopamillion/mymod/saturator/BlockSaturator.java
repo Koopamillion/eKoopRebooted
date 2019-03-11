@@ -1,5 +1,6 @@
 package koopamillion.mymod.saturator;
 
+import koopamillion.mymod.ModItems;
 import koopamillion.mymod.MyMod;
 import koopamillion.mymod.generators.TileGenerator;
 import net.minecraft.block.Block;
@@ -37,6 +38,8 @@ import java.util.List;
 
 public class BlockSaturator extends Block implements ITileEntityProvider {
 
+
+    public static final AxisAlignedBB SAT_AABB= new AxisAlignedBB(0.9375D,0,0.9375D,0.0625D,0.5D,0.0625D);
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     private static boolean keepInventory;
@@ -76,6 +79,18 @@ public class BlockSaturator extends Block implements ITileEntityProvider {
 
 
 
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return SAT_AABB;
+
+    }
+
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return SAT_AABB;
+    }
 
 
     @Nullable
@@ -98,7 +113,21 @@ public class BlockSaturator extends Block implements ITileEntityProvider {
             return false;
         }
         world.notifyBlockUpdate(pos, state, state, 2);
+        if(player.getHeldItem(hand).getItem() == ModItems.energy && !((TileSaturator) te).getDebug()){
+            ((TileSaturator) te).setDebug(true);
+            return true;
+        }
+        if(player.getHeldItem(hand).getItem() == ModItems.energy && ((TileSaturator) te).getDebug()){
+            ((TileSaturator) te).setDebug(false);
+            return true;
+        }
+
         player.openGui(MyMod.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+
+
+
+
+
         return true;
     }
 

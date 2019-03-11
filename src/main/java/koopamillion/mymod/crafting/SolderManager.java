@@ -2,6 +2,7 @@ package koopamillion.mymod.crafting;
 
 import koopamillion.mymod.ModItems;
 import koopamillion.mymod.ModLiquids;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -44,7 +45,9 @@ public class SolderManager {
     }
 
     private static void init() {
-        customRecipeList.add(new SolderRecipe(new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(ModItems.siliconpure), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE),  new ItemStack(ModItems.itemCircuit), new FluidStack(ModLiquids.solderfluid, 100, null), new ItemStack(ModItems.itemSolder, 1)));
-   //      customRecipeList.add(new SolderRecipe(new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(ModItems.siliconpure), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.DIAMOND),  new ItemStack(ModItems.photon), new FluidStack(ModLiquids.hcl, 200, null), new ItemStack(ModItems.salt, 1)));
+        customRecipeList.add(new SolderRecipe(new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.IRON_INGOT), new ItemStack(ModItems.siliconpure), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE),  new ItemStack(ModItems.itemCircuit), new FluidStack(ModLiquids.solderfluid, 100, null), new ItemStack(ModItems.itemSolder, 1)));
+        customRecipeList.add(new SolderRecipe(new ItemStack(Blocks.GLASS), new ItemStack(Blocks.GLASS), new ItemStack(Blocks.GLASS), new ItemStack(Items.REDSTONE), new ItemStack(Blocks.GLOWSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.DIAMOND), new ItemStack(ModItems.itemCircuit), new ItemStack(Items.DIAMOND),  new ItemStack(ModItems.photon, 4), new FluidStack(ModLiquids.solderfluid, 100, null), new ItemStack(ModItems.itemSolder, 1)));
+        customRecipeList.add(new SolderRecipe(new ItemStack(Blocks.GLASS), new ItemStack(Blocks.GLASS), new ItemStack(Blocks.GLASS), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.COMPASS), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.REDSTONE), new ItemStack(ModItems.itemCircuit), new ItemStack(Items.REDSTONE),  new ItemStack(ModItems.energy, 1), new FluidStack(ModLiquids.solderfluid, 200, null), new ItemStack(ModItems.itemSolder, 2)));
+        customRecipeList.add(new SolderRecipe(new ItemStack(Items.ENDER_PEARL), ItemStack.EMPTY, ItemStack.EMPTY, new ItemStack(Items.ENDER_EYE), new ItemStack(ModItems.itemCircuit), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT),  new ItemStack(ModItems.ender, 2), new FluidStack(ModLiquids.enderfluid, 200, null), new ItemStack(ModItems.enderingot, 2)));
     }
 }

@@ -1,6 +1,7 @@
 package koopamillion.mymod.saturator;
 
 import koopamillion.mymod.ModItems;
+import koopamillion.mymod.ModLiquids;
 import koopamillion.mymod.acidbath.TileAcidBath;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -46,8 +47,10 @@ public class SaturatorTESR extends TileEntitySpecialRenderer<TileSaturator> {
     @Override
     public void render(TileSaturator te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
-
+        GlStateManager.color(1, 1, 1, 1);
+        GlStateManager.disableBlend();
         tilee = te;
+
         renderItemStack(te, Minecraft.getMinecraft().world,x,y,z, partialTicks);
         GlStateManager.enableBlend();
     }
@@ -60,11 +63,11 @@ public class SaturatorTESR extends TileEntitySpecialRenderer<TileSaturator> {
     public void renderItemStack(TileSaturator te,World world,double x, double y, double z, float ticks){
         if(getStack(te)!=null) {
 
+            time = te.getWorld().getTotalWorldTime() +ticks;
             GlStateManager.color(1, 1, 1, 1);
             GlStateManager.disableBlend();
-            time = te.getWorld().getTotalWorldTime() +ticks;
             GlStateManager.pushMatrix();
-            GlStateManager.translate(x + 0.5, y + 1.0, z + 0.5);
+            GlStateManager.translate(x + 0.5, y + 0.8, z + 0.5);
             GlStateManager.scale(1.1f, 1.1f, 1.1f);
             GlStateManager.translate(0, Math.sin(time/8)/8, 0);
             GlStateManager.rotate(time,0,1,0);

@@ -1,6 +1,5 @@
 package koopamillion.mymod.saturator;
 
-import koopamillion.mymod.generators.TileGenerator;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -8,8 +7,9 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class DamageTracker {
-    public static final DamageTracker instance = new DamageTracker();
+public class FoodSenser {
+    
+    public static final FoodSenser instance = new FoodSenser();
 
     private Map<Integer, Map<BlockPos, Set<UUID>>> tracking = new HashMap<>();
 
@@ -52,7 +52,7 @@ public class DamageTracker {
                     if (world.isBlockLoaded(entry.getKey())) {
                         TileEntity tileEntity = world.getTileEntity(entry.getKey());
                         if (tileEntity instanceof TileSaturator) {
-                            ((TileSaturator) tileEntity).senseDamage(entity);
+                            ((TileSaturator) tileEntity).feedPlayer(entity);
                         }
                     }
                 }

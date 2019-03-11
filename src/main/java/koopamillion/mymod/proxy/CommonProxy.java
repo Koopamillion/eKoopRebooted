@@ -11,6 +11,7 @@ import koopamillion.mymod.furnace.TileFurnace;
 import koopamillion.mymod.generators.BlockGenerator;
 import koopamillion.mymod.generators.TileGenerator;
 import koopamillion.mymod.machineitems.ItemCircuit;
+import koopamillion.mymod.machineitems.ItemEnderIngot;
 import koopamillion.mymod.machineitems.ItemSolderIngot;
 import koopamillion.mymod.network.Messages;
 import koopamillion.mymod.plushy.BlockChickenPlushy;
@@ -18,12 +19,14 @@ import koopamillion.mymod.plushy.TileChickenPlushy;
 import koopamillion.mymod.saturator.BlockSaturator;
 import koopamillion.mymod.saturator.TileSaturator;
 import koopamillion.mymod.simpleblocks.BlockMachineFrame;
+import koopamillion.mymod.solder.BlockEnderSolder;
 import koopamillion.mymod.solder.BlockHCL;
 import koopamillion.mymod.solder.BlockSolder;
 import koopamillion.mymod.soldertable.BlockSolderPart;
 import koopamillion.mymod.soldertable.BlockSolderTable;
 import koopamillion.mymod.soldertable.TileSolderTable;
 import koopamillion.mymod.acidbath.BlockAcidBath;
+import koopamillion.mymod.tools.Oredict;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -54,6 +57,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
+        Oredict.init();
     }
   /*  @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event){
@@ -68,6 +72,7 @@ public class CommonProxy {
         event.getRegistry().register(new BlockSolderTable());
         event.getRegistry().register(new BlockSolderPart());
         event.getRegistry().register(new BlockSolder());
+        event.getRegistry().register(new BlockEnderSolder());
         event.getRegistry().register(new BlockHCL());
         event.getRegistry().register(new BlockAcidBath());
         event.getRegistry().register(new BlockGenerator());
@@ -89,8 +94,11 @@ public class CommonProxy {
                 new Item().setTranslationKey("mymod.siliconpure").setRegistryName("siliconpure").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("mymod.puresand").setRegistryName("puresand").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("mymod.salt").setRegistryName("salt").setCreativeTab(MyMod.tabEKoop),
-                new Item().setTranslationKey("mymod.photon").setRegistryName("photon").setCreativeTab(MyMod.tabEKoop));
+                new Item().setTranslationKey("mymod.photon").setRegistryName("photon").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("mymod.energy").setRegistryName("energy").setCreativeTab(MyMod.tabEKoop).setMaxStackSize(1),
+                new Item().setTranslationKey("mymod.ender").setRegistryName("ender").setCreativeTab(MyMod.tabEKoop));
         event.getRegistry().register(new ItemSolderIngot());
+        event.getRegistry().register(new ItemEnderIngot());
         event.getRegistry().register(new ItemBlock (ModBlocks.blockSolder).setRegistryName(BlockSolderTable.solder));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockChicken).setRegistryName(BlockChickenPlushy.chicken));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockMachineFrame).setRegistryName(BlockMachineFrame.machineframe));
@@ -98,11 +106,13 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock (ModBlocks.blockSaturator).setRegistryName(BlockSaturator.saturator));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockSolderPart).setRegistryName(BlockSolderPart.solderpart));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockAcidbath).setRegistryName(BlockAcidBath.acidbath));
-        OreDictionary.registerOre("circuitBasic", ModItems.itemCircuit);
+
     }
 
+  /*  @SubscribeEvent
+    public static void onItemRegistry(RegistryEvent.Register<Item> event){
 
-
+    }*/
     public ListenableFuture<Object> addScheduledTaskClient(Runnable runnableToSchedule) {
         throw new IllegalStateException("This should only be called from client side");
     }

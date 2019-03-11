@@ -11,16 +11,21 @@ import net.minecraft.util.ResourceLocation;
 
 public class PlushyTESR extends TileEntitySpecialRenderer<TileChickenPlushy> {
 
-    private static final ResourceLocation CHICKEN_TEXTURES = new ResourceLocation("textures/entity/chicken/chicken.png");
+    private static final ResourceLocation CHICKEN_TEXTURES = new ResourceLocation("textures/entity/chicken.png");
     private static final ModelChicken model = new ModelChicken();
     private static EntityChicken entity;
 
 
     @Override
     public void render(TileChickenPlushy tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+
+
+        //bind it in block chicken plushy to work
+
         if (!tileEntity.hasWorld()) {
             return;
         }
+
 
         super.render(tileEntity, x, y, z, partialTicks, destroyStage, alpha);
 
@@ -31,15 +36,16 @@ public class PlushyTESR extends TileEntitySpecialRenderer<TileChickenPlushy> {
 
         if (entity == null && tileEntity.hasWorld()) {
             entity = new EntityChicken(tileEntity.getWorld());
-            entity.setScaleForAge(false);
+            entity.setScaleForAge(true);
         }
 
         bindTexture(CHICKEN_TEXTURES);
         if (entity != null) {
             GlStateManager.pushMatrix();
-            GlStateManager.translate(x + 0.5, y + 0.5 + -0.05, z + 0.5);
-            GlStateManager.rotate(180f, 0f, 0f, 1f);
-            GlStateManager.scale(2, 2, 2);
+            GlStateManager.translate(x + 0.5f, y, z + 0.5f);
+           // GlStateManager.rotate(0, 0f, 0f, 1f);
+            GlStateManager.rotate(180f, 0f, 0f, 0f);
+            GlStateManager.scale(0.1f, 0.1f, 0.1f);
             model.render(entity, 0f, 0f, 0f, 0f, 0f, 1f);
             GlStateManager.popMatrix();
         }

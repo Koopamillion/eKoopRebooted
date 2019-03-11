@@ -1,17 +1,22 @@
 package koopamillion.mymod.jei;
 
 import koopamillion.mymod.ModBlocks;
+import koopamillion.mymod.crafting.AcidManager;
+import koopamillion.mymod.crafting.AcidRecipe;
 import koopamillion.mymod.crafting.SolderManager;
 import koopamillion.mymod.crafting.SolderRecipe;
 import koopamillion.mymod.furnace.ContainerFurnace;
+import koopamillion.mymod.furnace.GuiFurnace;
 import koopamillion.mymod.furnace.TileFurnace;
 import koopamillion.mymod.soldertable.ContainerSolderTable;
+import koopamillion.mymod.soldertable.GuiSolderTable;
 import koopamillion.mymod.soldertable.TileSolderTable;
 import mezz.jei.api.*;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -21,11 +26,15 @@ public class JeiPlugin implements IModPlugin {
 
     public static final String FASTFURNACE_ID = "mymod.furnace";
     public static final String SOLDER_ID = "mymod.solder";
+    public static final String ACID_ID = "mymod.acidbath";
 
     @Override
     public void register(@Nonnull IModRegistry registry) {
         registerFastFurnaceHandling(registry);
         registerSolderHandling(registry);
+        registerAcidHandling(registry);
+        registry.addRecipeClickArea(GuiSolderTable.class, 121, 43, 15, 16, SOLDER_ID);
+        registry.addRecipeClickArea(GuiFurnace.class, 79, 25, 22, 15, VanillaRecipeCategoryUid.SMELTING);
     }
 
     private void registerSolderHandling(@Nonnull IModRegistry registry) {
@@ -36,6 +45,13 @@ public class JeiPlugin implements IModPlugin {
 
         transferRegistry.addRecipeTransferHandler(ContainerSolderTable.class, SOLDER_ID,
                 0, TileSolderTable.INPUT_SLOTS, TileSolderTable.INPUT_SLOTS + TileSolderTable.OUTPUT_SLOTS, 36);
+    }
+
+    private void registerAcidHandling(@Nonnull IModRegistry registry) {
+        registry.addRecipeCatalyst(new ItemStack(ModBlocks.blockAcidbath), ACID_ID);
+        registry.addRecipes(AcidManager.getCustomRecipeList(), ACID_ID);
+        registry.handleRecipes(AcidRecipe.class, AcidRecipeWrapper::new, ACID_ID);
+
     }
 
     private void registerFastFurnaceHandling(@Nonnull IModRegistry registry) {
@@ -53,6 +69,7 @@ public class JeiPlugin implements IModPlugin {
         IGuiHelper guiHelper = helpers.getGuiHelper();
 
         registry.addRecipeCategories(new SolderRecipeCategory(guiHelper));
+        registry.addRecipeCategories(new AcidRecipeCategory(guiHelper));
     }
 
 }

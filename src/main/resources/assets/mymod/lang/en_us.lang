@@ -6,17 +6,24 @@ tile.mymod.hcl.name=Hydrochloric Acid
 tile.mymod.solder.name=Soldering Table
 tile.mymod.acidbath.name=Fluid Bath
 tile.mymod.generator.name=Beacon Generator
+tile.mymod.saturator.name=Saturator
+
 
 item.mymod.siliconraw.name=Raw Silicon
 item.mymod.siliconpure.name=Silicon Wafer
 item.mymod.salt.name=Salt
 item.mymod.puresand.name=Pure Sand
 item.mymod.photon.name=Photon Absorber
+item.mymod.energy.name=Debugging Tool
+item.mymod.ender.name=Ender Emitter
+item.mymod.enderingot.name=Ender Enriched Solder Ingot
 
 item.mymod.circuit.name=Basic Circuit
 item.mymod.solderingot.name=Solder Ingot
 item.mymod.fluid.solderfluid Bucket=Molten Solder Bucket
 item.mymod.fluid.hcl Bucket=Hydrochloric Acid Bucket
+item.mymod.fluid.enderfluid Bucket=Molten Ender Solder Bucket
 fluid.solderfluid=Molten Solder
 fluid.hcl=Hydrochloric Acid
+fluid.solderfluid=Molten Ender Solder
 itemGroup.tabEKoop=eKoop

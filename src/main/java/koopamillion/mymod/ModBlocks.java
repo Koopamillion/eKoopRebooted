@@ -4,6 +4,7 @@ import koopamillion.mymod.generators.BlockGenerator;
 import koopamillion.mymod.plushy.BlockChickenPlushy;
 import koopamillion.mymod.saturator.BlockSaturator;
 import koopamillion.mymod.simpleblocks.BlockMachineFrame;
+import koopamillion.mymod.solder.BlockEnderSolder;
 import koopamillion.mymod.solder.BlockHCL;
 import koopamillion.mymod.soldertable.BlockSolderPart;
 import koopamillion.mymod.soldertable.BlockSolderTable;
@@ -35,6 +36,8 @@ public class ModBlocks {
     public static BlockSaturator blockSaturator;
     @GameRegistry.ObjectHolder("mymod:solderfluid")
     public static BlockSolder blockSolderFluid;
+    @GameRegistry.ObjectHolder("mymod:enderfluid")
+    public static BlockEnderSolder blockEnderFluid;
     @GameRegistry.ObjectHolder("mymod:hcl")
     public static BlockHCL blockHCL;
     @GameRegistry.ObjectHolder("mymod:generator")
@@ -55,6 +58,7 @@ public class ModBlocks {
         blockAcidbath.initModel();
         blockHCL.initModel();
         blockSaturator.initModel();
+        blockEnderFluid.initModel();
 
         blockGenerator.initModel();
 

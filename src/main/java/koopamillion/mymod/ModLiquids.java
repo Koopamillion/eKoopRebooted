@@ -1,5 +1,6 @@
 package koopamillion.mymod;
 
+import koopamillion.mymod.solder.LiquidEnderSolder;
 import koopamillion.mymod.solder.LiquidHCL;
 import koopamillion.mymod.solder.LiquidSolder;
 import net.minecraftforge.fluids.Fluid;
@@ -9,12 +10,15 @@ import net.minecraftforge.fluids.FluidStack;
 public class ModLiquids {
     public static final Fluid solderfluid = new LiquidSolder();
     public static final Fluid hcl = new LiquidHCL();
+    public static final Fluid enderfluid = new LiquidEnderSolder();
 
     public static void init() {
         FluidRegistry.registerFluid(solderfluid);
         FluidRegistry.addBucketForFluid(solderfluid);
         FluidRegistry.registerFluid(hcl);
         FluidRegistry.addBucketForFluid(hcl);
+        FluidRegistry.registerFluid(enderfluid);
+        FluidRegistry.addBucketForFluid(enderfluid);
     }
 
     public static boolean isValidFloadStack(FluidStack stack){

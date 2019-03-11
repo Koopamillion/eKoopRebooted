@@ -1,0 +1,30 @@
+{
+  "result": {
+    "item": "mymod:saturator"
+  },
+  "pattern": [
+    "e e",
+    "xzx",
+    "gfg"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "blockGold"
+    },
+    "z": {
+      "item": "mymod:machineframe",
+      "data": 0
+    },
+    "e": {
+      "item": "mymod:ender"
+    },
+    "g": {
+      "item": "minecraft:golden_apple",
+      "data": 0
+    },
+    "f": {
+      "type": "forge:ore_dict", "ore": "blockIron"
+    }
+  }
+}

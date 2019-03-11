@@ -32,6 +32,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class EventHandler {
 
 
+
+
     @SubscribeEvent
     public static void onPlayerRightClick(PlayerInteractEvent.RightClickBlock event){
 
@@ -43,7 +45,7 @@ public class EventHandler {
                     ItemStack item = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
                    TileEntity te = event.getWorld().getTileEntity(event.getPos());
                    if(te instanceof TileAcidBath){
-                           AcidRecipe recipe = AcidManager.getRecipe(item, ((TileAcidBath) te).getTank().getFluid(), ((TileAcidBath) te).getAcidFire(), ((TileAcidBath)te).getElectricity());
+                           AcidRecipe recipe = AcidManager.getRecipe(item, ((TileAcidBath) te).getTank().getFluid(), ((TileAcidBath) te).getAcidFire(), ((TileAcidBath)te).getElectricity(), null, null);
                            if(recipe != null && ((TileAcidBath) te).getTank().getFluid().getFluid() == recipe.getInput2().getFluid() && ((TileAcidBath) te).getTank().getFluidAmount() >= recipe.getInput2().amount && ((TileAcidBath) te).getAcidFire() == recipe.getBool()&&((TileAcidBath)te).getElectricity() == recipe.getBool2()){
                                if(recipe.getOutput()!=null) {
                                    Helper.spawnItemInWorld(event.getWorld(), recipe.getOutput().copy(), event.getPos().up());

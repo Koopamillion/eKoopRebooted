@@ -26,6 +26,12 @@ public class ModItems {
     public static Item salt;
     @GameRegistry.ObjectHolder("mymod:photon")
     public static Item photon;
+    @GameRegistry.ObjectHolder("mymod:energy")
+    public static Item energy;
+    @GameRegistry.ObjectHolder("mymod:ender")
+    public static Item ender;
+    @GameRegistry.ObjectHolder("mymod:enderingot")
+    public static Item enderingot;
 
 
 
@@ -39,5 +45,8 @@ public class ModItems {
         ModelLoader.setCustomModelResourceLocation(puresand, 0, new ModelResourceLocation(puresand.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(salt, 0, new ModelResourceLocation(salt.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(photon, 0, new ModelResourceLocation(photon.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(energy, 0, new ModelResourceLocation(energy.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ender, 0, new ModelResourceLocation(ender.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(enderingot, 0, new ModelResourceLocation(enderingot.getRegistryName(), "inventory"));
     }
 }

@@ -64,12 +64,12 @@ public class TileFurnace extends TileEntity implements ITickable {
     public void update() {
         if (!world.isRemote) {
                 if (shouldRun() == true){
-                if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
+                    if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
 
                     return;
                 }
 
-                if (progressRemaining > 0) {
+                  if (progressRemaining > 0) {
                     setState(FurnaceState.WORKING);
                     energyStorage.consumePower(Math.round(RF_PER_TICK));
 
@@ -100,7 +100,7 @@ public class TileFurnace extends TileEntity implements ITickable {
                     startSmelt();
 
                 }
-            }else{
+             }else{
                     if(changeScale==false){
                         changeScale=true;
                         scale = scale - 0.001f;
@@ -129,7 +129,8 @@ public class TileFurnace extends TileEntity implements ITickable {
                     World worldIn = getWorld();
 
                     worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 2.0f, 1.0F);
-                //    worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+
+                //       worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
                 }
                 if(soundCounter > 0){
                     soundCounter--;

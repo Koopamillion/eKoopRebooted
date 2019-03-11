@@ -12,14 +12,18 @@ public class AcidRecipe {
     private final Boolean bool;
     //has redstone block below
     private final Boolean bool2;
+    private final ItemStack input3;
+    private final ItemStack input4;
 
-    public AcidRecipe(ItemStack input1, ItemStack output, FluidStack input2, Boolean bool, Boolean bool2, FluidStack output2) {
+    public AcidRecipe(ItemStack input1, ItemStack output, FluidStack input2, Boolean bool, Boolean bool2, FluidStack output2, ItemStack input3, ItemStack input4) {
         this.input1 = input1;
         this.input2 = input2;
         this.output = output;
         this.bool = bool;
         this.bool2 = bool2;
         this.output2 = output2;
+        this.input3 = input3;
+        this.input4 = input4;
     }
 
     public ItemStack getInput1() {
@@ -34,5 +38,8 @@ public class AcidRecipe {
     public FluidStack getOutput2(){
         return output2;
     }
+    public ItemStack getInput3(){return  input3;}
+    public ItemStack getInput4(){return  input4;}
+
 
 }

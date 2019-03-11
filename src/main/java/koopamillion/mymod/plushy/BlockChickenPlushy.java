@@ -87,7 +87,7 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-        ClientRegistry.bindTileEntitySpecialRenderer(TileChickenPlushy.class, new PlushyTESR());
+ //       ClientRegistry.bindTileEntitySpecialRenderer(TileChickenPlushy.class, new PlushyTESR());
     }
 
     @Override

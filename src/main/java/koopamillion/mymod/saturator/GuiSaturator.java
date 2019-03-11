@@ -28,11 +28,8 @@ public class GuiSaturator extends GuiContainer {
 
     private static final ResourceLocation FurnaceTextures = new ResourceLocation(MyMod.MODID,"textures/gui/furnacepoweredbar.png");
     private static final ResourceLocation FurnaceDead = new ResourceLocation(MyMod.MODID,"textures/gui/furnacedeadpowerbar.png");
-    private static final ResourceLocation HeatBar = new ResourceLocation(MyMod.MODID,"textures/gui/heatbar.png");
-    private static final ResourceLocation GlassHeatBar = new ResourceLocation(MyMod.MODID,"textures/gui/glassheatbar.png");
-    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/solder.png");
-    private static final ResourceLocation fluidgauge = new ResourceLocation(MyMod.MODID, "textures/gui/fluidgauge.png");
-    private static final ResourceLocation solderprogressbar = new ResourceLocation(MyMod.MODID, "textures/gui/solderprogressbar.png");
+    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/saturator.png");
+
 
     private TileSaturator solder;
     //  private int j = 0;

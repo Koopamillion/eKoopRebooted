@@ -4,6 +4,7 @@ import koopamillion.mymod.ModItems;
 import koopamillion.mymod.ModLiquids;
 import koopamillion.mymod.MyMod;
 import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -23,6 +24,8 @@ import java.util.List;
 public class SolderRecipeCategory implements IRecipeCategory<SolderRecipeWrapper> {
 
     private final IDrawable background;
+
+
 
     public SolderRecipeCategory(IGuiHelper guiHelper) {
         ResourceLocation location = new ResourceLocation(MyMod.MODID, "textures/gui/solderjei.png");

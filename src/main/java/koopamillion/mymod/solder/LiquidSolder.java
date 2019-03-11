@@ -9,5 +9,6 @@ public class LiquidSolder extends Fluid {
         super("solderfluid",
                 new ResourceLocation(MyMod.MODID,"blocks/solderfluid_still"),
         new ResourceLocation(MyMod.MODID,"blocks/solderfluid_flow"));
+        setTemperature(1000);
     }
 }

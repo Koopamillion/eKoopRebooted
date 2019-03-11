@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = MyMod.MODID, name = MyMod.MODNAME, version = MyMod.MODVERSION, dependencies = "required-after:forge@[14.23.5.2768,)", useMetadata = true)
@@ -39,24 +40,28 @@ public class MyMod {
     @Mod.Instance
     public static MyMod instance;
 
-    public static Logger logger;
+    public static Logger logger = LogManager.getLogger(MODNAME);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        MyMod.logger.info("eKoop has woken up!");
         logger = event.getModLog();
         proxy.preInit(event);
         SoundFurnace.preInit();
+
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
         ModRecipes.init();
         proxy.init(e);
+        MyMod.logger.info("Half way there!");
 
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         proxy.postInit(e);
+        MyMod.logger.info("WE MADE IT! HELLO MINECRAFT!");
     }
 }
