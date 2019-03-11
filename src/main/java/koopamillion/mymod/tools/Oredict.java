@@ -16,9 +16,10 @@ public class Oredict {
         addOre(ModItems.enderingot, "ingotEnderSolder");
         addOre(ModItems.itemSolder, "ingotSolder");
         addOre(ModItems.itemCircuit, "circuitBasic");
-        addOre(ModItems.salt, "salt");
         addOre(ModItems.salt, "dustSalt");
-        addOre(ModItems.siliconraw, "silicon");
+        addOre(ModItems.salt, "itemSalt");
+        addOre(ModItems.salt, "foodSalt");
+        addOre(ModItems.siliconraw, "itemSilicon");
     }
 
 

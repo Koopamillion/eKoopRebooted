@@ -128,7 +128,7 @@ public class TileFurnace extends TileEntity implements ITickable {
                     BlockPos pos = getPos();
                     World worldIn = getWorld();
 
-                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 2.0f, 1.0F);
+                    worldIn.playSound(null,(double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 3.0f, 1.0F);
 
                 //       worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundFurnace.furnaceActive, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
                 }

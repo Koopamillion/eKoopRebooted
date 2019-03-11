@@ -25,5 +25,5 @@ item.mymod.fluid.hcl Bucket=Hydrochloric Acid Bucket
 item.mymod.fluid.enderfluid Bucket=Molten Ender Solder Bucket
 fluid.solderfluid=Molten Solder
 fluid.hcl=Hydrochloric Acid
-fluid.solderfluid=Molten Ender Solder
+fluid.enderfluid=Molten Ender Solder
 itemGroup.tabEKoop=eKoop
