@@ -17,6 +17,8 @@ item.mymod.photon.name=Photon Absorber
 item.mymod.energy.name=Debugging Tool
 item.mymod.ender.name=Ender Emitter
 item.mymod.enderingot.name=Ender Enriched Solder Ingot
+item.mymod.trace.name=Trace Minerals
+item.mymod.mixed.name=Mixed Minerals
 
 item.mymod.circuit.name=Basic Circuit
 item.mymod.solderingot.name=Solder Ingot

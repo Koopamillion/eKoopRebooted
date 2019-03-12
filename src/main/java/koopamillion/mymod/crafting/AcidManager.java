@@ -46,6 +46,7 @@ public class AcidManager {
     private static void init() {
         customRecipeList.add(new AcidRecipe(new ItemStack(ModItems.puresand), new ItemStack(ModItems.siliconraw, 1, 0), new FluidStack(FluidRegistry.LAVA, 100, null), false, false, null, null, null));
         customRecipeList.add(new AcidRecipe(new ItemStack(Blocks.SAND), new ItemStack(ModItems.puresand, 1, 0), new FluidStack(ModLiquids.hcl, 100, null), true, false, null, new ItemStack(Blocks.MAGMA), null));
-customRecipeList.add(new AcidRecipe(new ItemStack(ModItems.salt), null, new FluidStack(FluidRegistry.WATER, 1000, null), false, true,  new FluidStack(ModLiquids.hcl, 1000, null ), null, new ItemStack(Blocks.REDSTONE_BLOCK)));
+        customRecipeList.add(new AcidRecipe(new ItemStack(ModItems.salt), null, new FluidStack(FluidRegistry.WATER, 1000, null), false, true,  new FluidStack(ModLiquids.hcl, 1000, null ), null, new ItemStack(Blocks.REDSTONE_BLOCK)));
+        customRecipeList.add(new AcidRecipe(new ItemStack(Blocks.STONE), new ItemStack(ModItems.trace, 1, 0), new FluidStack(ModLiquids.hcl, 100, null), true, false, null, null, null));
     }
 }

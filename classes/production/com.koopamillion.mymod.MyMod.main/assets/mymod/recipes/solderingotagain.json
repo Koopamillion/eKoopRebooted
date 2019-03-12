@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "mymod:solderingot"
+  },
+  "ingredients": [
+    {
+      "item": "mymod:mixed"
+    },
+    {
+      "item": "mymod:mixed"
+    },
+    {
+      "item": "mymod:mixed"
+    }
+  ]
+}

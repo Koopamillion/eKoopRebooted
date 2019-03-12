@@ -71,7 +71,6 @@ public class Helper {
 
     public static void spawnParticleLaserToPlayer(double posx, double posy, double posz, double x, double y, double z, World world, EnumParticleTypes e){
 
-        print("yo");
 
         double xdistance = x - (posx + 0.5D);
         double ydistance = y + 1.0D - (posy + 0.5D);

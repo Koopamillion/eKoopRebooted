@@ -96,7 +96,9 @@ public class CommonProxy {
                 new Item().setTranslationKey("mymod.salt").setRegistryName("salt").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("mymod.photon").setRegistryName("photon").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("mymod.energy").setRegistryName("energy").setCreativeTab(MyMod.tabEKoop).setMaxStackSize(1),
-                new Item().setTranslationKey("mymod.ender").setRegistryName("ender").setCreativeTab(MyMod.tabEKoop));
+                new Item().setTranslationKey("mymod.ender").setRegistryName("ender").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("mymod.trace").setRegistryName("trace").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("mymod.mixed").setRegistryName("mixed").setCreativeTab(MyMod.tabEKoop));
         event.getRegistry().register(new ItemSolderIngot());
         event.getRegistry().register(new ItemEnderIngot());
         event.getRegistry().register(new ItemBlock (ModBlocks.blockSolder).setRegistryName(BlockSolderTable.solder));

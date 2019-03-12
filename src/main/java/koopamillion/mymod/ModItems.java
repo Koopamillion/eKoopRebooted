@@ -32,6 +32,10 @@ public class ModItems {
     public static Item ender;
     @GameRegistry.ObjectHolder("mymod:enderingot")
     public static Item enderingot;
+    @GameRegistry.ObjectHolder("mymod:trace")
+    public static Item trace;
+    @GameRegistry.ObjectHolder("mymod:mixed")
+    public static Item mixed;
 
 
 
@@ -48,5 +52,7 @@ public class ModItems {
         ModelLoader.setCustomModelResourceLocation(energy, 0, new ModelResourceLocation(energy.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(ender, 0, new ModelResourceLocation(ender.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(enderingot, 0, new ModelResourceLocation(enderingot.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(trace, 0, new ModelResourceLocation(trace.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(mixed, 0, new ModelResourceLocation(mixed.getRegistryName(), "inventory"));
     }
 }
