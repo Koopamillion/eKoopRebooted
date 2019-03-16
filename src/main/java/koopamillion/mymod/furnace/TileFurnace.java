@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -375,6 +376,8 @@ public class TileFurnace extends TileEntity implements ITickable {
         compound.setInteger("energy", energyStorage.getEnergyStored());
         return compound;
     }
+
+
 
     //-------------------------------------------------------------------------------------------------------------
 

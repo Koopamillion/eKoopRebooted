@@ -72,6 +72,11 @@ public class TileGenerator extends TileEntity implements ITickable {
             }
             isBeacon = false;
         }
+        if(world.isRemote){
+            if(isBeacon){
+                spawnParticles();
+
+            }        }
         if(isBeacon) {
             if (energyStorage.shouldGenerate(MAX_POWER)) {
                 power = power + ((beaconPower + 1) * (beaconPower + 1) * 2 * 2 * 2 * 2) / 1000D;
@@ -85,7 +90,7 @@ public class TileGenerator extends TileEntity implements ITickable {
 
              //  spawnParticles();
             }
-            spawnParticles();
+
             double randomValue = rangemin + (rangemax - rangemin) * rand.nextDouble();
             counter = counter + 0.1f;
 
@@ -170,6 +175,34 @@ public class TileGenerator extends TileEntity implements ITickable {
             markDirty();
         }
     }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound tag = super.getUpdateTag();
+        tag.setBoolean("beacon", isBeacon);
+        return tag;
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        handleUpdateTag(pkt.getNbtCompound());
+    }
+
+    @Override
+    public void handleUpdateTag(NBTTagCompound tag) {
+        isBeacon = tag.getBoolean("beacon");
+
+    }
+
+
+    //make it so it dosent say -1 energy on the bar
+
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket () {
+        return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+    }
+
 
     @Override
     public void readFromNBT (NBTTagCompound compound){
