@@ -1,0 +1,11 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "ekooprebooted:salt"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ]
+}

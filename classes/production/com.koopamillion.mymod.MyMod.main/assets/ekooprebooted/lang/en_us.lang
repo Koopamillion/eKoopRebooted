@@ -1,0 +1,40 @@
+tile.ekooprebooted.furnace.name=Accelerating Furnace
+tile.ekooprebooted.chicken.name=Mob Plushy
+tile.ekooprebooted.machineframe.name=Basic Machine Frame
+tile.ekooprebooted.solderfluid.name=Molten Solder
+tile.ekooprebooted.hcl.name=Hydrochloric Acid
+tile.ekooprebooted.solder.name=Soldering Table
+tile.ekooprebooted.acidbath.name=Fluid Bath
+tile.ekooprebooted.generator.name=Beacon Generator
+tile.ekooprebooted.saturator.name=Saturator
+
+
+item.ekooprebooted.siliconraw.name=Raw Silicon
+item.ekooprebooted.siliconpure.name=Silicon Wafer
+item.ekooprebooted.salt.name=Salt
+item.ekooprebooted.puresand.name=Pure Sand
+item.ekooprebooted.photon.name=Photon Absorber
+item.ekooprebooted.energy.name=Debugging Tool
+item.ekooprebooted.ender.name=Ender Emitter
+item.ekooprebooted.enderingot.name=Ender Enriched Solder Ingot
+item.ekooprebooted.trace.name=Trace Minerals
+item.ekooprebooted.mixed.name=Mixed Minerals
+item.ekooprebooted.emeraldnugget.name=Emerald Nugget
+item.ekooprebooted.dragonnugget.name=Dragon Egg Nugget
+item.ekooprebooted.nethernugget.name=Nether Star Nugget
+item.ekooprebooted.lifecore.name=Core of Life
+item.ekooprebooted.mobholder.name=Mob Hard Drive
+item.ekooprebooted.dragonheartnugget.name=Dragon Heart Nugget
+item.ekooprebooted.withernugget.name=Wither Skull Nugget
+
+
+item.ekooprebooted.circuit.name=Basic Circuit
+item.ekooprebooted.solderingot.name=Solder Ingot
+item.ekooprebooted.fluid.solderfluid Bucket=Molten Solder Bucket
+item.ekooprebooted.fluid.hcl Bucket=Hydrochloric Acid Bucket
+item.ekooprebooted.fluid.enderfluid Bucket=Molten Ender Solder Bucket
+fluid.solderfluid=Molten Solder
+fluid.hcl=Hydrochloric Acid
+fluid.enderfluid=Molten Ender Solder
+
+itemGroup.ekooprebooted.tabEKoop=eKoop

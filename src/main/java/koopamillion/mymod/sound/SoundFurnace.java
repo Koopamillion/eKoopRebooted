@@ -24,7 +24,7 @@ public class SoundFurnace {
 
     public static SoundEvent registerSound(String name)
     {
-        ResourceLocation loc = new ResourceLocation("mymod", name);
+        ResourceLocation loc = new ResourceLocation("ekooprebooted", name);
         SoundEvent event = new SoundEvent(loc).setRegistryName(name);
         ForgeRegistries.SOUND_EVENTS.register(event);
         return event;

@@ -42,7 +42,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Gradle: deobf.mcp.mobius.waila:Hwyla:1.8.18-B32_1.12" level="project" />
-    <orderEntry type="library" name="Gradle: deobf.cofh:RedstoneFlux:1.12-2.0.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: deobf.cofh:RedstoneFlux:1.12-2.1.0.6" level="project" />
     <orderEntry type="library" name="Gradle: deobf.mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.14-7" level="project" />
     <orderEntry type="library" name="Gradle: deobf.com.github.mcjty:intwheel:1.12-1.2.7" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.1" level="project" />

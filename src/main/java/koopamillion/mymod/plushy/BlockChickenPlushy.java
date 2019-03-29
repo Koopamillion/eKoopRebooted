@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 
 public class BlockChickenPlushy extends Block implements ITileEntityProvider {
 //(0.250D,0,0.1875D,0.3125D,0.625D,0.0625D);
-    public static final AxisAlignedBB CHICKEN_AABB= new AxisAlignedBB(0.9375D,0,0.9375D,0.0625D,0.625D,0.0625D);
+    public static final AxisAlignedBB CHICKEN_AABB= new AxisAlignedBB(0.25D,0,0.25D,0.75D,0.0625D,0.75D);
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
@@ -53,13 +53,16 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
         setTranslationKey(MyMod.MODID + ".chicken");
         setHarvestLevel("pickaxe", 0);
         setCreativeTab(MyMod.tabEKoop);
-        setHardness(1);
+        setHardness(0.8f);
+
 
 
 
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
     }
+
+
 
     @Nullable
     @Override
@@ -71,7 +74,7 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     }
 
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        world.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_HURT, SoundCategory.BLOCKS, 0.7f, 1.0f,false);
+
         // Only execute on the server
         if (world.isRemote) {
             return true;
@@ -87,7 +90,7 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
- //       ClientRegistry.bindTileEntitySpecialRenderer(TileChickenPlushy.class, new PlushyTESR());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileChickenPlushy.class, new PlushyTESR());
     }
 
     @Override
@@ -110,12 +113,12 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return CHICKEN_AABB;
+        return null;
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_AMBIENT, SoundCategory.BLOCKS, 0.7f, 1.0f,false);
+
     }
 
     @Override
@@ -150,19 +153,19 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
 
     @Override
     public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_DEATH, SoundCategory.BLOCKS, 1.0f, 1.0f,false);
+
     }
 
     @Override
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.ENTITY_CHICKEN_DEATH, SoundCategory.BLOCKS, 1.0f, 1.0f,false);
+
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
         TileEntity te = worldIn.getTileEntity(pos);
-        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if(te instanceof TileChickenPlushy){
         for(int slot=0; slot <9;){
             ItemStack stack = itemHandler.getStackInSlot(slot);

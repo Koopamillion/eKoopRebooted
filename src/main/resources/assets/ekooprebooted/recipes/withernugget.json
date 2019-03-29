@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "minecraft:skull",
+    "data": 1
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "nuggetWither"
+    }
+  }
+}

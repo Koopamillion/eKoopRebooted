@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "ekooprebooted:chicken"
+  },
+  "pattern": [
+    "xyx",
+    "yzy",
+    "xyx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "minecraft:wool",
+      "data": 0
+    },
+    "y": {
+      "item": "minecraft:string"
+    },
+    "z": {
+      "item": "ekooprebooted:lifecore"
+    }
+  }
+}

@@ -34,7 +34,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     public static final int OUTPUT_SLOTS = 3;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
     public static final int MAX_POWER = 100000;
-    public float RF_PER_TICK = 20;
+    public float RF_PER_TICK = 50;
     public static final int RF_PER_TICK_INPUT = 250;
     //static var means it is the same for all acelerating furnaces so only use it for something that wont change per furnace (ie slots)
 

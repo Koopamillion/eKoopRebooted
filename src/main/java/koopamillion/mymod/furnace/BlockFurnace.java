@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,6 +29,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockFurnace extends Block implements ITileEntityProvider {
 
@@ -47,12 +49,14 @@ public class BlockFurnace extends Block implements ITileEntityProvider {
         setTranslationKey(MyMod.MODID + ".furnace");
         setHarvestLevel("pickaxe", 1);
         setCreativeTab(MyMod.tabEKoop);
-        setHardness(1);
+        setHardness(3.5f);
 
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
 
     }
+
+
 
 
   /*  @SideOnly(Side.CLIENT)

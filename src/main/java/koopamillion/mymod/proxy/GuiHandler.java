@@ -1,5 +1,8 @@
 package koopamillion.mymod.proxy;
 
+import koopamillion.mymod.dna.ContainerDNAExtractor;
+import koopamillion.mymod.dna.GuiDNAExtractor;
+import koopamillion.mymod.dna.TileDNAExtractor;
 import koopamillion.mymod.furnace.ContainerFurnace;
 import koopamillion.mymod.furnace.GuiFurnace;
 import koopamillion.mymod.furnace.TileFurnace;
@@ -39,6 +42,9 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileSaturator) {
             return new ContainerSaturator(player.inventory, (TileSaturator) te);
         }
+        if (te instanceof TileDNAExtractor) {
+            return new ContainerDNAExtractor(player.inventory, (TileDNAExtractor) te);
+        }
         return null;
     }
 
@@ -63,6 +69,10 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileSaturator) {
             TileSaturator containerTileEntity = (TileSaturator) te;
             return new GuiSaturator(containerTileEntity, new ContainerSaturator(player.inventory, containerTileEntity));
+        }
+        if (te instanceof TileDNAExtractor) {
+            TileDNAExtractor containerTileEntity = (TileDNAExtractor) te;
+            return new GuiDNAExtractor(containerTileEntity, new ContainerDNAExtractor(player.inventory, containerTileEntity));
         }
         return null;
     }

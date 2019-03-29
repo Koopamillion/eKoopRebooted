@@ -28,6 +28,7 @@ public class Messages {
         INSTANCE.registerMessage(PacketSyncPower.Handler.class, PacketSyncPower.class, nextID(), Side.CLIENT);
         INSTANCE.registerMessage(PacketSyncHeat.Handler.class, PacketSyncHeat.class, nextID(), Side.CLIENT);
         INSTANCE.registerMessage(PacketSyncTank.Handler.class, PacketSyncTank.class, nextID(), Side.CLIENT);
+        INSTANCE.registerMessage(PacketSyncNBT.Handler.class, PacketSyncNBT.class, nextID(), Side.CLIENT);
 
     }
 }

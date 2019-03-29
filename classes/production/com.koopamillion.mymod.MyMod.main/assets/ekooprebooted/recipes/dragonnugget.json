@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "minecraft:dragon_egg",
+    "data": 0
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "nuggetDragonEgg"
+    }
+  }
+}

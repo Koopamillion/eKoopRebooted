@@ -1,0 +1,7 @@
+{
+  "furnaceActive": {
+    "category": "block",
+    "subtitle": "ekooprebooted.subtitle.furnaceactive",
+    "sounds": [ "ekooprebooted:furnaceactive" ]
+  }
+}

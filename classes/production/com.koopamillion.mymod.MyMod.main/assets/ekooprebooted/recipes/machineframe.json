@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "ekooprebooted:machineframe"
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xsx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "ekooprebooted:circuit"
+    },
+    "x": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "blockRedstone"
+    }
+  }
+}

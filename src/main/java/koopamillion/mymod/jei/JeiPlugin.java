@@ -24,9 +24,9 @@ import java.util.Collections;
 @JEIPlugin
 public class JeiPlugin implements IModPlugin {
 
-    public static final String FASTFURNACE_ID = "mymod.furnace";
-    public static final String SOLDER_ID = "mymod.solder";
-    public static final String ACID_ID = "mymod.acidbath";
+    public static final String FASTFURNACE_ID = "ekooprebooted.furnace";
+    public static final String SOLDER_ID = "ekooprebooted.solder";
+    public static final String ACID_ID = "ekooprebooted.acidbath";
 
     @Override
     public void register(@Nonnull IModRegistry registry) {

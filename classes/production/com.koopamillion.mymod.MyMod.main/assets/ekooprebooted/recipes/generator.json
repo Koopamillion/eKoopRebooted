@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "ekooprebooted:generator"
+
+  },
+  "pattern": [
+    "xzx",
+    "g g",
+    "xzx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "ekooprebooted:photon"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "gemDiamond"
+    },
+    "g": {
+      "type": "forge:ore_dict", "ore": "blockGlass"
+    }
+  }
+}

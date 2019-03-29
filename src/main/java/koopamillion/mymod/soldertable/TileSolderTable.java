@@ -66,6 +66,8 @@ private Fluid fluidtype = null;
 
 
 
+
+
     @Override
     public void update() {
 
@@ -74,7 +76,6 @@ private Fluid fluidtype = null;
             controlHeat();
        //     System.out.println(heat);
             if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
-
                 return;
             }
 

@@ -1,5 +1,6 @@
 package koopamillion.mymod;
 
+import koopamillion.mymod.dna.BlockDNAExtractor;
 import koopamillion.mymod.generators.BlockGenerator;
 import koopamillion.mymod.plushy.BlockChickenPlushy;
 import koopamillion.mymod.saturator.BlockSaturator;
@@ -17,34 +18,36 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlocks {
 
-    @GameRegistry.ObjectHolder("mymod:furnace")
+    @GameRegistry.ObjectHolder("ekooprebooted:furnace")
     public static BlockFurnace blockFurnace;
 
-    @GameRegistry.ObjectHolder("mymod:solder")
+    @GameRegistry.ObjectHolder("ekooprebooted:solder")
     public static BlockSolderTable blockSolder;
 
 
-   @GameRegistry.ObjectHolder("mymod:chicken")
+   @GameRegistry.ObjectHolder("ekooprebooted:chicken")
     public static BlockChickenPlushy blockChicken;
 
-    @GameRegistry.ObjectHolder("mymod:machineframe")
+    @GameRegistry.ObjectHolder("ekooprebooted:machineframe")
     public static BlockMachineFrame blockMachineFrame;
 
-    @GameRegistry.ObjectHolder("mymod:solderpart")
+    @GameRegistry.ObjectHolder("ekooprebooted:solderpart")
     public static BlockSolderPart blockSolderPart;
-    @GameRegistry.ObjectHolder("mymod:saturator")
+    @GameRegistry.ObjectHolder("ekooprebooted:saturator")
     public static BlockSaturator blockSaturator;
-    @GameRegistry.ObjectHolder("mymod:solderfluid")
+    @GameRegistry.ObjectHolder("ekooprebooted:solderfluid")
     public static BlockSolder blockSolderFluid;
-    @GameRegistry.ObjectHolder("mymod:enderfluid")
+    @GameRegistry.ObjectHolder("ekooprebooted:enderfluid")
     public static BlockEnderSolder blockEnderFluid;
-    @GameRegistry.ObjectHolder("mymod:hcl")
+    @GameRegistry.ObjectHolder("ekooprebooted:hcl")
     public static BlockHCL blockHCL;
-    @GameRegistry.ObjectHolder("mymod:generator")
+    @GameRegistry.ObjectHolder("ekooprebooted:generator")
     public static BlockGenerator blockGenerator;
 
-    @GameRegistry.ObjectHolder("mymod:acidbath")
+    @GameRegistry.ObjectHolder("ekooprebooted:acidbath")
     public static BlockAcidBath blockAcidbath;
+    @GameRegistry.ObjectHolder("ekooprebooted:dnaextractor")
+    public static BlockDNAExtractor blockDNAExtractor;
 
 
     @SideOnly(Side.CLIENT)
@@ -60,6 +63,7 @@ public class ModBlocks {
         blockSaturator.initModel();
         blockEnderFluid.initModel();
 
+        blockDNAExtractor.initModel();
         blockGenerator.initModel();
 
     }

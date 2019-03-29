@@ -52,6 +52,8 @@ public class ContainerChickenPlushy extends Container {
         int slotIndex = 0;
 
         // Add our own slots
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 36, 26));
+
         int x = 64;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
@@ -66,6 +68,8 @@ public class ContainerChickenPlushy extends Container {
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));    x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package koopamillion.mymod.saturator;
 
+import koopamillion.mymod.dna.TileDNAExtractor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -54,7 +55,10 @@ public class FoodSenser {
                         if (tileEntity instanceof TileSaturator) {
                             ((TileSaturator) tileEntity).feedPlayer(entity);
                         }
-                    }
+                        if(tileEntity instanceof TileDNAExtractor){
+                            ((TileDNAExtractor) tileEntity).extractDna(entity);
+
+                        }                    }
                 }
             }
         }
