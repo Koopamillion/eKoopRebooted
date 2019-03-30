@@ -2,6 +2,7 @@ package koopamillion.mymod;
 
 import koopamillion.mymod.machineitems.ItemCircuit;
 import koopamillion.mymod.machineitems.ItemMobHolder;
+import koopamillion.mymod.machineitems.ItemMobRAM;
 import koopamillion.mymod.machineitems.ItemSolderIngot;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -52,6 +53,9 @@ public class ModItems {
     public static Item dragonheartnugget;
     @GameRegistry.ObjectHolder("ekooprebooted:withernugget")
     public static Item withernugget;
+    @GameRegistry.ObjectHolder("ekooprebooted:mobram")
+    public static ItemMobRAM mobram;
+
 
 
 
@@ -61,6 +65,7 @@ public class ModItems {
         itemCircuit.initModel();
         itemSolder.initModel();
         mobholder.initModel();
+        mobram.initModel();
         ModelLoader.setCustomModelResourceLocation(siliconraw, 0, new ModelResourceLocation(siliconraw.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(siliconpure, 0, new ModelResourceLocation(siliconpure.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(puresand, 0, new ModelResourceLocation(puresand.getRegistryName(), "inventory"));

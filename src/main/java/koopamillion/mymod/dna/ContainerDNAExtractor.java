@@ -64,8 +64,9 @@ public class ContainerDNAExtractor extends Container implements IEnergyContainer
         int slotIndex = 0;
 
         // Add our own slots
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 64-27, y));
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 64+81, y));
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 10, 25));
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 154, 25));
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, 93, 25));
 
 
     }

@@ -11,12 +11,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,6 +37,8 @@ public class ItemMobHolder extends Item {
         return !stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().hasKey("entity") && stack.getTagCompound().hasKey("dna") && stack.getTagCompound().getInteger("dna") > 0;
     }
 
+    private int timer = 9;
+
 
 
 
@@ -46,6 +47,14 @@ public class ItemMobHolder extends Item {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         String name;
         int dnacount = 0;
+        try{
+            String s = tooltip.get(1);
+            String ss = tooltip.get(2);
+        }catch(Exception e){
+            tooltip.add(1, "Mob:");
+            tooltip.add(2, "DNA:");
+        }
+
         NBTTagCompound tag = stack.getTagCompound();
         if (containsEntity(stack)) {
             dnacount = stack.getTagCompound().getInteger("dna");
@@ -55,8 +64,11 @@ public class ItemMobHolder extends Item {
             }catch(ClassNotFoundException e){
                 name = "Unknown";
             }
-            tooltip.add("Mob: " + name);
-            tooltip.add("DNA: " + dnacount);
+            tooltip.set(1, "Mob: "+name);
+            tooltip.set(2, "DNA: " + dnacount);
+        }else{
+            tooltip.set(1, "Mob:");
+            tooltip.set(2, "DNA:");
         }
 
     }
@@ -66,6 +78,44 @@ public class ItemMobHolder extends Item {
     }
 
     @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if(!entityIn.isSneaking()){
+            timer = 9;
+        }
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if(worldIn.isRemote) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        if(playerIn.getHeldItem(handIn).hasTagCompound()){
+            if(playerIn.getHeldItem(handIn).getTagCompound().getString("entity").isEmpty()) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        }else{
+            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        }
+        if(playerIn.isSneaking()){
+
+            timer--;
+            if(timer == 1){
+                playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + "The next click will erase, are you sure?"),false);
+            }else{
+                if(timer > 0)
+                    playerIn.sendStatusMessage(new TextComponentString(TextFormatting.YELLOW + "Right clicks to erase: " + timer),false);
+            }
+
+        }
+        if(timer <= 0){
+            if(playerIn.getHeldItem(handIn).hasTagCompound()){
+                playerIn.getHeldItem(handIn).setTagCompound(new NBTTagCompound());
+                playerIn.sendStatusMessage(new TextComponentString(TextFormatting.GREEN + "Erased"),false);
+                timer = 9;
+                return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+            }
+
+        }
+        return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+    }
+
+  /*  @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (player.getEntityWorld().isRemote) return EnumActionResult.FAIL;
@@ -85,7 +135,7 @@ public class ItemMobHolder extends Item {
             stack.setTagCompound(new NBTTagCompound());
         }
         return EnumActionResult.SUCCESS;
-    }
+    }*/
 
 
     private EntityLivingBase createEntity(EntityPlayer player, World world, String type) {

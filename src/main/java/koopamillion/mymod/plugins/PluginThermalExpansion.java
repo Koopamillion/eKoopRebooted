@@ -20,23 +20,23 @@ public class PluginThermalExpansion extends BasePlugin {
         ItemStack powderBlitz = getItemStack("material", 1, 2051);
         ItemStack dustSulfur = getItemStack("material", 1, 771);
         if(!rodBlizz.isEmpty()){
-            PlushyStuff.addCustomLoot(rodBlizz, 5, getPlushyModEntitiesCanonicalName(MOD_ID, "blizz"));
-            PlushyStuff.addCustomLoot(powderBlizz, 8, getPlushyModEntitiesCanonicalName(MOD_ID, "blizz"));
+            PlushyStuff.addCustomLoot(rodBlizz, 6, getPlushyModEntitiesCanonicalName(MOD_ID, "blizz"));
+            PlushyStuff.addCustomLoot(powderBlizz, 9, getPlushyModEntitiesCanonicalName(MOD_ID, "blizz"));
         }
         if(!rodBasalz.isEmpty()){
-            PlushyStuff.addCustomLoot(rodBasalz, 5, getPlushyModEntitiesCanonicalName(MOD_ID, "basalz"));
-            PlushyStuff.addCustomLoot(powderBasalz, 8, getPlushyModEntitiesCanonicalName(MOD_ID, "basalz"));
+            PlushyStuff.addCustomLoot(rodBasalz, 6, getPlushyModEntitiesCanonicalName(MOD_ID, "basalz"));
+            PlushyStuff.addCustomLoot(powderBasalz, 9, getPlushyModEntitiesCanonicalName(MOD_ID, "basalz"));
         }
         if(!rodBlitz.isEmpty()){
-            PlushyStuff.addCustomLoot(rodBlitz, 5, getPlushyModEntitiesCanonicalName(MOD_ID, "blitz"));
-            PlushyStuff.addCustomLoot(powderBlitz, 8, getPlushyModEntitiesCanonicalName(MOD_ID, "blitz"));
+            PlushyStuff.addCustomLoot(rodBlitz, 6, getPlushyModEntitiesCanonicalName(MOD_ID, "blitz"));
+            PlushyStuff.addCustomLoot(powderBlitz, 9, getPlushyModEntitiesCanonicalName(MOD_ID, "blitz"));
         }
         if(!dustSulfur.isEmpty()){
-            PlushyStuff.addCustomLoot(dustSulfur, 3, EntityMagmaCube.class.getCanonicalName());
-            PlushyStuff.addCustomLoot(dustSulfur, 3, EntityBlaze.class.getCanonicalName());
-            PlushyStuff.addCustomLoot(dustSulfur, 3, EntityWitherSkeleton.class.getCanonicalName());
-            PlushyStuff.addCustomLoot(dustSulfur, 3, EntityPigZombie.class.getCanonicalName());
-            PlushyStuff.addCustomLoot(dustSulfur, 3, EntityCreeper.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(dustSulfur, 5, EntityMagmaCube.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(dustSulfur, 5, EntityBlaze.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(dustSulfur, 5, EntityWitherSkeleton.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(dustSulfur, 5, EntityPigZombie.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(dustSulfur, 5, EntityCreeper.class.getCanonicalName());
         }
 
 

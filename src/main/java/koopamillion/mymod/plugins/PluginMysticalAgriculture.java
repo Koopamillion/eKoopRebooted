@@ -53,15 +53,15 @@ public class PluginMysticalAgriculture extends BasePlugin {
             if(!getPlushyModEntitiesCanonicalName("thermalfoundation", "basalz").isEmpty()){
                 PlushyStuff.addCustomLoot(new ItemStack(chunk, 1, 23), 1, getPlushyModEntitiesCanonicalName("thermalfoundation", "basalz"));
             }
-            PlushyStuff.addCustomLoot(supessence, 1,  EntityWither.class.getCanonicalName());
-            PlushyStuff.addCustomLoot(supessence, 2,  EntityDragon.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(supessence, 2,  EntityWither.class.getCanonicalName());
+            PlushyStuff.addCustomLoot(supessence, 3,  EntityDragon.class.getCanonicalName());
             for(int i = 0; i < ForgeRegistries.ENTITIES.getEntries().size(); i++){
                 if(EntityMob.class.isAssignableFrom(ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass()) && !(EntityDragon.class.isAssignableFrom(ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass())) && !(EntityWither.class.isAssignableFrom(ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass()))){
                     PlushyStuff.addCustomLoot(chunkstack, 1, ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass().getCanonicalName());
-                    PlushyStuff.addCustomLoot(essence, 5, ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass().getCanonicalName());
+                    PlushyStuff.addCustomLoot(essence, 7, ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass().getCanonicalName());
                 }
                 if(EntityAnimal.class.isAssignableFrom(ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass()) ){
-                    PlushyStuff.addCustomLoot(essence, 3, ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass().getCanonicalName());
+                    PlushyStuff.addCustomLoot(essence, 5, ForgeRegistries.ENTITIES.getValues().get(i).getEntityClass().getCanonicalName());
                 }
 
 

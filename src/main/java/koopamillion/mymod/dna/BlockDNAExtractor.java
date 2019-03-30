@@ -5,9 +5,7 @@ import koopamillion.mymod.MyMod;
 import koopamillion.mymod.furnace.FurnaceState;
 import koopamillion.mymod.furnace.TileFurnace;
 import koopamillion.mymod.saturator.TileSaturator;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -20,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -52,9 +51,11 @@ public class BlockDNAExtractor  extends Block implements ITileEntityProvider {
         // mymod:furnace
         setRegistryName(dnaextractor);
         setTranslationKey(MyMod.MODID + ".dnaextractor");
-        setHarvestLevel("pickaxe", 1);
+        setHarvestLevel("pickaxe", 2);
         setCreativeTab(MyMod.tabEKoop);
-        setHardness(1);
+        setHardness(250);
+
+
 
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
@@ -132,7 +133,21 @@ public class BlockDNAExtractor  extends Block implements ITileEntityProvider {
 
 
 
+    @Override
+    public boolean isBlockNormalCube(IBlockState blockState) {
+        return false;
+    }
 
+    @Override
+    public boolean isOpaqueCube(IBlockState blockState) {
+        return false;
+    }
+
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
     @Override
     public int getMetaFromState(IBlockState state){

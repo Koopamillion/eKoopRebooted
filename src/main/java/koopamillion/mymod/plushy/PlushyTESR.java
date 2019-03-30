@@ -1,6 +1,7 @@
 package koopamillion.mymod.plushy;
 
 import koopamillion.mymod.ModBlocks;
+import koopamillion.mymod.plugins.BasePlugin;
 import koopamillion.mymod.soldertable.BlockSolderTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -9,6 +10,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityMobSpawnerRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySquid;
@@ -88,8 +91,14 @@ public class PlushyTESR extends TileEntitySpecialRenderer<TileChickenPlushy> {
             if (tileEntity.getBlockState().getValue(BlockSolderTable.FACING).getHorizontalIndex() == EnumFacing.WEST.getHorizontalIndex()){
                 GlStateManager.rotate(270F, 0f, 1f, 0f);
             }
+            if(entityLivingBase instanceof EntityGhast){
+                GlStateManager.scale(0.3f, 0.3f, 0.3f);
+            }else if(entityLivingBase instanceof EntityDragon){
+                GlStateManager.scale(0.2f, 0.2f, 0.2f);
+            }else{
+                GlStateManager.scale(0.4f, 0.4f, 0.4f);
+            }
 
-            GlStateManager.scale(0.4f, 0.4f, 0.4f);
         //    model.render(entity, 0f, 0f, 0f, 0f, 0f, 1f);
             Minecraft.getMinecraft().getRenderManager().renderEntity(entityLivingBase, 0.0D, 0.0D, 0.0D, 0.0F, 0, false);
             GlStateManager.popMatrix();

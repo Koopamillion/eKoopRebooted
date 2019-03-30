@@ -35,9 +35,9 @@ public class GuiDNAExtractor  extends GuiContainer {
     private static final ResourceLocation FurnaceTextures = new ResourceLocation(MyMod.MODID,"textures/gui/furnacepoweredbar.png");
     private static final ResourceLocation FurnaceDead = new ResourceLocation(MyMod.MODID,"textures/gui/furnacedeadpowerbar.png");
 
-    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/solder.png");
+    private static final ResourceLocation background = new ResourceLocation(MyMod.MODID, "textures/gui/dna.png");
 
-    private static final ResourceLocation solderprogressbar = new ResourceLocation(MyMod.MODID, "textures/gui/solderprogressbar.png");
+    private static final ResourceLocation solderprogressbar = new ResourceLocation(MyMod.MODID, "textures/gui/dnaprogressbar.png");
 
     private TileDNAExtractor solder;
     //  private int j = 0;
@@ -66,9 +66,9 @@ public class GuiDNAExtractor  extends GuiContainer {
 
         mc.getTextureManager().bindTexture(solderprogressbar);
         if(solder.getClientProgress() == 0) {
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26 + increase, 0, 0, 0, 16, 15, 16);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 52, guiTop + 25, 0, 0, 0, 16, 15, 16);
         }else{
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 121, guiTop + 26 + increase, 0, 0, 15 - l, 16, 15, 16);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 52, guiTop + 25, 0, 0, 15 - l, 16, 15, 16);
         }
 
         String name;
@@ -78,7 +78,7 @@ public class GuiDNAExtractor  extends GuiContainer {
         }catch(ClassNotFoundException e){
             name = "Unknown";
         }
-        drawString(mc.fontRenderer, "Mob: " + name, guiLeft + 10, guiTop + 50, 0xffffff);
+        drawString(mc.fontRenderer, "Mob: " + name, guiLeft + 10, guiTop + 47, 0xffffff);
         drawString(mc.fontRenderer, "DNA: " + solder.getClientDNA(), guiLeft + 10, guiTop + 60, 0xffffff);
 
         int energy = solder.getClientEnergy();

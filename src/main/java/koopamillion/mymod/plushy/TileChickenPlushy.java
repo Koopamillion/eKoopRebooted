@@ -3,6 +3,7 @@ package koopamillion.mymod.plushy;
 import koopamillion.mymod.dna.DNAState;
 import koopamillion.mymod.dna.TileDNAExtractor;
 import koopamillion.mymod.machineitems.ItemMobHolder;
+import koopamillion.mymod.machineitems.ItemMobRAM;
 import koopamillion.mymod.tools.PlushyStuff;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -72,7 +73,7 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
 
 
 
-            if(inputHandler.getStackInSlot(0).getItem() instanceof ItemMobHolder && inputHandler.getStackInSlot(0).hasTagCompound()){
+            if((inputHandler.getStackInSlot(0).getItem() instanceof ItemMobHolder || inputHandler.getStackInSlot(0).getItem() instanceof ItemMobRAM)&& inputHandler.getStackInSlot(0).hasTagCompound()){
                 if(!(nbt.getString("type")).equals(inputHandler.getStackInSlot(0).getTagCompound().getString("entity"))){
                     markUpdate = true;
                     String name;
@@ -108,17 +109,17 @@ public class TileChickenPlushy extends TileEntity implements ITickable {
                 return;
             }
 
-            if(inputHandler.getStackInSlot(0).getTagCompound().getInteger("dnacount") <= 190000){
-                decrease = inputHandler.getStackInSlot(0).getTagCompound().getInteger("dnacount");
+            if(inputHandler.getStackInSlot(0).getTagCompound().getInteger("dna") <= 118000){
+                decrease = inputHandler.getStackInSlot(0).getTagCompound().getInteger("dna");
             }else{
-                decrease = 190000;
+                decrease = 118000;
             }
 
 
 
 
-         //  randInt = rand.nextInt(192000 - decrease);
-            randInt = rand.nextInt(200);
+           randInt = rand.nextInt(120000 - decrease);
+       //     randInt = rand.nextInt(200);
 
 
 

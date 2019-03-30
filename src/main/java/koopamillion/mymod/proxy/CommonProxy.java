@@ -12,12 +12,10 @@ import koopamillion.mymod.furnace.BlockFurnace;
 import koopamillion.mymod.furnace.TileFurnace;
 import koopamillion.mymod.generators.BlockGenerator;
 import koopamillion.mymod.generators.TileGenerator;
-import koopamillion.mymod.machineitems.ItemCircuit;
-import koopamillion.mymod.machineitems.ItemEnderIngot;
-import koopamillion.mymod.machineitems.ItemMobHolder;
-import koopamillion.mymod.machineitems.ItemSolderIngot;
+import koopamillion.mymod.machineitems.*;
 import koopamillion.mymod.network.Messages;
 import koopamillion.mymod.plugins.PluginDraconicEvolution;
+import koopamillion.mymod.plugins.PluginInit;
 import koopamillion.mymod.plugins.PluginMysticalAgriculture;
 import koopamillion.mymod.plugins.PluginThermalExpansion;
 import koopamillion.mymod.plushy.BlockChickenPlushy;
@@ -47,7 +45,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import sun.plugin2.main.server.Plugin;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
@@ -69,9 +66,7 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent e) {
         Oredict.init();
         PlushyStuff.initDefaultLoot();
-        new PluginThermalExpansion().init();
-        new PluginDraconicEvolution().init();
-        new PluginMysticalAgriculture().init();
+        PluginInit.init();
     }
   /*  @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event){
@@ -107,6 +102,7 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock (ModBlocks.blockFurnace).setRegistryName(BlockFurnace.afurnace));
         event.getRegistry().register(new ItemCircuit());
         event.getRegistry().register(new ItemMobHolder());
+        event.getRegistry().register(new ItemMobRAM());
         event.getRegistry().registerAll(new Item().setTranslationKey("ekooprebooted.siliconraw").setRegistryName("siliconraw").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.siliconpure").setRegistryName("siliconpure").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.puresand").setRegistryName("puresand").setCreativeTab(MyMod.tabEKoop),

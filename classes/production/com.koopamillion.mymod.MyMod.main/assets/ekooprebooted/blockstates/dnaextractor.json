@@ -1,0 +1,32 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "particle": "ekooprebooted:blocks/dnaextractor",
+      "north": "ekooprebooted:blocks/dnaextractor",
+      "south": "ekooprebooted:blocks/dnaextractor_side",
+      "west": "ekooprebooted:blocks/dnaextractor_side",
+      "east": "ekooprebooted:blocks/dnaextractor_side",
+      "up": "ekooprebooted:blocks/dnaextractor_top",
+      "down": "ekooprebooted:blocks/dnaextractor_bottom"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+        "north": {},
+        "south": {"y": 180},
+        "west": {"y": 270},
+        "east": {"y": 90},
+        "up": {"x": -90},
+        "down": {"x": 90}
+    },
+    "state": {
+      "off": {},
+      "working": { "textures": { "north": "ekooprebooted:blocks/dnaextractor_working" } }
+
+    }
+  }
+}

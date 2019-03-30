@@ -7,6 +7,7 @@ tile.ekooprebooted.solder.name=Soldering Table
 tile.ekooprebooted.acidbath.name=Fluid Bath
 tile.ekooprebooted.generator.name=Beacon Generator
 tile.ekooprebooted.saturator.name=Saturator
+tile.ekooprebooted.dnaextractor.name=DNA Extractor
 
 
 item.ekooprebooted.siliconraw.name=Raw Silicon
@@ -26,6 +27,7 @@ item.ekooprebooted.lifecore.name=Core of Life
 item.ekooprebooted.mobholder.name=Mob Hard Drive
 item.ekooprebooted.dragonheartnugget.name=Dragon Heart Nugget
 item.ekooprebooted.withernugget.name=Wither Skull Nugget
+item.ekooprebooted.mobram.name=Mob RAM
 
 
 item.ekooprebooted.circuit.name=Basic Circuit

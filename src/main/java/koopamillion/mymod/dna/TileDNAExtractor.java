@@ -4,6 +4,7 @@ import koopamillion.mymod.ModItems;
 import koopamillion.mymod.furnace.FurnaceState;
 import koopamillion.mymod.furnace.TileFurnace;
 import koopamillion.mymod.machineitems.ItemMobHolder;
+import koopamillion.mymod.machineitems.ItemMobRAM;
 import koopamillion.mymod.machineitems.ItemSolderIngot;
 import koopamillion.mymod.saturator.FoodSenser;
 import koopamillion.mymod.tools.Helper;
@@ -43,34 +44,17 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     public static final int RF_PER_TICK_INPUT = 2000;
     public static final int RF_PER_TICK = 50;
     public static final int RF_IDLE = 2;
-    private boolean isBeacon = false;
-    private double power = 0;
-    private double radius = 1.2;
-    private double originX = 0;
-    private double originY = 0;
-    private double originZ = 0;
-    private double x = 0;
-    private double y = 0;
-    private double z = 0;
-    private double t = 0;
-    private double rangemin = 0.0d;
-    private double rangemax = 1.0d;
-    private double counter2 = 360;
 
-    private  boolean needfood = false;
-
-  //  private Class<? extends EntityLivingBase> livingBase = null;
     private NBTTagCompound nbt = new NBTTagCompound();
     private int dnaCount = 0;
+  //  private int dnaCount = 256;
 
     private double px = 0;
     private double py = 0;
     private double pz = 0;
 
-    private float field = 0.1f;
-    private boolean wait = false;
-    public static final int SIZE = 9;
-    public static final int INPUT_SLOTS = 1;
+    public static final int SIZE = 3;
+    public static final int INPUT_SLOTS = 2;
     public static final int OUTPUT_SLOTS = 1;
     public boolean debug = false;
 
@@ -86,12 +70,6 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     private int dnaFromStack = 0;
     private int cooldown = 20;
 
-
-    private double counter = 0;
-    private int beaconPower = -1;
-    Random rand = new Random();
-    private boolean createSaturation = true;
-    private int maxsat = 20;
     private int clientEnergy = -1;
     private float progressRemaining = 0;
     private int clientDNA = -1;
@@ -102,6 +80,9 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     private NBTTagCompound clienttag = new NBTTagCompound();
 
 
+    public int newDna = 0;
+    public int dnaToTakeaway = 0;
+    public boolean go = false;
     private int trackCounter = 0;
     private AxisAlignedBB trackingBox;
 
@@ -113,11 +94,16 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
             if (debug) {
                 Helper.spawnParticleRange(tlx, tly, tlz, trx, tryy, trz, pos, EnumParticleTypes.END_ROD, world);
             }
+            if(go){
+                Helper.spawnParticleLaserToPlayer(pos.getX(), pos.getY(), pos.getZ(), px,py,pz, world, EnumParticleTypes.PORTAL);
+                go= false;
+
+            }
         }
 
 
         if (!world.isRemote) {
-
+            go = false;
 
 
             if (energyStorage.getEnergyStored() >= RF_IDLE) {
@@ -134,6 +120,18 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
                 }
 
 
+            }
+            if(!inputHandler.getStackInSlot(1).isEmpty()){
+                if(inputHandler.getStackInSlot(1).getItem() instanceof ItemMobRAM||inputHandler.getStackInSlot(1).getItem() instanceof ItemMobHolder){
+                    if(inputHandler.getStackInSlot(1).hasTagCompound()){
+                        if(inputHandler.getStackInSlot(1).getTagCompound().getInteger("dna") > 0 && (nbt.getString("type").isEmpty() || nbt.getString("type").equals(inputHandler.getStackInSlot(1).getTagCompound().getString("entity")))){
+                            nbt.setString("type", inputHandler.getStackInSlot(1).getTagCompound().getString("entity"));
+                            dnaCount = dnaCount + inputHandler.getStackInSlot(1).getTagCompound().getInteger("dna");
+                            inputHandler.getStackInSlot(1).getTagCompound().setString("entity","");
+                            inputHandler.getStackInSlot(1).getTagCompound().setInteger("dna",0);
+                        }
+                    }
+                }
             }
             if(shouldRun()) {
                 if (progressRemaining > 0) {
@@ -155,9 +153,14 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     }
 
     private boolean shouldRun(){
-        if(inputHandler.getStackInSlot(0).getItem() instanceof ItemMobHolder){
+        if(inputHandler.getStackInSlot(0).getItem() instanceof ItemMobHolder || inputHandler.getStackInSlot(0).getItem() instanceof ItemMobRAM){
             if(outputHandler.getStackInSlot(0).isEmpty()){
                 if(dnaCount > 0 && energyStorage.getEnergyStored() >= RF_PER_TICK){
+                    if(inputHandler.getStackInSlot(0).hasTagCompound() && inputHandler.getStackInSlot(0).getItem() instanceof ItemMobRAM){
+                        if(inputHandler.getStackInSlot(0).getTagCompound().getInteger("dna") >= ItemMobRAM.maxDNA && inputHandler.getStackInSlot(0).getTagCompound().getString("entity").equals(nbt.getString("type"))){
+                            return false;
+                        }
+                    }
                     return true;
                 }
             }
@@ -177,7 +180,8 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     private void startSmelt() {
 
             ItemStack result = inputHandler.getStackInSlot(0);
-            if(result.getItem() instanceof ItemMobHolder) {
+            if(result.getItem() instanceof ItemMobHolder || result.getItem() instanceof ItemMobRAM) {
+
                 if (insertOutput(result.copy(), true)) {
                     progressRemaining = 40;
                     markDirty();
@@ -220,14 +224,71 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
                         }
                         dnaCount = 0;
                         nbt.setString("type", "");
+                }
+            }else if (result.getItem() instanceof ItemMobRAM) {
+                // This copy is very important!(
+                if (insertOutput(result.copy(), false)) {
+
+                    inputHandler.extractItem(0, 1, false);
+                    ItemStack stack = outputHandler.getStackInSlot(0);
+                    if(stack.hasTagCompound()){
+                        if(!stack.getTagCompound().getString("entity").equals(nbt.getString("type"))){
+                            stack.getTagCompound().setString("entity", nbt.getString("type"));
+                            if(dnaCount <= ItemMobRAM.maxDNA){
+                                stack.getTagCompound().setInteger("dna", dnaCount);
+                                dnaToTakeaway = dnaCount;
+                            }else{
+                                stack.getTagCompound().setInteger("dna", 256);
+                                dnaToTakeaway = 256;
+                            }
+
+                        }else{
+                            if(stack.getTagCompound().getInteger("dna") > 0){
+                                dnaFromStack = stack.getTagCompound().getInteger("dna");
+                                System.out.println(dnaFromStack);
+                                if(dnaFromStack < ItemMobRAM.maxDNA){
+                                    newDna = ItemMobRAM.maxDNA - dnaFromStack;
+                                    if(dnaCount > newDna){
+                                        stack.getTagCompound().setInteger("dna", newDna + dnaFromStack);
+                                        dnaToTakeaway = newDna;
+                                    }else{
+                                        stack.getTagCompound().setInteger("dna", dnaCount + dnaFromStack);
+                                        dnaToTakeaway = dnaCount;
+                                    }
+                                }
+
+                            }else{
+                                if(dnaCount <= ItemMobRAM.maxDNA){
+                                    stack.getTagCompound().setInteger("dna", dnaCount);
+                                    dnaToTakeaway = dnaCount;
+                                }else{
+                                    dnaToTakeaway = 256;
+                                    stack.getTagCompound().setInteger("dna", 256);
+                                }
+                            }
+                        }
 
 
+                    }else{
+                        stack.setTagCompound(new NBTTagCompound());
+                        stack.getTagCompound().setString("entity", nbt.getString("type"));
+                        if(dnaCount <= ItemMobRAM.maxDNA){
+                            stack.getTagCompound().setInteger("dna", dnaCount);
+                            dnaToTakeaway = dnaCount;
+                        }else{
+                            dnaToTakeaway = 256;
+                            stack.getTagCompound().setInteger("dna", 256);
+                        }
 
-
-
-
+                    }
+                    dnaCount = dnaCount - dnaToTakeaway;
+                    if(!(dnaCount > 0)){
+                        nbt.setString("type", "");
+                    }
                 }
             }
+
+
 
     }
     private boolean insertOutput(ItemStack output, boolean simulate) {
@@ -245,10 +306,12 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
 
         NBTTagCompound tag = super.getUpdateTag();
         tag.setTag("itemsIn", inputHandler.serializeNBT());
+        tag.setTag("itemsOut", outputHandler.serializeNBT());
         tag.setInteger("energy", energyStorage.getEnergyStored());
         tag.setBoolean("debug", debug);
         tag.setString("mobType", nbt.getString("type"));
         tag.setInteger("dnacount", dnaCount);
+        tag.setBoolean("go", go);
 
         tag.setDouble("xx", px);
         tag.setDouble("yy", py);
@@ -268,12 +331,15 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
         if (tag.hasKey("itemsIn")) {
             inputHandler.deserializeNBT((NBTTagCompound) tag.getTag("itemsIn"));
         }
+        if (tag.hasKey("itemsOut")) {
+            outputHandler.deserializeNBT((NBTTagCompound) tag.getTag("itemsOut"));
+        }
         clientEnergy = tag.getInteger("energy");
         energyStorage.setEnergy(tag.getInteger("energy"));
         debug = tag.getBoolean("debug");
         nbt.setString("type", tag.getString("mobType"));
         dnaCount = tag.getInteger("dnacount");
-
+        go = tag.getBoolean("go");
 
         px = tag.getDouble("xx");
         py = tag.getDouble("yy");
@@ -388,6 +454,9 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
         if (compound.hasKey("itemsIn")) {
             inputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsIn"));
         }
+        if (compound.hasKey("itemsOut")) {
+            outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
+        }
         energyStorage.setEnergy(compound.getInteger("energy"));
         debug = compound.getBoolean("debug");
         nbt.setString("type", compound.getString("mobType"));
@@ -401,6 +470,7 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     public NBTTagCompound writeToNBT (NBTTagCompound compound){
         super.writeToNBT(compound);
         compound.setTag("itemsIn", inputHandler.serializeNBT());
+        compound.setTag("itemsOut", outputHandler.serializeNBT());
         compound.setInteger("energy", energyStorage.getEnergyStored());
         compound.setBoolean("debug", debug);
         compound.setString("mobType", nbt.getString("type"));
@@ -482,10 +552,11 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
                 py = entity.getPositionVector().y;
                 pz = entity.getPositionVector().z;
                 if(nbt.getString("type").isEmpty() && dnaCount >= 0){
+                    go = true;
                     entity.writeToNBT(nbt);
                     //USE ENTITYLIST.getKey(Entity).toString ?????????
                     nbt.setString("type", entity.getClass().getCanonicalName());
-
+                    entity.setDropItemsWhenDead(false);
                     entity.setHealth(0);
                     dnaCount++;
                     energyStorage.consumePower(RF_PER_TICK);
@@ -496,12 +567,15 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
                 }
                 if(!nbt.getString("type").isEmpty()){
                     if(nbt.getString("type").equals(entity.getClass().getCanonicalName())){
+                        go = true;
+                        entity.setDropItemsWhenDead(false);
                         entity.setHealth(0);
                         energyStorage.consumePower(RF_PER_TICK);
                         dnaCount++;
                         IBlockState state = world.getBlockState(pos);
                         world.notifyBlockUpdate(pos, state, state, 3);
                         cooldown = 20;
+
                         return;
                     }
                 }

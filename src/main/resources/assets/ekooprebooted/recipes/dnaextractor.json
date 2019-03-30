@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "ekooprebooted:dnaextractor"
+  },
+  "pattern": [
+    "vcv",
+    "cFc",
+    "vsv"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "minecraft:ender_pearl"
+    },
+    "F": {
+      "item": "minecraft:furnace",
+      "data": 0
+
+    },
+    "v": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "s": {
+      "item": "ekooprebooted:machineframe",
+      "data": 0
+    }
+  }
+}
