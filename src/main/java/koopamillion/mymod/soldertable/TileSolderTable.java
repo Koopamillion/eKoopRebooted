@@ -9,6 +9,7 @@ import koopamillion.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -24,6 +25,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -220,6 +223,12 @@ private Fluid fluidtype = null;
                 fluidtype = ModLiquids.enderfluid;
                 inputHandler.extractItem(9, 1, false);
             }
+
+            if (stack.getItem() == ModItems.silversolderingot && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= ModItems.silversolderingot.getMeltingPoint() * 200 && tank.getFluid().getFluid() == ModLiquids.silversolder) {
+                amountsmooth = 20;
+                fluidtype = ModLiquids.silversolder;
+                inputHandler.extractItem(9, 1, false);
+            }
         }else {
             if(stack.getItem() == ModItems.itemSolder && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= ModItems.itemSolder.getMeltingPoint() * 200  ){
                 amountsmooth = 20;
@@ -230,6 +239,12 @@ private Fluid fluidtype = null;
             if (stack.getItem() == ModItems.enderingot && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= 250 * 200 ) {
                 amountsmooth = 20;
                 fluidtype = ModLiquids.enderfluid;
+                inputHandler.extractItem(9, 1, false);
+            }
+
+            if (stack.getItem() == ModItems.silversolderingot && tank.getFluidAmount() < tank.getCapacity() && amountsmooth <= 0 && this.getEnergy() >= 5 && this.heat >= ModItems.silversolderingot.getMeltingPoint() * 200 ) {
+                amountsmooth = 20;
+                fluidtype = ModLiquids.silversolder;
                 inputHandler.extractItem(9, 1, false);
             }
         }
@@ -254,7 +269,7 @@ private Fluid fluidtype = null;
 
 
     private ItemStack getResult(ItemStack stack ){
-        SolderRecipe recipe = SolderManager.getRecipe(inputHandler.getStackInSlot(0), inputHandler.getStackInSlot(1), inputHandler.getStackInSlot(2), inputHandler.getStackInSlot(3), inputHandler.getStackInSlot(4), inputHandler.getStackInSlot(5), inputHandler.getStackInSlot(6), inputHandler.getStackInSlot(7), inputHandler.getStackInSlot(8), tank.getFluid(), new ItemStack(ModItems.puresand, 4));
+        SolderRecipe recipe = SolderManager.getRecipe(inputHandler.getStackInSlot(0), inputHandler.getStackInSlot(1), inputHandler.getStackInSlot(2), inputHandler.getStackInSlot(3), inputHandler.getStackInSlot(4), inputHandler.getStackInSlot(5), inputHandler.getStackInSlot(6), inputHandler.getStackInSlot(7), inputHandler.getStackInSlot(8), tank.getFluid());
         if(recipe != null){
             drain = recipe.getInput10Amount();
         }

@@ -49,7 +49,10 @@ public class ItemEnderIngot extends Item {
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flags) {
 
         addInformationLocalized(tooltip, "Melting Point: "+ TextFormatting.AQUA +getMeltingPoint() +"°C");
-        addInformationLocalized(tooltip, "SolderEnder");
-        addInformationLocalized(tooltip, "1:1");
+        for(int i = 0; i < ChemicalFormulaList.hashMap.get("endersolder").size(); i++){
+            addInformationLocalized(tooltip, ChemicalFormulaList.hashMap.get("endersolder").get(i));
+        }
+
+
     }
 }

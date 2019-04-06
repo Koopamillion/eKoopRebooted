@@ -60,7 +60,7 @@ public class BlockGenerator extends Block implements ITileEntityProvider {
     private TileGenerator te;
 
     public BlockGenerator() {
-        super(Material.IRON); //super fetches the material.Iron from the block class (vanilla)
+        super(Material.GLASS); //super fetches the material.Iron from the block class (vanilla)
         // mymod:furnace
         setRegistryName(generator);
         setTranslationKey(MyMod.MODID + ".generator");
@@ -174,21 +174,7 @@ public class BlockGenerator extends Block implements ITileEntityProvider {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileEntity te = worldIn.getTileEntity(pos);
-        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if(te instanceof TileGenerator){
-            for(int slot=0; slot <6;){
-                ItemStack stack = itemHandler.getStackInSlot(slot);
-                if (!stack.isEmpty()) {
-                    EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
-                    worldIn.spawnEntity(item);
-                    if(worldIn.spawnEntity(item) == true)
-                        stack.setCount(0);
-                }
-                slot++;
-            }
             super.breakBlock(worldIn, pos, state);
-        }
     }
 
 
@@ -198,6 +184,10 @@ public class BlockGenerator extends Block implements ITileEntityProvider {
         return false;
     }
 
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
 
     @Override
     public boolean isFullBlock(IBlockState state) {

@@ -51,7 +51,8 @@ public class ItemSolderIngot extends Item {
        addInformationLocalized(tooltip, "Melting Point: "+ TextFormatting.AQUA +getMeltingPoint() +"°C");
       // addInformationLocalized(tooltip, ch.getChemicalInfo("solder", 1));
    //    addInformationLocalized(tooltip, ch.getChemicalInfo("solder", 2));
-       addInformationLocalized(tooltip, "SnPb");
-        addInformationLocalized(tooltip, "2:1");
+        for(int i = 0; i < ChemicalFormulaList.hashMap.get("solder").size(); i++){
+            addInformationLocalized(tooltip, ChemicalFormulaList.hashMap.get("solder").get(i));
+        }
     }
 }

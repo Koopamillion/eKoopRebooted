@@ -1,5 +1,8 @@
 package koopamillion.mymod.proxy;
 
+import koopamillion.mymod.centrifuge.ContainerCentrifuge;
+import koopamillion.mymod.centrifuge.GuiCentrifuge;
+import koopamillion.mymod.centrifuge.TileCentrifuge;
 import koopamillion.mymod.dna.ContainerDNAExtractor;
 import koopamillion.mymod.dna.GuiDNAExtractor;
 import koopamillion.mymod.dna.TileDNAExtractor;
@@ -45,6 +48,9 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileDNAExtractor) {
             return new ContainerDNAExtractor(player.inventory, (TileDNAExtractor) te);
         }
+        if (te instanceof TileCentrifuge) {
+            return new ContainerCentrifuge(player.inventory, (TileCentrifuge) te);
+        }
         return null;
     }
 
@@ -73,6 +79,10 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileDNAExtractor) {
             TileDNAExtractor containerTileEntity = (TileDNAExtractor) te;
             return new GuiDNAExtractor(containerTileEntity, new ContainerDNAExtractor(player.inventory, containerTileEntity));
+        }
+        if (te instanceof TileCentrifuge) {
+            TileCentrifuge containerTileEntity = (TileCentrifuge) te;
+            return new GuiCentrifuge(containerTileEntity, new ContainerCentrifuge(player.inventory, containerTileEntity));
         }
         return null;
     }

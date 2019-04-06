@@ -1,17 +1,18 @@
 {
   "type": "forge:ore_shapeless",
   "result": {
-    "item": "ekooprebooted:solderingot"
+    "item": "ekooprebooted:solderingot",
+    "count": 3
   },
   "ingredients": [
     {
-      "type": "forge:ore_dict", "ore": "dustLead"
+      "type": "forge:ore_dict", "ore": "ingotLead"
     },
     {
-      "type": "forge:ore_dict", "ore": "dustTin"
+      "type": "forge:ore_dict", "ore": "ingotTin"
     },
     {
-      "type": "forge:ore_dict", "ore": "dustTin"
+      "type": "forge:ore_dict", "ore": "ingotTin"
     }
   ]
 }

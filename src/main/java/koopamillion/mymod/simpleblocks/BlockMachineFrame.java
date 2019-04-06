@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,7 +20,7 @@ public class BlockMachineFrame extends Block {
     public static final ResourceLocation machineframe = new ResourceLocation(MyMod.MODID, "machineframe");
 
     public BlockMachineFrame() {
-        super(Material.CLOTH); //super fetches the material.Iron from the block class (vanilla)
+        super(Material.ROCK); //super fetches the material.Iron from the block class (vanilla)
         // mymod:charger
         setRegistryName(machineframe);
         setTranslationKey(MyMod.MODID + ".machineframe");
@@ -46,4 +47,8 @@ public class BlockMachineFrame extends Block {
     }
 
 
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
 }

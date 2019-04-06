@@ -30,5 +30,6 @@ public class Messages {
         INSTANCE.registerMessage(PacketSyncTank.Handler.class, PacketSyncTank.class, nextID(), Side.CLIENT);
         INSTANCE.registerMessage(PacketSyncNBT.Handler.class, PacketSyncNBT.class, nextID(), Side.CLIENT);
 
+
     }
 }

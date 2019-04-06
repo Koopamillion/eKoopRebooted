@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -38,7 +39,7 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
 
 
     public BlockSolderTable() {
-        super(Material.CLOTH); //super fetches the material.Iron from the block class (vanilla)
+        super(Material.WOOD); //super fetches the material.Iron from the block class (vanilla)
         // mymod:charger
         setRegistryName(solder);
         setTranslationKey(MyMod.MODID + ".solder");
@@ -101,7 +102,10 @@ public class BlockSolderTable extends Block implements ITileEntityProvider {
         return state.getValue(FACING).getHorizontalIndex();
     }
 
-
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
 
     @Override
     protected BlockStateContainer createBlockState() {

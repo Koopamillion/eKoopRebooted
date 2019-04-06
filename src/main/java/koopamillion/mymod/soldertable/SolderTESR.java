@@ -39,6 +39,8 @@ public class SolderTESR extends TileEntitySpecialRenderer<TileSolderTable> {
         renderFluid(tileEntity);
 
         GlStateManager.popMatrix();
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.enableBlend();
     }
 
 

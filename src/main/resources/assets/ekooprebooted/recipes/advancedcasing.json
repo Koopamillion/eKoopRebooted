@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "ekooprebooted:advancedcasing",
+    "count": 4
+  },
+  "pattern": [
+    "xzx",
+    "zdz",
+    "xzx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "ingotSilver"
+    },
+    "d": {
+      "type": "forge:ore_dict", "ore": "gemDiamond"
+    }
+  }
+}

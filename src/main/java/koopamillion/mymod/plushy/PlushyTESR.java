@@ -1,21 +1,16 @@
 package koopamillion.mymod.plushy;
 
 import koopamillion.mymod.ModBlocks;
-import koopamillion.mymod.plugins.BasePlugin;
-import koopamillion.mymod.soldertable.BlockSolderTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntityMobSpawnerRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -72,6 +67,8 @@ public class PlushyTESR extends TileEntitySpecialRenderer<TileChickenPlushy> {
             GlStateManager.color(1, 1, 1, 1);
             GlStateManager.disableBlend();
             GlStateManager.pushMatrix();
+
+
             if(entityLivingBase instanceof EntitySquid){
                 GlStateManager.translate(x + 0.5f, y+0.5f+0.0625F, z + 0.5f);
             }else{
@@ -79,16 +76,16 @@ public class PlushyTESR extends TileEntitySpecialRenderer<TileChickenPlushy> {
             }
 
            // GlStateManager.rotate(0, 0f, 0f, 1f);
-            if (tileEntity.getBlockState().getValue(BlockSolderTable.FACING).getHorizontalIndex() == EnumFacing.NORTH.getHorizontalIndex()){
+            if (tileEntity.getBlockState().getValue(BlockChickenPlushy.FACING).getHorizontalIndex() == EnumFacing.NORTH.getHorizontalIndex()){
                 GlStateManager.rotate(180F, 0f, 1f, 0f);
             }
-            if (tileEntity.getBlockState().getValue(BlockSolderTable.FACING).getHorizontalIndex() == EnumFacing.EAST.getHorizontalIndex()){
+            if (tileEntity.getBlockState().getValue(BlockChickenPlushy.FACING).getHorizontalIndex() == EnumFacing.EAST.getHorizontalIndex()){
                 GlStateManager.rotate(90F, 0f, 1f, 0f);
             }
-            if (tileEntity.getBlockState().getValue(BlockSolderTable.FACING).getHorizontalIndex() == EnumFacing.SOUTH.getHorizontalIndex()){
+            if (tileEntity.getBlockState().getValue(BlockChickenPlushy.FACING).getHorizontalIndex() == EnumFacing.SOUTH.getHorizontalIndex()){
                 GlStateManager.rotate(0F, 0f, 1f, 0f);
             }
-            if (tileEntity.getBlockState().getValue(BlockSolderTable.FACING).getHorizontalIndex() == EnumFacing.WEST.getHorizontalIndex()){
+            if (tileEntity.getBlockState().getValue(BlockChickenPlushy.FACING).getHorizontalIndex() == EnumFacing.WEST.getHorizontalIndex()){
                 GlStateManager.rotate(270F, 0f, 1f, 0f);
             }
             if(entityLivingBase instanceof EntityGhast){

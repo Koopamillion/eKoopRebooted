@@ -8,7 +8,11 @@ tile.ekooprebooted.acidbath.name=Fluid Bath
 tile.ekooprebooted.generator.name=Beacon Generator
 tile.ekooprebooted.saturator.name=Saturator
 tile.ekooprebooted.dnaextractor.name=DNA Extractor
-
+tile.ekooprebooted.centrifuge.name=Basic Centrifuge
+tile.ekooprebooted.motor.name=Basic Motor Provider
+tile.ekooprebooted.augstone.name=Augmented Stone
+tile.ekooprebooted.advancedmachineframe.name=Advanced Machine Frame
+tile.ekooprebooted.advancedcasing.name=Advanced Casing
 
 item.ekooprebooted.siliconraw.name=Raw Silicon
 item.ekooprebooted.siliconpure.name=Silicon Wafer
@@ -28,6 +32,41 @@ item.ekooprebooted.mobholder.name=Mob Hard Drive
 item.ekooprebooted.dragonheartnugget.name=Dragon Heart Nugget
 item.ekooprebooted.withernugget.name=Wither Skull Nugget
 item.ekooprebooted.mobram.name=Mob RAM
+item.ekooprebooted.dirty.name=Dirty Treasure
+item.ekooprebooted.clean.name=Clean Treasure
+
+item.ekooprebooted.tinylead.name=Tiny Lead Dust
+item.ekooprebooted.tinyaluminium.name=Tiny Aluminium Dust
+item.ekooprebooted.tinyantinomy.name=Tiny Antimony Dust
+item.ekooprebooted.tinysilver.name=Tiny Silver Dust
+item.ekooprebooted.tinytin.name=Tiny Tin Dust
+item.ekooprebooted.tinyiron.name=Tiny Iron Dust
+item.ekooprebooted.tinyshinys.name=Tiny Rare Metals Dust
+item.ekooprebooted.tinycopper.name=Tiny Copper Dust
+item.ekooprebooted.tinystone.name=Tiny Stone Dust
+
+item.ekooprebooted.dustlead.name=Lead Dust
+item.ekooprebooted.dustaluminium.name=Aluminium Dust
+item.ekooprebooted.dustantinomy.name=Antimony Dust
+item.ekooprebooted.dustsilver.name=Silver Dust
+item.ekooprebooted.dusttin.name=Tin Dust
+item.ekooprebooted.dustiron.name=Iron Dust
+item.ekooprebooted.dustshinys.name=Rare Metals Dust
+item.ekooprebooted.dustcopper.name=Copper Dust
+item.ekooprebooted.duststone.name=Stone Dust
+item.ekooprebooted.dustsulfur.name=Sulfur Dust
+item.ekooprebooted.dustcharcoal.name=Charcoal Dust
+item.ekooprebooted.dustsaltpeter.name=Saltpeter
+
+item.ekooprebooted.ingotsilver.name=Silver Ingot
+item.ekooprebooted.ingottin.name=Tin Ingot
+item.ekooprebooted.ingotlead.name=Lead Ingot
+item.ekooprebooted.ingotcopper.name=Copper Ingot
+item.ekooprebooted.ingotantinomy.name=Antinomy Ingot
+item.ekooprebooted.ingotaluminium.name=Aluminium Ingot
+
+item.ekooprebooted.silversolderingot.name=Silver Reinforced Solder Ingot
+item.ekooprebooted.advancedcircuit.name=Advanced Circuit
 
 
 item.ekooprebooted.circuit.name=Basic Circuit
@@ -37,6 +76,7 @@ item.ekooprebooted.fluid.hcl Bucket=Hydrochloric Acid Bucket
 item.ekooprebooted.fluid.enderfluid Bucket=Molten Ender Solder Bucket
 fluid.solderfluid=Molten Solder
 fluid.hcl=Hydrochloric Acid
+fluid.silversolder=Silver Reinforced Solder
 fluid.enderfluid=Molten Ender Solder
 
-itemGroup.ekooprebooted.tabEKoop=eKoop
+itemGroup.eKoop=eKoop Rebooted

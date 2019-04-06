@@ -60,12 +60,13 @@ public class AcidRecipeCategory  implements IRecipeCategory<AcidRecipeWrapper> {
 
         guiItemStacks.init(0, true, 10, 10); //input item
         guiItemStacks.init(1, false, 140, 10); //output item
-        guiItemStacks.init(2, true, 85, 44);
-        guiItemStacks.init(3, true, 85, 44);
+        guiItemStacks.init(2, true, 85, 44); //jei?
+        guiItemStacks.init(3, true, 85, 44); //jei?
 
 
         guiFluidStacks.init(4, true, 86, 11, 16 ,16 ,1000 ,true ,null); //input fluid
-        guiFluidStacks.init(5, false, 141, 45, 16 ,16 ,1000 ,true ,null);
+        guiFluidStacks.init(5, false, 141, 45, 16 ,16 ,1000 ,true ,null); //output fluid
+
 
         guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
         guiFluidStacks.set(4, ingredients.getInputs(VanillaTypes.FLUID).get(0)); //fluid input

@@ -1,44 +1,26 @@
 package koopamillion.mymod.tools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ChemicalFormulaList {
 
-    private static ArrayList chemicalformula = new ArrayList<>();
-    private static ArrayList ratiolist = new ArrayList<>();
-    private static ArrayList chemicalstringindex = new ArrayList<>();
-
-    public static void setChemicalStringIndex(){
-        chemicalstringindex.add("solder");
-    }
-    public static void setChemicalformula() {
-        chemicalformula.add("SnPb");
-    }
-    public static void setRatiolist(){
-        ratiolist.add("2:1");
-    }
-    public static String getRatioList(int k){
-        return ratiolist.get(k).toString();
-    }
-    public static String getChemicalformula(int k){
-        return chemicalformula.get(k).toString();
-    }
-    public static String getChemicalInfo(String l, int x) {
-        for (int i = 0; i < chemicalstringindex.size(); i++) {
-            String j = chemicalstringindex.get(i).toString();
-            if (j.equalsIgnoreCase(l)) {
-                if(x == 2){return getRatioList(i);}else{
-                    return getChemicalformula(i);
-                }
-            }
-        }
-        return "Unknown";
-    }
-
-    public static void initlist(){
-        setChemicalformula();
-        setRatiolist();
-        setChemicalStringIndex();
-    }
+   public static Map<String, List<String>> hashMap = new HashMap<>();
+   public static List<String> a = new ArrayList<>();
+   public static void init(){
+       a.add("SnPb");
+       a.add("2:1");
+       hashMap.put("solder", a);
+       a = new ArrayList<>();
+       a.add("SolderEnder");
+       a.add("1:1");
+       hashMap.put("endersolder", a);
+       a = new ArrayList<>();
+       a.add("SolderAgSb");
+       a.add("1:1:0.11");
+       hashMap.put("silversolder", a);
+   }
 
 }

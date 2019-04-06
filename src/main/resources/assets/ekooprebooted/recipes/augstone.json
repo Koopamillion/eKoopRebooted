@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "ekooprebooted:augstone",
+    "count": 8
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "stone"
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    }
+  }
+}

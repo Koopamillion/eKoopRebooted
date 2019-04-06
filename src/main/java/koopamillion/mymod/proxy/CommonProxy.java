@@ -6,6 +6,8 @@ import koopamillion.mymod.ModItems;
 import koopamillion.mymod.ModLiquids;
 import koopamillion.mymod.MyMod;
 import koopamillion.mymod.acidbath.TileAcidBath;
+import koopamillion.mymod.centrifuge.BlockCentrifuge;
+import koopamillion.mymod.centrifuge.TileCentrifuge;
 import koopamillion.mymod.dna.BlockDNAExtractor;
 import koopamillion.mymod.dna.TileDNAExtractor;
 import koopamillion.mymod.furnace.BlockFurnace;
@@ -22,9 +24,10 @@ import koopamillion.mymod.plushy.BlockChickenPlushy;
 import koopamillion.mymod.plushy.TileChickenPlushy;
 import koopamillion.mymod.saturator.BlockSaturator;
 import koopamillion.mymod.saturator.TileSaturator;
-import koopamillion.mymod.simpleblocks.BlockMachineFrame;
+import koopamillion.mymod.simpleblocks.*;
 import koopamillion.mymod.solder.BlockEnderSolder;
 import koopamillion.mymod.solder.BlockHCL;
+import koopamillion.mymod.solder.BlockSilverSolder;
 import koopamillion.mymod.solder.BlockSolder;
 import koopamillion.mymod.soldertable.BlockSolderPart;
 import koopamillion.mymod.soldertable.BlockSolderTable;
@@ -83,10 +86,16 @@ public class CommonProxy {
         event.getRegistry().register(new BlockSolder());
         event.getRegistry().register(new BlockEnderSolder());
         event.getRegistry().register(new BlockHCL());
+        event.getRegistry().register(new BlockSilverSolder());
         event.getRegistry().register(new BlockAcidBath());
         event.getRegistry().register(new BlockGenerator());
         event.getRegistry().register(new BlockSaturator());
         event.getRegistry().register(new BlockDNAExtractor());
+        event.getRegistry().register(new BlockCentrifuge());
+        event.getRegistry().register(new BlockMotor());
+        event.getRegistry().register(new BlockAugmentedStone());
+        event.getRegistry().register(new BlockAdvancedCasing());
+        event.getRegistry().register(new BlockAdvancedMachineFrame());
         GameRegistry.registerTileEntity(TileFurnace.class, MyMod.MODID + "_furnace");
         GameRegistry.registerTileEntity(TileGenerator.class, MyMod.MODID + "_generator");
         GameRegistry.registerTileEntity(TileChickenPlushy.class, MyMod.MODID + "_chicken");
@@ -94,6 +103,8 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileAcidBath.class, MyMod.MODID+"_acidbath");
         GameRegistry.registerTileEntity(TileSaturator.class, MyMod.MODID+"_saturator");
         GameRegistry.registerTileEntity(TileDNAExtractor.class, MyMod.MODID+"_dnaextractor");
+        GameRegistry.registerTileEntity(TileCentrifuge.class, MyMod.MODID+"_centrifuge");
+        GameRegistry.registerTileEntity(TileMotor.class, MyMod.MODID+"_motor");
 
     }
 
@@ -103,6 +114,7 @@ public class CommonProxy {
         event.getRegistry().register(new ItemCircuit());
         event.getRegistry().register(new ItemMobHolder());
         event.getRegistry().register(new ItemMobRAM());
+        event.getRegistry().register(new ItemSilverSolderIngot());
         event.getRegistry().registerAll(new Item().setTranslationKey("ekooprebooted.siliconraw").setRegistryName("siliconraw").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.siliconpure").setRegistryName("siliconpure").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.puresand").setRegistryName("puresand").setCreativeTab(MyMod.tabEKoop),
@@ -117,7 +129,43 @@ public class CommonProxy {
                 new Item().setTranslationKey("ekooprebooted.nethernugget").setRegistryName("nethernugget").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.lifecore").setRegistryName("lifecore").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.dragonheartnugget").setRegistryName("dragonheartnugget").setCreativeTab(MyMod.tabEKoop),
-                new Item().setTranslationKey("ekooprebooted.withernugget").setRegistryName("withernugget").setCreativeTab(MyMod.tabEKoop)
+                new Item().setTranslationKey("ekooprebooted.withernugget").setRegistryName("withernugget").setCreativeTab(MyMod.tabEKoop),
+
+                new Item().setTranslationKey("ekooprebooted.tinyaluminium").setRegistryName("tinyaluminium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinyantinomy").setRegistryName("tinyantinomy").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinycopper").setRegistryName("tinycopper").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinysilver").setRegistryName("tinysilver").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinytin").setRegistryName("tinytin").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinyiron").setRegistryName("tinyiron").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinyshinys").setRegistryName("tinyshinys").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinystone").setRegistryName("tinystone").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinylead").setRegistryName("tinylead").setCreativeTab(MyMod.tabEKoop),
+
+                new Item().setTranslationKey("ekooprebooted.dustaluminium").setRegistryName("dustaluminium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustantinomy").setRegistryName("dustantinomy").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustcopper").setRegistryName("dustcopper").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustsilver").setRegistryName("dustsilver").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dusttin").setRegistryName("dusttin").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustiron").setRegistryName("dustiron").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustshinys").setRegistryName("dustshinys").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.duststone").setRegistryName("duststone").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustlead").setRegistryName("dustlead").setCreativeTab(MyMod.tabEKoop),
+
+                new Item().setTranslationKey("ekooprebooted.ingotaluminium").setRegistryName("ingotaluminium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotlead").setRegistryName("ingotlead").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingottin").setRegistryName("ingottin").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotcopper").setRegistryName("ingotcopper").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotantinomy").setRegistryName("ingotantinomy").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotsilver").setRegistryName("ingotsilver").setCreativeTab(MyMod.tabEKoop),
+
+                new Item().setTranslationKey("ekooprebooted.advancedcircuit").setRegistryName("advancedcircuit").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustsulfur").setRegistryName("dustsulfur").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustcharcoal").setRegistryName("dustcharcoal").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustsaltpeter").setRegistryName("dustsaltpeter").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dirty").setRegistryName("dirty").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.clean").setRegistryName("clean").setCreativeTab(MyMod.tabEKoop)
+
+
 
         );
         event.getRegistry().register(new ItemSolderIngot());
@@ -130,7 +178,11 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.blockSolderPart).setRegistryName(BlockSolderPart.solderpart));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockAcidbath).setRegistryName(BlockAcidBath.acidbath));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockDNAExtractor).setRegistryName(BlockDNAExtractor.dnaextractor));
-
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockAugmentedStone).setRegistryName(BlockAugmentedStone.augstone));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockCentrifuge).setRegistryName(BlockCentrifuge.centrifuge));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockMotor).setRegistryName(BlockMotor.motor));
+        event.getRegistry().register(new ItemBlock(ModBlocks.advancedCasing).setRegistryName(BlockAdvancedCasing.advancedcasing));
+        event.getRegistry().register(new ItemBlock(ModBlocks.advancedMachineFrame).setRegistryName(BlockAdvancedMachineFrame.advancedmachineframe));
     }
 
   /*  @SubscribeEvent

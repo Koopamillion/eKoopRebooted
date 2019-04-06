@@ -3,20 +3,24 @@
     "item": "ekooprebooted:machineframe"
   },
   "pattern": [
-    "xxx",
-    "xzx",
+    "xrx",
+    "rzr",
     "xsx"
   ],
   "type": "forge:ore_shaped",
   "key": {
     "s": {
-      "item": "ekooprebooted:circuit"
+      "type": "forge:ore_dict", "ore": "circuitBasic"
     },
-    "x": {
+    "r": {
       "type": "forge:ore_dict", "ore": "ingotIron"
     },
     "z": {
       "type": "forge:ore_dict", "ore": "blockRedstone"
+    },
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "ekooprebooted:silversolderingot",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "type": "forge:ore_dict", "ore": "dustTinyAntimony"
+    },
+    {
+      "type": "forge:ore_dict", "ore": "ingotSilver"
+    },
+    {
+      "type": "forge:ore_dict", "ore": "ingotSolder"
+    }
+  ]
+}

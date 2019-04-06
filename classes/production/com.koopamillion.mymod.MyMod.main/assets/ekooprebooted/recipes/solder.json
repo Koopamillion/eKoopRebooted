@@ -4,20 +4,24 @@
   },
   "pattern": [
     "xxx",
-    "xzx",
-    "xsx"
+    "zyz",
+    "zrz"
   ],
   "type": "forge:ore_shaped",
   "key": {
-    "s": {
-      "item": "minecraft:stone",
+    "r": {
+      "item": "minecraft:redstone_block",
       "data": 0
     },
-    "x": {
+    "y": {
       "type": "forge:ore_dict", "ore": "ingotIron"
     },
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
+    },
     "z": {
-      "type": "forge:ore_dict", "ore": "blockRedstone"
+      "type": "forge:ore_dict", "ore": "logWood"
     }
   }
 }

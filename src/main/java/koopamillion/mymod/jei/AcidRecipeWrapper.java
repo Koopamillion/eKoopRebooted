@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class AcidRecipeWrapper implements IRecipeWrapper {
   //  private final List<ItemStack> inputl;
  //   private final List<FluidStack> inputfl;
 
-    private final ItemStack input;
+    private final List<List<ItemStack>> input;
     private final FluidStack inputfluid;
   //  private final ItemStack inputf;
 //    private final ItemStack inpute;
@@ -37,10 +38,12 @@ public class AcidRecipeWrapper implements IRecipeWrapper {
     public AcidRecipeWrapper(AcidRecipe recipe) {
         this.theRecipe = recipe;
 
+       this.input = new ArrayList<>();
+
     //    this.outputss = recipe.getOutput2().copy(); //fluid //might be null
     //    this.output = recipe.getOutput().copy();  //might be null
 
-        this.input = recipe.getInput1();
+        this.input.add( Arrays.asList(recipe.getInput1().getMatchingStacks().clone()));
         this.inputfluid = recipe.getInput2();
         this.outputfluid = recipe.getOutput2();
         this.output = recipe.getOutput();
@@ -63,7 +66,7 @@ public class AcidRecipeWrapper implements IRecipeWrapper {
      //   ingredients.setInputs(VanillaTypes.FLUID, inputfl);
      //   ingredients.setOutput(VanillaTypes.ITEM, output);
      //   ingredients.setOutput(VanillaTypes.FLUID, outputss);
-        ingredients.setInput(VanillaTypes.ITEM, input);
+        ingredients.setInputLists(VanillaTypes.ITEM, input);
         ingredients.setInput(VanillaTypes.FLUID, inputfluid);
         ingredients.setOutput(VanillaTypes.FLUID, outputfluid);
         ingredients.setOutput(VanillaTypes.ITEM, output);

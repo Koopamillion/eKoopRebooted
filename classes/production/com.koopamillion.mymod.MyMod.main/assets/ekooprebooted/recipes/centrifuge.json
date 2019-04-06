@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "ekooprebooted:centrifuge"
+  },
+  "pattern": [
+    "xzx",
+    "szs",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "type": "forge:ore_dict", "ore": "stickWood"
+    },
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
+    },
+    "z": {
+      "type": "forge:ore_dict", "ore": "logWood"
+    }
+  }
+}

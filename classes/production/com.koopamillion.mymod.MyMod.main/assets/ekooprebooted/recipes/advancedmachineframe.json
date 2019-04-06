@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "ekooprebooted:advancedmachineframe"
+  },
+  "pattern": [
+    "xrx",
+    "rfr",
+    "xsx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "ekooprebooted:advancedcircuit"
+    },
+    "f": {
+      "item": "ekooprebooted:machineframe",
+      "data": 0
+    },
+    "r": {
+      "type": "forge:ore_dict", "ore": "ingotSilver"
+    },
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
+    }
+  }
+}

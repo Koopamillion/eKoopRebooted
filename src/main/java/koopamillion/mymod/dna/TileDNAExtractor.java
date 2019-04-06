@@ -95,7 +95,7 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
                 Helper.spawnParticleRange(tlx, tly, tlz, trx, tryy, trz, pos, EnumParticleTypes.END_ROD, world);
             }
             if(go){
-                Helper.spawnParticleLaserToPlayer(pos.getX(), pos.getY(), pos.getZ(), px,py,pz, world, EnumParticleTypes.PORTAL);
+                Helper.spawnParticleLaserToPlayer(pos.getX(), pos.getY(), pos.getZ(), px,py,pz, world, EnumParticleTypes.SPELL_WITCH);
                 go= false;
 
             }
@@ -450,7 +450,9 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
 
     @Override
     public void readFromNBT (NBTTagCompound compound){
+
         super.readFromNBT(compound);
+        state = DNAState.VALUES[compound.getInteger("state")];
         if (compound.hasKey("itemsIn")) {
             inputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsIn"));
         }
@@ -469,6 +471,7 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
     @Override
     public NBTTagCompound writeToNBT (NBTTagCompound compound){
         super.writeToNBT(compound);
+        compound.setInteger("state", state.ordinal());
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
         compound.setInteger("energy", energyStorage.getEnergyStored());
@@ -549,7 +552,7 @@ public class TileDNAExtractor extends TileEntity  implements ITickable {
             if(!(entity instanceof EntityPlayer) && energyStorage.getEnergyStored() >= RF_PER_TICK && cooldown <= 0) {
 
                 px = entity.getPositionVector().x;
-                py = entity.getPositionVector().y;
+                py = entity.getPositionVector().y - 0.5f;
                 pz = entity.getPositionVector().z;
                 if(nbt.getString("type").isEmpty() && dnaCount >= 0){
                     go = true;

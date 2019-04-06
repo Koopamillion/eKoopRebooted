@@ -2,6 +2,7 @@ package koopamillion.mymod;
 
 import koopamillion.mymod.solder.LiquidEnderSolder;
 import koopamillion.mymod.solder.LiquidHCL;
+import koopamillion.mymod.solder.LiquidSilverSolder;
 import koopamillion.mymod.solder.LiquidSolder;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -11,6 +12,7 @@ public class ModLiquids {
     public static final Fluid solderfluid = new LiquidSolder();
     public static final Fluid hcl = new LiquidHCL();
     public static final Fluid enderfluid = new LiquidEnderSolder();
+    public static final Fluid silversolder = new LiquidSilverSolder();
 
     public static void init() {
         FluidRegistry.registerFluid(solderfluid);
@@ -19,6 +21,8 @@ public class ModLiquids {
         FluidRegistry.addBucketForFluid(hcl);
         FluidRegistry.registerFluid(enderfluid);
         FluidRegistry.addBucketForFluid(enderfluid);
+        FluidRegistry.registerFluid(silversolder);
+        FluidRegistry.addBucketForFluid(silversolder);
     }
 
     public static boolean isValidFloadStack(FluidStack stack){

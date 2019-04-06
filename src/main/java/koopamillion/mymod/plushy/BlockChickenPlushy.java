@@ -64,6 +64,11 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
 
 
 
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -113,7 +118,7 @@ public class BlockChickenPlushy extends Block implements ITileEntityProvider {
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return null;
+        return CHICKEN_AABB;
     }
 
     @Override

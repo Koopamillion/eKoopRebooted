@@ -79,10 +79,20 @@ public class TileGenerator extends TileEntity implements ITickable {
             }        }
         if(isBeacon) {
             if (energyStorage.shouldGenerate(MAX_POWER)) {
-                power = power + ((beaconPower + 1) * (beaconPower + 1) * 2 * 2 * 2 * 2);
-                if(power >= 1){
-                    energyStorage.generatePower(1, MAX_POWER);
-                    power --;
+                    switch(beaconPower){
+                        case 1:
+                            energyStorage.generatePower(8, MAX_POWER);
+                            break;
+                        case 2:
+                            energyStorage.generatePower(16, MAX_POWER);
+                            break;
+                        case 3:
+                            energyStorage.generatePower(32, MAX_POWER);
+                            break;
+                        case 4:
+                            energyStorage.generatePower(64, MAX_POWER);
+                            break;
+
                 }
 
 

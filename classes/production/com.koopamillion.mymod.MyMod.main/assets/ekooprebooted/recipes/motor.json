@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "ekooprebooted:motor"
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "z": {
+      "item": "ekooprebooted:augstone"
+    }
+  }
+}

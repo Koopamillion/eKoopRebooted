@@ -31,6 +31,8 @@ public class AcidTESR extends TileEntitySpecialRenderer<TileAcidBath> {
         renderFluid(tileEntity);
 
         GlStateManager.popMatrix();
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.enableBlend();
     }
 
     private void renderFluid(TileAcidBath tank) {

@@ -1,5 +1,6 @@
 package koopamillion.mymod.furnace;
 
+import koopamillion.mymod.soldertable.BlockSolderTable;
 import koopamillion.mymod.sound.SoundFurnace;
 import koopamillion.mymod.tools.MyEnergyStorage;
 import net.minecraft.block.state.IBlockState;
@@ -12,6 +13,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +26,8 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import java.util.Random;
 
 import static koopamillion.mymod.furnace.FurnaceState.WORKING;
 
@@ -49,6 +53,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     private float progressRemaining = 0;
     private float scale = 0;
 
+    public boolean particles = false;
     private int soundCounter = 0;
     private float increaseWithoutCompound = 0.0005f;
     private float increaseWithCompound = 0.025f;
@@ -61,9 +66,18 @@ public class TileFurnace extends TileEntity implements ITickable {
     private boolean compound = false;
 
 
+
+
     @Override
     public void update() {
+        if(world.isRemote){
+            if(particles){
+                spawnParticles();
+            }
+        }
         if (!world.isRemote) {
+
+
                 if (shouldRun() == true){
                     if (energyStorage.getEnergyStored() < Math.round(RF_PER_TICK)){
 
@@ -71,7 +85,9 @@ public class TileFurnace extends TileEntity implements ITickable {
                 }
 
                   if (progressRemaining > 0) {
+                      particles = true;
                     setState(FurnaceState.WORKING);
+
                     energyStorage.consumePower(Math.round(RF_PER_TICK));
 
 
@@ -121,6 +137,8 @@ public class TileFurnace extends TileEntity implements ITickable {
                     }
 
                     setState(FurnaceState.OFF);
+
+                    particles = false;
                 }
 
                 if(getState()==WORKING && soundCounter == 0){
@@ -156,6 +174,88 @@ public class TileFurnace extends TileEntity implements ITickable {
             }
         }
         return false;
+    }
+
+
+
+    public void spawnParticles(){
+        EnumFacing facing = world.getBlockState(pos).getValue(BlockFurnace.FACING);
+        Random rand = new Random();
+
+        switch (facing){
+            case NORTH:
+                switch (rand.nextInt(20)){
+                    case 1:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5/16D, pos.getY() + 11.5/16D, pos.getZ(), 0, 0, 0, 0);
+                        break;
+                    case 2:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 6.5/16D, pos.getY() + 11.5/16D, pos.getZ(), 0, 0, 0, 0);
+                        break;
+                    case 3:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 9.5/16D, pos.getY() + 11.5/16D, pos.getZ(), 0, 0, 0, 0);
+                        break;
+                    case 4:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 12.5/16D, pos.getY() + 11.5/16D, pos.getZ(), 0, 0, 0, 0);
+                        break;
+                }
+                break;
+            case WEST:
+                switch (rand.nextInt(20)){
+                    case 1:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX(), pos.getY() + 11.5/16D, pos.getZ() + 3.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 2:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX(), pos.getY() + 11.5/16D, pos.getZ() + 6.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 3:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX(), pos.getY() + 11.5/16D, pos.getZ() + 9.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 4:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX(), pos.getY() + 11.5/16D, pos.getZ() + 12.5/16D, 0, 0, 0, 0);
+                        break;
+                }
+                break;
+            case SOUTH:
+                switch (rand.nextInt(20)){
+                    case 1:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() +1 - 3.5/16D, pos.getY() + 11.5/16D, pos.getZ() + 1, 0, 0, 0, 0);
+                        break;
+                    case 2:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() +1 - 6.5/16D, pos.getY() + 11.5/16D, pos.getZ() + 1, 0, 0, 0, 0);
+                        break;
+                    case 3:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() +1 - 9.5/16D, pos.getY() + 11.5/16D, pos.getZ() + 1, 0, 0, 0, 0);
+                        break;
+                    case 4:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() +1 - 12.5/16D, pos.getY() + 11.5/16D, pos.getZ() + 1, 0, 0, 0, 0);
+                        break;
+                }
+                break;
+            case EAST:
+                switch (rand.nextInt(20)){
+                    case 1:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 1, pos.getY() + 11.5/16D, pos.getZ() +1- 3.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 2:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 1, pos.getY() + 11.5/16D, pos.getZ() +1- 6.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 3:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 1, pos.getY() + 11.5/16D, pos.getZ() +1- 9.5/16D, 0, 0, 0, 0);
+                        break;
+                    case 4:
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 1, pos.getY() + 11.5/16D, pos.getZ()+1 - 12.5/16D, 0, 0, 0, 0);
+                        break;
+                }
+                break;
+
+
+
+
+        }
+
+
+
+
     }
 
     public boolean shouldRun(){
@@ -274,6 +374,7 @@ public class TileFurnace extends TileEntity implements ITickable {
         NBTTagCompound nbtTag = super.getUpdateTag();
         nbtTag.setInteger("state", state.ordinal());
         nbtTag.setInteger("energy", energyStorage.getEnergyStored());
+        nbtTag.setBoolean("particles", particles);
         return nbtTag;
     }
 
@@ -290,6 +391,8 @@ public class TileFurnace extends TileEntity implements ITickable {
         int stateIndex = packet.getNbtCompound().getInteger("state");
         clientEnergy = packet.getNbtCompound().getInteger("energy");
         energyStorage.setEnergy(packet.getNbtCompound().getInteger("energy"));
+        particles = packet.getNbtCompound().getBoolean("particles");
+
         if (world.isRemote && stateIndex != state.ordinal()) {
             state = FurnaceState.VALUES[stateIndex];
             world.markBlockRangeForRenderUpdate(pos, pos);
@@ -353,6 +456,7 @@ public class TileFurnace extends TileEntity implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        state = FurnaceState.VALUES[compound.getInteger("state")];
         if (compound.hasKey("itemsIn")) {
             inputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsIn"));
         }
@@ -363,11 +467,18 @@ public class TileFurnace extends TileEntity implements ITickable {
         energyStorage.setEnergy(compound.getInteger("energy"));
         time = compound.getFloat("time");
         scale = compound.getFloat("scale");
+        particles = compound.getBoolean("particles");
+
+
+
     }
+
     //saves stuff in a file so it can be recalled upon boot up
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
+        compound.setInteger("state", state.ordinal());
+        compound.setBoolean("particles", particles);
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
         compound.setFloat("progressRemaining", progressRemaining);

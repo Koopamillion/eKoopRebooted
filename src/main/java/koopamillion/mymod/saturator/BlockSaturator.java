@@ -64,6 +64,11 @@ public class BlockSaturator extends Block implements ITileEntityProvider {
 
     }
 
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
   /*  @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {

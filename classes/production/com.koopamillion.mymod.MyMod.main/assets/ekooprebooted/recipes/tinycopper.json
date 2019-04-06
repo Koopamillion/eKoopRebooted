@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "ekooprebooted:dustcopper"
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "ekooprebooted:tinycopper"
+    }
+  }
+}

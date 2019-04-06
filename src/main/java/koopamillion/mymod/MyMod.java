@@ -3,6 +3,7 @@ package koopamillion.mymod;
 
 import koopamillion.mymod.sound.SoundFurnace;
 import koopamillion.mymod.proxy.CommonProxy;
+import koopamillion.mymod.tools.ChemicalFormulaList;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -45,6 +46,7 @@ public class MyMod {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MyMod.logger.info("Pre Init Time!");
+        ChemicalFormulaList.init();
         logger = event.getModLog();
         proxy.preInit(event);
         SoundFurnace.preInit();

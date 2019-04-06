@@ -52,7 +52,7 @@ public class BlockAcidBath extends Block implements ITileEntityProvider {
         setTranslationKey(MyMod.MODID + ".acidbath");
         setHarvestLevel("pickaxe", 1);
         setCreativeTab(MyMod.tabEKoop);
-        setHardness(2);
+        setHardness(5);
     }
 
 

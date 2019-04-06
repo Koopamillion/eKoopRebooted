@@ -3,19 +3,19 @@
     "item": "ekooprebooted:furnace"
   },
   "pattern": [
-    "vcv",
-    "cFc",
+    "xxx",
+    "xFx",
     "vsv"
   ],
   "type": "forge:ore_shaped",
   "key": {
-    "c": {
-      "type": "forge:ore_dict", "ore": "ingotIron"
+    "x": {
+      "item": "ekooprebooted:augstone",
+      "data": 0
     },
     "F": {
       "item": "minecraft:furnace",
       "data": 0
-
     },
     "v": {
       "type": "forge:ore_dict", "ore": "dustRedstone"

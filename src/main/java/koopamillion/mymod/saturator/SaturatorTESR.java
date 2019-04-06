@@ -53,6 +53,7 @@ public class SaturatorTESR extends TileEntitySpecialRenderer<TileSaturator> {
 
         renderItemStack(te, Minecraft.getMinecraft().world,x,y,z, partialTicks);
         GlStateManager.enableBlend();
+
     }
 
 

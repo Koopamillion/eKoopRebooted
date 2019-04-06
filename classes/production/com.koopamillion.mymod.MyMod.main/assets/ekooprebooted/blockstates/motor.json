@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "particle": "ekooprebooted:blocks/metalblock",
+      "north": "ekooprebooted:blocks/metalblock",
+      "south": "ekooprebooted:blocks/metalblock",
+      "west": "ekooprebooted:blocks/metalblock",
+      "east": "ekooprebooted:blocks/metalblock",
+      "up": "ekooprebooted:blocks/motor_top",
+      "down": "ekooprebooted:blocks/metalblock"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+        "north": {},
+        "south": {"y": 180},
+        "west": {"y": 270},
+        "east": {"y": 90},
+        "up": {"x": -90},
+        "down": {"x": 90}
+    }
+
+  }
+}
