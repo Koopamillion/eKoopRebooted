@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "ekooprebooted:dustgold"
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "x": {
+      "item": "ekooprebooted:tinygold"
+    }
+  }
+}

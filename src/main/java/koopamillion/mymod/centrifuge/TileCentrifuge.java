@@ -6,6 +6,7 @@ import koopamillion.mymod.crafting.SolderManager;
 import koopamillion.mymod.network.Messages;
 import koopamillion.mymod.network.VanillaPackets;
 import koopamillion.mymod.simpleblocks.BlockMotor;
+import koopamillion.mymod.simpleblocks.TileAdvancedMotor;
 import koopamillion.mymod.simpleblocks.TileMotor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +24,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
-import scala.reflect.internal.Trees;
+
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -180,13 +181,20 @@ public class TileCentrifuge extends TileEntity implements ITickable {
 
     public void controlRPM(){
 
-        if(world.getTileEntity(getPos().down()) instanceof  TileMotor && !world.isRemote){
-            if(((TileMotor) world.getTileEntity(getPos().down())).getRPMproduced() <= MAX_RPM){
+        if((world.getTileEntity(getPos().down()) instanceof  TileMotor) && !world.isRemote){
+            if(((TileMotor) world.getTileEntity(getPos().down())).getRPMproduced() <= MAX_RPM ){
                 idleRPM = ((TileMotor) world.getTileEntity(getPos().down())).getRPMproduced();
             }else{
                 idleRPM = MAX_RPM;
             }
 
+        }else if(world.getTileEntity(getPos().down()) instanceof TileAdvancedMotor && !world.isRemote){
+            if(((TileAdvancedMotor) world.getTileEntity(getPos().down())).getRPMproduced() <= MAX_RPM ) {
+                if (world.getTileEntity(getPos().down()) instanceof TileAdvancedMotor)
+                    idleRPM = ((TileAdvancedMotor) world.getTileEntity(getPos().down())).getRPMproduced();
+            }else{
+                idleRPM = MAX_RPM;
+            }
         }else{idleRPM = 0;}
         if(rot < 0)
             rot = 0;
@@ -398,7 +406,7 @@ public class TileCentrifuge extends TileEntity implements ITickable {
             }
         }
 
-        if(idleRPM <= CentrifugeManager.getRecipeForStatsOnly(inputHandler.getStackInSlot(0)).getRPM()){
+        if(idleRPM < CentrifugeManager.getRecipeForStatsOnly(inputHandler.getStackInSlot(0)).getRPM()){
             return false;
         }
 

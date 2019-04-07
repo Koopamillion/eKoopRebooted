@@ -111,6 +111,8 @@ public class ModItems {
     public static ItemSilverSolderIngot silversolderingot;
     @GameRegistry.ObjectHolder("ekooprebooted:dustcharcoal")
     public static Item dustcharcoal;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustcoal")
+    public static Item dustcoal;
     @GameRegistry.ObjectHolder("ekooprebooted:dustsulfur")
     public static Item dustsulfur;
     @GameRegistry.ObjectHolder("ekooprebooted:dustsaltpeter")
@@ -119,6 +121,69 @@ public class ModItems {
     public static Item dirty;
     @GameRegistry.ObjectHolder("ekooprebooted:clean")
     public static Item clean;
+
+    @GameRegistry.ObjectHolder("ekooprebooted:geo")
+    public static Item geo;
+    @GameRegistry.ObjectHolder("ekooprebooted:meteorite")
+    public static Item meteorite;
+
+    @GameRegistry.ObjectHolder("ekooprebooted:dustchrome")
+    public static Item dustchrome;
+    @GameRegistry.ObjectHolder("ekooprebooted:dusttungsten")
+    public static Item dusttungsten;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustlithium")
+    public static Item dustlithium;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustmagnesium")
+    public static Item dustmagnesium;
+    @GameRegistry.ObjectHolder("ekooprebooted:dusttitanium")
+    public static Item dusttitanium;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustvanadium")
+    public static Item dustvanadium;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustpalladium")
+    public static Item dustpalladium;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustiridium")
+    public static Item dustiridium;
+
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotchrome")
+    public static Item ingotchrome;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingottungsten")
+    public static Item ingottungsten;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotlithium")
+    public static Item ingotlithium;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotmagnesium")
+    public static Item ingotmagnesium;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingottitanium")
+    public static Item ingottitanium;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotvanadium")
+    public static Item ingotvanadium;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotpalladium")
+    public static Item ingotpalladium;
+    @GameRegistry.ObjectHolder("ekooprebooted:ingotiridium")
+    public static Item ingotiridium;
+
+
+    @GameRegistry.ObjectHolder("ekooprebooted:dustnether")
+    public static Item dustnether;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustend")
+    public static Item dustend;
+    @GameRegistry.ObjectHolder("ekooprebooted:tinytungsten")
+    public static Item tinytungsten;
+    @GameRegistry.ObjectHolder("ekooprebooted:tinylithium")
+    public static Item tinylithium;
+    @GameRegistry.ObjectHolder("ekooprebooted:tinyredstone")
+    public static Item tinyredstone;
+    @GameRegistry.ObjectHolder("ekooprebooted:tinygold")
+    public static Item tinygold;
+    @GameRegistry.ObjectHolder("ekooprebooted:dustgold")
+    public static Item dustgold;
+    @GameRegistry.ObjectHolder("ekooprebooted:tinyiridium")
+    public static Item tinyiridium;
+
+
+
+
+
+
 
 
 
@@ -184,5 +249,36 @@ public class ModItems {
         ModelLoader.setCustomModelResourceLocation(dustsaltpeter, 0, new ModelResourceLocation(dustsaltpeter.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(dirty, 0, new ModelResourceLocation(dirty.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(clean, 0, new ModelResourceLocation(clean.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustcoal, 0, new ModelResourceLocation(dustcoal.getRegistryName(), "inventory"));
+
+        ModelLoader.setCustomModelResourceLocation(geo, 0, new ModelResourceLocation(geo.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(meteorite, 0, new ModelResourceLocation(meteorite.getRegistryName(), "inventory"));
+
+        ModelLoader.setCustomModelResourceLocation(dustchrome, 0, new ModelResourceLocation(dustchrome.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dusttungsten, 0, new ModelResourceLocation(dusttungsten.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustlithium, 0, new ModelResourceLocation(dustlithium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustmagnesium, 0, new ModelResourceLocation(dustmagnesium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dusttitanium, 0, new ModelResourceLocation(dusttitanium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustvanadium, 0, new ModelResourceLocation(dustvanadium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustpalladium, 0, new ModelResourceLocation(dustpalladium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustiridium, 0, new ModelResourceLocation(dustiridium.getRegistryName(), "inventory"));
+
+        ModelLoader.setCustomModelResourceLocation(ingotchrome, 0, new ModelResourceLocation(ingotchrome.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingottungsten, 0, new ModelResourceLocation(ingottungsten.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingotlithium, 0, new ModelResourceLocation(ingotlithium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingotmagnesium, 0, new ModelResourceLocation(ingotmagnesium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingottitanium, 0, new ModelResourceLocation(ingottitanium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingotvanadium, 0, new ModelResourceLocation(ingotvanadium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingotpalladium, 0, new ModelResourceLocation(ingotpalladium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ingotiridium, 0, new ModelResourceLocation(ingotiridium.getRegistryName(), "inventory"));
+
+        ModelLoader.setCustomModelResourceLocation(dustend, 0, new ModelResourceLocation(dustend.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustnether, 0, new ModelResourceLocation(dustnether.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(tinytungsten, 0, new ModelResourceLocation(tinytungsten.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(dustgold, 0, new ModelResourceLocation(dustgold.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(tinygold, 0, new ModelResourceLocation(tinygold.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(tinyredstone, 0, new ModelResourceLocation(tinyredstone.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(tinylithium, 0, new ModelResourceLocation(tinylithium.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(tinyiridium, 0, new ModelResourceLocation(tinyiridium.getRegistryName(), "inventory"));
     }
 }

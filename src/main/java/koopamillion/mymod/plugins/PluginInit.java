@@ -13,5 +13,7 @@ public class PluginInit {
         new PluginQuark().init();
         new PluginThermalExpansion().init();
         new PluginTinkersConstruct().init();
+        new PluginTwilightForest().init();
+        new PluginTechReborn().init();
     }
 }

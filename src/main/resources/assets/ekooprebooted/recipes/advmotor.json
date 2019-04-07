@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "ekooprebooted:advmotor"
+  },
+  "pattern": [
+    "xxx",
+    "xzx",
+    "xxx"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "z": {
+      "item": "ekooprebooted:motor",
+      "data": 0
+    },
+    "x": {
+      "item": "ekooprebooted:advancedcasing",
+      "data": 0
+    }
+  }
+}

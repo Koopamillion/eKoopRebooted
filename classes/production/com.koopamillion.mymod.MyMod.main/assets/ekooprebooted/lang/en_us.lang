@@ -10,6 +10,7 @@ tile.ekooprebooted.saturator.name=Saturator
 tile.ekooprebooted.dnaextractor.name=DNA Extractor
 tile.ekooprebooted.centrifuge.name=Basic Centrifuge
 tile.ekooprebooted.motor.name=Basic Motor Provider
+tile.ekooprebooted.advmotor.name=Advanced Motor Provider
 tile.ekooprebooted.augstone.name=Augmented Stone
 tile.ekooprebooted.advancedmachineframe.name=Advanced Machine Frame
 tile.ekooprebooted.advancedcasing.name=Advanced Casing
@@ -35,6 +36,15 @@ item.ekooprebooted.mobram.name=Mob RAM
 item.ekooprebooted.dirty.name=Dirty Treasure
 item.ekooprebooted.clean.name=Clean Treasure
 
+item.ekooprebooted.tinygold.name=Tiny Gold Dust
+item.ekooprebooted.dustgold.name=Gold Dust
+item.ekooprebooted.tinyredstone.name=Tiny Redstone Dust
+item.ekooprebooted.tinytungsten.name=Tiny Tungsten Dust
+item.ekooprebooted.tinylithium.name=Tiny Lithium Dust
+item.ekooprebooted.dustend.name=Endstone Dust
+item.ekooprebooted.dustnether.name=Netherrack Dust
+item.ekooprebooted.tinyiridium.name=Tiny Iridium Dust
+
 item.ekooprebooted.tinylead.name=Tiny Lead Dust
 item.ekooprebooted.tinyaluminium.name=Tiny Aluminium Dust
 item.ekooprebooted.tinyantinomy.name=Tiny Antimony Dust
@@ -57,6 +67,28 @@ item.ekooprebooted.duststone.name=Stone Dust
 item.ekooprebooted.dustsulfur.name=Sulfur Dust
 item.ekooprebooted.dustcharcoal.name=Charcoal Dust
 item.ekooprebooted.dustsaltpeter.name=Saltpeter
+item.ekooprebooted.dustcoal.name=Coal Dust
+
+item.ekooprebooted.dustchrome.name=Chrome Dust
+item.ekooprebooted.dusttungsten.name=Tungsten Dust
+item.ekooprebooted.dustlithium.name=Lithium Dust
+item.ekooprebooted.dustmagnesium.name=Magnesium Dust
+item.ekooprebooted.dusttitanium.name=Titanium Dust
+item.ekooprebooted.dustvanadium.name=Vanadium Dust
+item.ekooprebooted.dustpalladium.name=Palladium Dust
+item.ekooprebooted.dustiridium.name=Iridium Dust
+
+item.ekooprebooted.ingotchrome.name=Chrome ingot
+item.ekooprebooted.ingottungsten.name=Tungsten ingot
+item.ekooprebooted.ingotlithium.name=Lithium ingot
+item.ekooprebooted.ingotmagnesium.name=Magnesium ingot
+item.ekooprebooted.ingottitanium.name=Titanium ingot
+item.ekooprebooted.ingotvanadium.name=Vanadium ingot
+item.ekooprebooted.ingotpalladium.name=Palladium ingot
+item.ekooprebooted.ingotiridium.name=Iridium ingot
+
+item.ekooprebooted.geo.name=Geological Treasure
+item.ekooprebooted.meteorite.name=Mini Meteorite
 
 item.ekooprebooted.ingotsilver.name=Silver Ingot
 item.ekooprebooted.ingottin.name=Tin Ingot

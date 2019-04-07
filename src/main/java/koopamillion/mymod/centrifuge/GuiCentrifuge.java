@@ -92,20 +92,20 @@ public class GuiCentrifuge extends GuiContainer {
         for (int i = 0 ; i < percentage ; i++) {
             this.mc.getTextureManager().bindTexture(idle);
             GlStateManager.color(1,1,1,1);
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 49 - i,0,0,52,i+1,52f,36f);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 49 - (i +1),0,0,52,i+1,52f,36f);
         }
         int percentage3 = crafter * 36 / TileCentrifuge.MAX_RPM;
         for (int i = 0 ; i < percentage3 ; i++) {
             this.mc.getTextureManager().bindTexture(idle);
             GlStateManager.color(1,1,1,1);
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 118,guiTop + 49 - i,0,0,52,i+1,52f,36f);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 118,guiTop + 49 - (i +1),0,0,52,i+1,52f,36f);
         }
         int percentage2 = rote * 36 / TileCentrifuge.MAX_RPM;
         for (int i = 0 ; i < percentage2 ; i++) {
             this.mc.getTextureManager().bindTexture(rot);
             GlStateManager.color(1,1,1,1);
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 49 - i,0,0,52,i+1,52f,36f);
-            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 118,guiTop + 49 - i,0,0,52,i+1,52f,36f);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 10,guiTop + 49 - (i +1),0,0,52,i+1,52f,36f);
+            Gui.drawModalRectWithCustomSizedTexture(guiLeft + 118,guiTop + 49 - (i +1),0,0,52,i+1,52f,36f);
         }
 
     }

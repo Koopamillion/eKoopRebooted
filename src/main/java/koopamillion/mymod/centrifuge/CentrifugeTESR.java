@@ -20,7 +20,7 @@ import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import scala.collection.parallel.ParIterableLike;
+
 
 import java.util.HashMap;
 import java.util.List;

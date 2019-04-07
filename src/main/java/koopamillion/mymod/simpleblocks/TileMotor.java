@@ -50,6 +50,8 @@ public class TileMotor  extends TileEntity implements ITickable{
             if(RPMproduced < maxRPM){
                 RPMproduced++;
                 energyStorage.consumePower(RF_PER_TICK);
+            }else{
+                energyStorage.consumePower(RF_PER_TICK);
             }
         }else{
             if(RPMproduced > 0){

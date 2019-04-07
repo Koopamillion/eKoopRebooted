@@ -90,7 +90,7 @@ public class CentrifugeManager {
                 new ItemStack(Items.REDSTONE),
                 new ItemStack(Items.COAL),
                 new ItemStack(Items.DYE, 1, 4),
-               new ItemStack(Items.GOLD_NUGGET),
+               new ItemStack(ModItems.tinygold),
                 ItemStack.EMPTY,
                 ItemStack.EMPTY,
                 ItemStack.EMPTY,
@@ -155,6 +155,114 @@ public class CentrifugeManager {
                 ItemStack.EMPTY,
                 ItemStack.EMPTY,
                 0,65,4,4, 4,2,1,0,0,1500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(Blocks.GRASS, 1 )),
+                new ItemStack(ModItems.tinystone, 9),
+                new ItemStack(ModItems.tinystone, 2),
+                new ItemStack(ModItems.tinyiron),
+                new ItemStack(ModItems.tinytin),
+                new ItemStack(ModItems.tinycopper),
+                new ItemStack(ModItems.tinyshinys),
+                new ItemStack(Items.WHEAT_SEEDS),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                0,65,4,4, 4,2,25,0,0,1500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(Blocks.MYCELIUM, 1)),
+                new ItemStack(ModItems.tinystone, 9),
+                new ItemStack(ModItems.tinystone, 2),
+                new ItemStack(ModItems.tinyiron),
+                new ItemStack(ModItems.tinytin),
+                new ItemStack(ModItems.tinycopper),
+                new ItemStack(ModItems.tinyshinys),
+                new ItemStack(Items.CLAY_BALL),
+                new ItemStack(Blocks.RED_MUSHROOM),
+                new ItemStack(Blocks.BROWN_MUSHROOM),
+                0,65,4,4, 4,2,25,25,25,1500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND, 16)),
+                new ItemStack(Blocks.SAND, 12),
+                new ItemStack(ModItems.dustsaltpeter, 4),
+                new ItemStack(ModItems.dustcoal),
+                new ItemStack(ModItems.tinyantinomy),
+                new ItemStack(ModItems.dustnether, 2),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                0,0,0,0, 0,0,0,0,0,2500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST, 8)),
+                new ItemStack(Items.REDSTONE, 4),
+                new ItemStack(Items.REDSTONE, 2),
+                new ItemStack(Items.REDSTONE, 2),
+                new ItemStack(ModItems.dustsulfur, 2),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                0,50,25,75, 0,0,0,0,0,3500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(ModItems.clean)),
+                new ItemStack(ModItems.geo),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                10,0,0,0, 0,0,0,0,0,4000));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(ModItems.geo)),
+                new ItemStack(ModItems.meteorite),
+                new ItemStack(ModItems.dustiron, 8),
+                new ItemStack(Blocks.NETHERRACK, 8),
+                new ItemStack(ModItems.dustsulfur, 8),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                15,50,50,50, 0,0,0,0,0,5000));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(ModItems.meteorite)),
+                new ItemStack(ModItems.dustchrome, 16),
+                new ItemStack(ModItems.dusttungsten, 16),
+                new ItemStack(ModItems.dustlithium, 16),
+                new ItemStack(ModItems.dustmagnesium, 16),
+                new ItemStack(ModItems.dusttitanium, 16),
+                new ItemStack(ModItems.dustvanadium, 16),
+                new ItemStack(ModItems.dustpalladium, 16),
+                new ItemStack(ModItems.dustiridium, 16),
+                new ItemStack(ModItems.dustend, 32),
+                50,50,50,50, 25,25,15,15,25,7500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(ModItems.dustnether)),
+                new ItemStack(ModItems.tinygold),
+                new ItemStack(ModItems.dustsulfur ),
+                new ItemStack(ModItems.tinyredstone ),
+                new ItemStack(ModItems.dustcoal),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                25,12,33,5, 0,0,0,0,0,3500));
+        customRecipeList.add(new CentrifugeRecipe(
+                Ingredient.fromStacks(new ItemStack(ModItems.dustend)),
+                new ItemStack(ModItems.tinytungsten),
+                new ItemStack(ModItems.tinylithium ),
+                new ItemStack(ModItems.tinyiridium ),
+                new ItemStack(Blocks.SAND),
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                ItemStack.EMPTY,
+                3,5,1,33, 0,0,0,0,0,6500));
 
 
 

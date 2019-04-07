@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "particle": "ekooprebooted:blocks/tier2texture",
+      "north": "ekooprebooted:blocks/tier2texture",
+      "south": "ekooprebooted:blocks/tier2texture",
+      "west": "ekooprebooted:blocks/tier2texture",
+      "east": "ekooprebooted:blocks/tier2texture",
+      "up": "ekooprebooted:blocks/advmotor_top",
+      "down": "ekooprebooted:blocks/tier2texture"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+        "north": {},
+        "south": {"y": 180},
+        "west": {"y": 270},
+        "east": {"y": 90},
+        "up": {"x": -90},
+        "down": {"x": 90}
+    }
+
+  }
+}

@@ -38,7 +38,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
-import scala.Int;
+
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -8,15 +8,17 @@ import net.minecraft.util.registry.IRegistry;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.HashSet;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MyMod.MODID)
 /***
  * https://github.com/Cadiboo/WIPTech/tree/fb5883e9d76ef0361ec1ebbcb9c508611dd2ef6b/src/main/java/cadiboo/wiptech
  * Huge thanks to Cadiboo for helping me understand models
  */
 public class ClientEventSubscriber {
+
     @SubscribeEvent
     public static void onModelBakeEvent(final ModelBakeEvent event) {
         final IRegistry<ModelResourceLocation, IBakedModel> registry = event.getModelRegistry();
@@ -34,7 +36,7 @@ public class ClientEventSubscriber {
 
         for (final ResourceLocation modelLocation : modelLocations) {
             try {
-                /* modified from code made by Draco18s */
+                // modified from code made by Draco18s
                 final ModelResourceLocation location = new ModelResourceLocation(modelLocation.toString());
 
                 final IBakedModel bakedModel = ModelsCache.INSTANCE.getBakedModel(modelLocation);
@@ -44,6 +46,7 @@ public class ClientEventSubscriber {
             } catch (final Exception e) {
                 MyMod.logger.error("Error injecting model " + modelLocation.toString() + " into Model Registry");
             }
-        }
+
+       }
     }
 }

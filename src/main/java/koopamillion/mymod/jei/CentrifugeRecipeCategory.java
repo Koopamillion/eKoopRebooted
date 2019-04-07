@@ -80,6 +80,7 @@ public class CentrifugeRecipeCategory  implements IRecipeCategory<CentrifugeReci
 
         List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(ModBlocks.blockMotor));
+        list.add(new ItemStack(ModBlocks.blockadvMotor));
 
 
         guiItemStacks.set(0, inputs.get(0));

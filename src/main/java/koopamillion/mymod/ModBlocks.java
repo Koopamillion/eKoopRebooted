@@ -60,6 +60,8 @@ public class ModBlocks {
 
     @GameRegistry.ObjectHolder("ekooprebooted:motor")
     public static BlockMotor blockMotor;
+    @GameRegistry.ObjectHolder("ekooprebooted:advmotor")
+    public static BlockAdvancedMotor blockadvMotor;
 
     @GameRegistry.ObjectHolder("ekooprebooted:advancedcasing")
     public static BlockAdvancedCasing advancedCasing;
@@ -87,6 +89,7 @@ public class ModBlocks {
         blockSilverSolder.initModel();
         advancedCasing.initModel();
         advancedMachineFrame.initModel();
+        blockadvMotor.initModel();
 
     }
 

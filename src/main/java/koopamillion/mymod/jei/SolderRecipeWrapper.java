@@ -13,10 +13,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import scala.actors.threadpool.Arrays;
+
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,6 +82,7 @@ public class SolderRecipeWrapper implements IRecipeWrapper {
 
 
     public static List<ItemStack> getListForElement(ItemStack[] a){
+
         return Arrays.asList(a);
     }
 

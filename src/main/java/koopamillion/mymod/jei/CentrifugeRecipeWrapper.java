@@ -9,8 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import scala.Int;
-import scala.actors.threadpool.Arrays;
+
+import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

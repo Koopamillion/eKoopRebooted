@@ -56,7 +56,7 @@ public class JeiPlugin implements IModPlugin {
         registry.addRecipes(CentrifugeManager.getCustomRecipeList(), CENTRIFUGE_ID);
         registry.handleRecipes(CentrifugeRecipe.class, CentrifugeRecipeWrapper::new, CENTRIFUGE_ID);
 
-        transferRegistry.addRecipeTransferHandler(ContainerCentrifuge.class, SOLDER_ID,
+        transferRegistry.addRecipeTransferHandler(ContainerCentrifuge.class, CENTRIFUGE_ID,
                 0, TileCentrifuge.INPUT_SLOTS, TileCentrifuge.INPUT_SLOTS + TileCentrifuge.OUTPUT_SLOTS, 36);
     }
 

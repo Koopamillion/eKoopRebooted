@@ -96,6 +96,7 @@ public class CommonProxy {
         event.getRegistry().register(new BlockAugmentedStone());
         event.getRegistry().register(new BlockAdvancedCasing());
         event.getRegistry().register(new BlockAdvancedMachineFrame());
+        event.getRegistry().register(new BlockAdvancedMotor());
         GameRegistry.registerTileEntity(TileFurnace.class, MyMod.MODID + "_furnace");
         GameRegistry.registerTileEntity(TileGenerator.class, MyMod.MODID + "_generator");
         GameRegistry.registerTileEntity(TileChickenPlushy.class, MyMod.MODID + "_chicken");
@@ -105,6 +106,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileDNAExtractor.class, MyMod.MODID+"_dnaextractor");
         GameRegistry.registerTileEntity(TileCentrifuge.class, MyMod.MODID+"_centrifuge");
         GameRegistry.registerTileEntity(TileMotor.class, MyMod.MODID+"_motor");
+        GameRegistry.registerTileEntity(TileAdvancedMotor.class, MyMod.MODID+"_advmotor");
 
     }
 
@@ -151,6 +153,24 @@ public class CommonProxy {
                 new Item().setTranslationKey("ekooprebooted.duststone").setRegistryName("duststone").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.dustlead").setRegistryName("dustlead").setCreativeTab(MyMod.tabEKoop),
 
+                new Item().setTranslationKey("ekooprebooted.dustchrome").setRegistryName("dustchrome").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dusttungsten").setRegistryName("dusttungsten").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustlithium").setRegistryName("dustlithium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustmagnesium").setRegistryName("dustmagnesium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dusttitanium").setRegistryName("dusttitanium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustvanadium").setRegistryName("dustvanadium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustpalladium").setRegistryName("dustpalladium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustiridium").setRegistryName("dustiridium").setCreativeTab(MyMod.tabEKoop),
+
+                new Item().setTranslationKey("ekooprebooted.ingotchrome").setRegistryName("ingotchrome").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingottungsten").setRegistryName("ingottungsten").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotlithium").setRegistryName("ingotlithium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotmagnesium").setRegistryName("ingotmagnesium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingottitanium").setRegistryName("ingottitanium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotvanadium").setRegistryName("ingotvanadium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotpalladium").setRegistryName("ingotpalladium").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.ingotiridium").setRegistryName("ingotiridium").setCreativeTab(MyMod.tabEKoop),
+
                 new Item().setTranslationKey("ekooprebooted.ingotaluminium").setRegistryName("ingotaluminium").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.ingotlead").setRegistryName("ingotlead").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.ingottin").setRegistryName("ingottin").setCreativeTab(MyMod.tabEKoop),
@@ -163,8 +183,19 @@ public class CommonProxy {
                 new Item().setTranslationKey("ekooprebooted.dustcharcoal").setRegistryName("dustcharcoal").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.dustsaltpeter").setRegistryName("dustsaltpeter").setCreativeTab(MyMod.tabEKoop),
                 new Item().setTranslationKey("ekooprebooted.dirty").setRegistryName("dirty").setCreativeTab(MyMod.tabEKoop),
-                new Item().setTranslationKey("ekooprebooted.clean").setRegistryName("clean").setCreativeTab(MyMod.tabEKoop)
+                new Item().setTranslationKey("ekooprebooted.clean").setRegistryName("clean").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustcoal").setRegistryName("dustcoal").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.geo").setRegistryName("geo").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.meteorite").setRegistryName("meteorite").setCreativeTab(MyMod.tabEKoop),
 
+                new Item().setTranslationKey("ekooprebooted.dustend").setRegistryName("dustend").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustnether").setRegistryName("dustnether").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.dustgold").setRegistryName("dustgold").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinytungsten").setRegistryName("tinytungsten").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinyredstone").setRegistryName("tinyredstone").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinygold").setRegistryName("tinygold").setCreativeTab(MyMod.tabEKoop),
+                new Item().setTranslationKey("ekooprebooted.tinylithium").setRegistryName("tinylithium").setCreativeTab(MyMod.tabEKoop),
+        new Item().setTranslationKey("ekooprebooted.tinyiridium").setRegistryName("tinyiridium").setCreativeTab(MyMod.tabEKoop)
 
 
         );
@@ -183,6 +214,7 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.blockMotor).setRegistryName(BlockMotor.motor));
         event.getRegistry().register(new ItemBlock(ModBlocks.advancedCasing).setRegistryName(BlockAdvancedCasing.advancedcasing));
         event.getRegistry().register(new ItemBlock(ModBlocks.advancedMachineFrame).setRegistryName(BlockAdvancedMachineFrame.advancedmachineframe));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockadvMotor).setRegistryName(BlockAdvancedMotor.motor));
     }
 
   /*  @SubscribeEvent

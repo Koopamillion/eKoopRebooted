@@ -18,7 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import scala.actors.threadpool.Arrays;
+
 
 import javax.annotation.Nonnull;
 import java.util.List;

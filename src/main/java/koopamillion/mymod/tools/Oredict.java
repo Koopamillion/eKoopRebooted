@@ -39,6 +39,15 @@ public class Oredict {
         addOre(ModItems.tinysilver, "dustTinySilver");
         addOre(ModItems.tinystone, "dustTinyStone");
         addOre(ModItems.tinytin, "dustTinyTin");
+        addOre(ModItems.tinyiridium, "dustTinyIridium");
+
+        addOre(ModItems.tinytungsten, "dustTinyTungsten");
+        addOre(ModItems.tinygold, "dustTinyGold");
+        addOre(ModItems.dustgold, "dustGold");
+        addOre(ModItems.tinyredstone, "dustTinyRedstone");
+        addOre(ModItems.tinylithium, "dustTinyLithium");
+        addOre(ModItems.dustend, "dustEndstone");
+        addOre(ModItems.dustnether, "dustNetherrack");
 
         addOre(ModItems.dustaluminium, "dustAluminium");
         addOre(ModItems.dustaluminium, "dustAluminum");
@@ -50,8 +59,28 @@ public class Oredict {
         addOre(ModItems.duststone, "dustStone");
         addOre(ModItems.dusttin, "dustTin");
         addOre(ModItems.dustcharcoal, "dustCharcoal");
+        addOre(ModItems.dustcoal, "dustCoal");
         addOre(ModItems.dustsulfur, "dustSulfur");
         addOre(ModItems.dustsaltpeter, "dustNiter");
+        addOre(ModItems.dustsaltpeter, "dustSaltpeter");
+
+        addOre(ModItems.dustchrome, "dustChrome");
+        addOre(ModItems.dusttungsten, "dustTungsten");
+        addOre(ModItems.dustlithium, "dustLithium");
+        addOre(ModItems.dustmagnesium, "dustMagnesium");
+        addOre(ModItems.dusttitanium, "dustTitanium");
+        addOre(ModItems.dustvanadium, "dustVanadium");
+        addOre(ModItems.dustpalladium, "dustPalladium");
+        addOre(ModItems.dustiridium, "dustIridium");
+
+        addOre(ModItems.ingotchrome, "ingotChrome");
+        addOre(ModItems.ingottungsten, "ingotTungsten");
+        addOre(ModItems.ingotlithium, "ingotLithium");
+        addOre(ModItems.ingotmagnesium, "ingotMagnesium");
+        addOre(ModItems.ingottitanium, "ingotTitanium");
+        addOre(ModItems.ingotvanadium, "ingotVanadium");
+        addOre(ModItems.ingotpalladium, "ingotPalladium");
+        addOre(ModItems.ingotiridium, "ingotIridium");
 
         addOre(ModItems.ingotaluminium, "ingotAluminium");
         addOre(ModItems.ingotantinomy, "ingotAntimony");
