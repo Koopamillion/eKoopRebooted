@@ -179,6 +179,10 @@ public class ModItems {
     @GameRegistry.ObjectHolder("ekooprebooted:tinyiridium")
     public static Item tinyiridium;
 
+    @GameRegistry.ObjectHolder("ekooprebooted:ironballs")
+    public static ItemIronBalls ironballs;
+
+
 
 
 
@@ -199,6 +203,7 @@ public class ModItems {
         mobholder.initModel();
         mobram.initModel();
         silversolderingot.initModel();
+        ironballs.initModel();
         ModelLoader.setCustomModelResourceLocation(siliconraw, 0, new ModelResourceLocation(siliconraw.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(siliconpure, 0, new ModelResourceLocation(siliconpure.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(puresand, 0, new ModelResourceLocation(puresand.getRegistryName(), "inventory"));

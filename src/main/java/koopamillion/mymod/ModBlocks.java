@@ -1,5 +1,6 @@
 package koopamillion.mymod;
 
+import koopamillion.mymod.ballmill.BlockBallmill;
 import koopamillion.mymod.centrifuge.BlockCentrifuge;
 import koopamillion.mymod.dna.BlockDNAExtractor;
 import koopamillion.mymod.generators.BlockGenerator;
@@ -68,6 +69,9 @@ public class ModBlocks {
     @GameRegistry.ObjectHolder("ekooprebooted:advancedmachineframe")
     public static BlockAdvancedMachineFrame advancedMachineFrame;
 
+    @GameRegistry.ObjectHolder("ekooprebooted:ballmill")
+    public static BlockBallmill blockBallmill;
+
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
@@ -90,6 +94,7 @@ public class ModBlocks {
         advancedCasing.initModel();
         advancedMachineFrame.initModel();
         blockadvMotor.initModel();
+        blockBallmill.initModel();
 
     }
 

@@ -6,6 +6,8 @@ import koopamillion.mymod.ModItems;
 import koopamillion.mymod.ModLiquids;
 import koopamillion.mymod.MyMod;
 import koopamillion.mymod.acidbath.TileAcidBath;
+import koopamillion.mymod.ballmill.BlockBallmill;
+import koopamillion.mymod.ballmill.TileBallmill;
 import koopamillion.mymod.centrifuge.BlockCentrifuge;
 import koopamillion.mymod.centrifuge.TileCentrifuge;
 import koopamillion.mymod.dna.BlockDNAExtractor;
@@ -97,6 +99,7 @@ public class CommonProxy {
         event.getRegistry().register(new BlockAdvancedCasing());
         event.getRegistry().register(new BlockAdvancedMachineFrame());
         event.getRegistry().register(new BlockAdvancedMotor());
+        event.getRegistry().register(new BlockBallmill());
         GameRegistry.registerTileEntity(TileFurnace.class, MyMod.MODID + "_furnace");
         GameRegistry.registerTileEntity(TileGenerator.class, MyMod.MODID + "_generator");
         GameRegistry.registerTileEntity(TileChickenPlushy.class, MyMod.MODID + "_chicken");
@@ -107,6 +110,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileCentrifuge.class, MyMod.MODID+"_centrifuge");
         GameRegistry.registerTileEntity(TileMotor.class, MyMod.MODID+"_motor");
         GameRegistry.registerTileEntity(TileAdvancedMotor.class, MyMod.MODID+"_advmotor");
+        GameRegistry.registerTileEntity(TileBallmill.class, MyMod.MODID+"_ballmill");
 
     }
 
@@ -201,6 +205,7 @@ public class CommonProxy {
         );
         event.getRegistry().register(new ItemSolderIngot());
         event.getRegistry().register(new ItemEnderIngot());
+        event.getRegistry().register(new ItemIronBalls());
         event.getRegistry().register(new ItemBlock (ModBlocks.blockSolder).setRegistryName(BlockSolderTable.solder));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockChicken).setRegistryName(BlockChickenPlushy.chicken));
         event.getRegistry().register(new ItemBlock (ModBlocks.blockMachineFrame).setRegistryName(BlockMachineFrame.machineframe));
@@ -215,6 +220,7 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.advancedCasing).setRegistryName(BlockAdvancedCasing.advancedcasing));
         event.getRegistry().register(new ItemBlock(ModBlocks.advancedMachineFrame).setRegistryName(BlockAdvancedMachineFrame.advancedmachineframe));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockadvMotor).setRegistryName(BlockAdvancedMotor.motor));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockBallmill).setRegistryName(BlockBallmill.ballmill));
     }
 
   /*  @SubscribeEvent

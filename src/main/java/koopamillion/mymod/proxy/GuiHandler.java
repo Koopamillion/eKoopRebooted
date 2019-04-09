@@ -1,5 +1,8 @@
 package koopamillion.mymod.proxy;
 
+import koopamillion.mymod.ballmill.ContainerBallmill;
+import koopamillion.mymod.ballmill.GuiBallmill;
+import koopamillion.mymod.ballmill.TileBallmill;
 import koopamillion.mymod.centrifuge.ContainerCentrifuge;
 import koopamillion.mymod.centrifuge.GuiCentrifuge;
 import koopamillion.mymod.centrifuge.TileCentrifuge;
@@ -51,6 +54,9 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileCentrifuge) {
             return new ContainerCentrifuge(player.inventory, (TileCentrifuge) te);
         }
+        if (te instanceof TileBallmill) {
+            return new ContainerBallmill(player.inventory, (TileBallmill) te);
+        }
         return null;
     }
 
@@ -83,6 +89,10 @@ public class GuiHandler implements IGuiHandler {
         if (te instanceof TileCentrifuge) {
             TileCentrifuge containerTileEntity = (TileCentrifuge) te;
             return new GuiCentrifuge(containerTileEntity, new ContainerCentrifuge(player.inventory, containerTileEntity));
+        }
+        if (te instanceof TileBallmill) {
+            TileBallmill containerTileEntity = (TileBallmill) te;
+            return new GuiBallmill(containerTileEntity, new ContainerBallmill(player.inventory, containerTileEntity));
         }
         return null;
     }
